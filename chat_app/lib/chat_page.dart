@@ -6,7 +6,6 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: const [Text('ChatPage')]),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -15,16 +14,18 @@ class ChatPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
               ),
             ),
-            const TextField(
+            TextField(
               decoration: InputDecoration(
-                hintText: "Enter",
-                labelText: "Chat Start",
-              ),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 23.0, horizontal: 8.0),
+                  border: const OutlineInputBorder(),
+                  labelText: "Text Form",
+                  labelStyle: const TextStyle(fontSize: 20),
+                  focusColor: Colors.green,
+                  suffixIcon: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.send))),
+              style: const TextStyle(fontSize: 20.0),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text("Send"),
-            )
           ],
         ),
       ),

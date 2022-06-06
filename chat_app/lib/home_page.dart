@@ -1,4 +1,4 @@
-import 'package:chat_app/chat_page.dart';
+import 'package:chat_app/chat_page/chat_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,6 +7,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Home Page"),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -19,11 +23,11 @@ class HomePage extends StatelessWidget {
               style: TextStyle(color: Colors.green, fontSize: 45),
             ),
             const SizedBox(
-              height: 500,
+              height: 400,
             ),
             SizedBox(
-              height: 75.0,
-              width: 200.0,
+              height: 50.0,
+              width: 150.0,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(

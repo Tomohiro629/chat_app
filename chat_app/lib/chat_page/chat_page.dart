@@ -8,21 +8,33 @@ class ChatPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
+    final messegetime = DateTime.now().toString();
+    final textedit = TextEditingController();
+    final messeage = textedit.text;
+
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Chat Page"),
-      ),
-      body: Center(
-        child: Column(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text("Chat Page"),
+        ),
+        body: Center(
+            child: Column(
           children: <Widget>[
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-              ),
+              child: ListView.builder(
+                  itemCount: messeage.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      shape: const RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.green)),
+                      title: Text(messeage),
+                      subtitle: Text(messegetime),
+                      onLongPress: _controller.deleteMesseage(),
+                    );
+                  }),
             ),
             TextField(
-              onChanged: (text) {},
+              controller: textedit,
               decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 23.0, horizontal: 8.0),
@@ -32,14 +44,12 @@ class ChatPage extends ConsumerWidget {
                   focusColor: Colors.green,
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _controller.fetchChatSteram();
+                        _controller.addMesseage(messeage);
                       },
                       icon: const Icon(Icons.send))),
               style: const TextStyle(fontSize: 20.0),
             ),
           ],
-        ),
-      ),
-    );
+        )));
   }
 }

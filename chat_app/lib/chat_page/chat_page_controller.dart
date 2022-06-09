@@ -9,21 +9,41 @@ final chatControllerProvider = ChangeNotifierProvider<ChatController>((ref) {
 });
 
 class ChatController extends ChangeNotifier {
-  final id = Uuid().v4();
+  final id = const Uuid().v4();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Stream<List<Chat>> fetchChatSteram() {
-    final snapshot = _firestore.collection('chatmessage').snapshots();
 
-    return snapshot.map((event) => event.docs.map((doc) {
-          Map<String, dynamic> data = doc.data();
-          final String id = data['id'];
-          final String messeage = data['messeage'];
+  List<Chat> chats = [];
 
-          return Chat(id: id, messeage: messeage);
-        }).toList());
+  void getMessages(Chat chat) async {
+    //firestoreからデータ読み込み
+    final getData = await _firestore.collection("chat_room").doc(chat.id).get();
   }
 
-  Future<void> deleteMesseage(String id) async {
-    await _firestore.collection("chatmessage").doc(id).delete();
+  Stream<List<Chat>> fetchMesseageStream() {
+    final snapshot = _firestore.collection("chat_room").snapshots();
+
+    return snapshot.map(
+      (qs) => qs.docs.map((doc) {
+        Map<String, dynamic> data = doc.data();
+        final String id = data["id"];
+        final String messeage = ["messeage"].toString();
+
+        return Chat(id: id, messeage: messeage);
+      }).toList(),
+    );
+  }
+
+  Future<void> addMesseage(String messeage) async {
+    //firestoreにメッセージを追加
+    await _firestore.collection("chat_room").add({
+      'id': id,
+      'messeage': messeage,
+    });
+    notifyListeners();
+  }
+
+  deleteMesseage() async {
+    await _firestore.collection("chat_room").doc(id).delete();
+    notifyListeners();
   }
 }

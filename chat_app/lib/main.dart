@@ -1,4 +1,3 @@
-import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

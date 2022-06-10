@@ -1,9 +1,13 @@
 import 'package:chat_app/chat_page/chat_page_controller.dart';
+import 'package:chat_app/entity/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChatPage extends ConsumerWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
@@ -16,39 +20,44 @@ class ChatPage extends ConsumerWidget {
           centerTitle: true,
           title: const Text("Chat Page"),
         ),
-        body: Center(
-            child: Column(
+        body: Stack(
+          fit: StackFit.expand,
           children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                  itemCount: messeage.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      shape: const RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.green)),
-                      title: Text(messeage),
-                      subtitle: Text(messegetime),
-                      onLongPress: _controller.deleteMesseage(),
-                    );
-                  }),
+            ListView.builder(
+                itemCount: messeage.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    shape: const RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.green)),
+                    title: Text(messeage),
+                    subtitle: Text(messegetime),
+                    onLongPress: _controller.deleteMesseage(),
+                  );
+                }),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: TextField(
+                controller: textedit,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 23.0, horizontal: 8.0),
+                    border: const OutlineInputBorder(),
+                    labelText: "Text Form",
+                    labelStyle: const TextStyle(fontSize: 20),
+                    focusColor: Colors.green,
+                    suffixIcon: IconButton(
+                        onPressed: () async {
+                          _controller.onPressLoading();
+                          await Future.delayed(
+                              const Duration(milliseconds: 1500), () {});
+                          _controller.addMesseage(messeage);
+                        },
+                        icon: const Icon(Icons.send))),
+                style: const TextStyle(fontSize: 20.0),
+              ),
             ),
-            TextField(
-              controller: textedit,
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 23.0, horizontal: 8.0),
-                  border: const OutlineInputBorder(),
-                  labelText: "Text Form",
-                  labelStyle: const TextStyle(fontSize: 20),
-                  focusColor: Colors.green,
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        _controller.addMesseage(messeage);
-                      },
-                      icon: const Icon(Icons.send))),
-              style: const TextStyle(fontSize: 20.0),
-            ),
+            LoadingPage(loading: _controller.loading),
           ],
-        )));
+        ));
   }
 }

@@ -23,17 +23,24 @@ class ChatController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getMessages(Chat chat) async {
+  void getMessages() async {
     //firestoreからデータ読み込み
-    final getData = await _firestore.collection("chat_room").doc(chat.id).get();
+    final getData = await _firestore
+        .collection("chat_rooms")
+        .doc(id)
+        .collection("messeages")
+        .get();
 
     notifyListeners();
   }
 
   Future<void> addMesseage(String messeage) async {
     //firestoreにメッセージを追加
-    await _firestore.collection("chat_room").add({
-      'id': id,
+    await _firestore
+        .collection("chat_rooms")
+        .doc(id)
+        .collection("messeages")
+        .add({
       'messeage': messeage,
     });
     notifyListeners();
@@ -41,7 +48,7 @@ class ChatController extends ChangeNotifier {
 
   deleteMesseage() async {
     //firestoreのデータ削除
-    await _firestore.collection("chat_room").doc(id).delete();
+    await _firestore.collection("chat_rooms").doc(id).delete();
     notifyListeners();
   }
 }

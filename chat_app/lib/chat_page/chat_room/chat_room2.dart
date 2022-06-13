@@ -1,24 +1,21 @@
 import 'package:chat_app/chat_page/chat_page_controller.dart';
-import 'package:chat_app/entity/loading_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
-class ChatPage extends ConsumerWidget {
-  const ChatPage({Key? key, required}) : super(key: key);
+class ChatRoom2 extends ConsumerWidget {
+  const ChatRoom2({Key? key, required}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
-    final sendTime = DateFormat("yyyy年MM月dd日 hh時mm分").format(DateTime.now());
     final textEdit = TextEditingController();
     List<DocumentSnapshot> docList = [];
 
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Chat Page"),
+          title: const Text("Chat Room2"),
         ),
         body: Stack(
           fit: StackFit.expand,
@@ -32,8 +29,9 @@ class ChatPage extends ConsumerWidget {
                     child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('chat_rooms')
-                      .doc("room1")
+                      .doc("room2")
                       .collection("messeages")
+                      // .orderBy('sendtime', descending: true)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -58,7 +56,7 @@ class ChatPage extends ConsumerWidget {
                               .map((DocumentSnapshot document) {
                             return ListTile(
                               title: Text(document.get('messeage')),
-                              // subtitle: Text(document.get('sendTime')),
+                              subtitle: Text(document.get('sendTime')),
                               onLongPress: () {},
                             );
                           }).toList(),
@@ -79,7 +77,7 @@ class ChatPage extends ConsumerWidget {
                       onPressed: () async {
                         final messeages = textEdit.text;
                         _controller.onPressLoading();
-                        await _controller.addMesseage(messeages);
+                        await _controller.addMesseage2(messeages);
                         textEdit.clear();
                       },
                       icon: const Icon(Icons.send),

@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
-import 'package:chat_app/chat_page/chat_page.dart';
-import 'package:chat_app/chat_page/test_chat.dart';
+import 'package:chat_app/chat_page/chat_room/chat_room1.dart';
+import 'package:chat_app/chat_page/chat_room/chat_room2.dart';
+import 'package:chat_app/room_select_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,7 +37,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ChatPage(),
+                        builder: (context) => RoomSelectPage(),
                       ));
                 },
                 child: const Text(
@@ -49,23 +48,6 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(
               height: 10,
-            ),
-            SizedBox(
-              height: 50.0,
-              width: 150.0,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TestChat(),
-                      ));
-                },
-                child: const Text(
-                  "Test",
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
             ),
           ],
         ),

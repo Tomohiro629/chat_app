@@ -1,4 +1,4 @@
-import 'package:chat_app/entity/chat.dart';
+import 'package:chat_app/entity/messeages.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,9 +9,25 @@ final chatControllerProvider = ChangeNotifierProvider<ChatController>((ref) {
 });
 
 class ChatController extends ChangeNotifier {
-  final id = const Uuid().v4();
+  String id = const Uuid().v4();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool loading = false;
+
+  Future<void> addMesseage(String messeages) async {
+    //firestoreにメッセージを追加
+    await _firestore
+        .collection("chat_rooms")
+        .doc("room1")
+        .collection("messeages")
+        .add({'messeage': messeages});
+    notifyListeners();
+  }
+
+  deleteMesseage(String id) async {
+    //firestoreのデータ削除
+    await _firestore.collection("chat_rooms").doc(id).delete();
+    notifyListeners();
+  }
 
   onPressLoading() async {
     //ローディング画面の表示
@@ -20,35 +36,6 @@ class ChatController extends ChangeNotifier {
       const Duration(milliseconds: 5000),
     );
     loading = false;
-    notifyListeners();
-  }
-
-  void getMessages() async {
-    //firestoreからデータ読み込み
-    final getData = await _firestore
-        .collection("chat_rooms")
-        .doc(id)
-        .collection("messeages")
-        .get();
-
-    notifyListeners();
-  }
-
-  Future<void> addMesseage(String messeage) async {
-    //firestoreにメッセージを追加
-    await _firestore
-        .collection("chat_rooms")
-        .doc(id)
-        .collection("messeages")
-        .add({
-      'messeage': messeage,
-    });
-    notifyListeners();
-  }
-
-  deleteMesseage() async {
-    //firestoreのデータ削除
-    await _firestore.collection("chat_rooms").doc(id).delete();
     notifyListeners();
   }
 }

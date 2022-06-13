@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:chat_app/chat_page/chat_page.dart';
+import 'package:chat_app/chat_page/test_chat.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,6 +43,26 @@ class HomePage extends StatelessWidget {
                 },
                 child: const Text(
                   "Start",
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 50.0,
+              width: 150.0,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TestChat(),
+                      ));
+                },
+                child: const Text(
+                  "Test",
                   style: TextStyle(fontSize: 20.0),
                 ),
               ),

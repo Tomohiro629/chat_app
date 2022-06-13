@@ -1,9 +1,9 @@
 import 'package:chat_app/chat_page/chat_page_controller.dart';
-import 'package:chat_app/entity/chat.dart';
-
 import 'package:chat_app/entity/loading_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class ChatPage extends ConsumerWidget {
   const ChatPage({Key? key, required}) : super(key: key);
@@ -11,8 +11,9 @@ class ChatPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
-    final messegetime = DateTime.now().toString();
-    final textedit = TextEditingController();
+    final sendTime = DateFormat("yyyy年MM月dd日 hh時mm分").format(DateTime.now());
+    final textEdit = TextEditingController();
+    List<DocumentSnapshot> docList = [];
 
     return Scaffold(
         appBar: AppBar(
@@ -22,22 +23,52 @@ class ChatPage extends ConsumerWidget {
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            ListView.builder(
-                itemCount: textedit.text.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    shape: const RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.green)),
-                    title: Text(textedit.text),
-                    subtitle: Text(messegetime),
-                    onLongPress: _controller.deleteMesseage(),
-                  );
-                }),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: TextField(
-                controller: textedit,
-                decoration: InputDecoration(
+            Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                ),
+                Expanded(
+                    child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('chat_rooms')
+                      .doc("room1")
+                      .collection("messeages")
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: Stack(children: const [
+                            CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color.fromARGB(255, 6, 121, 11)),
+                              backgroundColor: Color.fromARGB(255, 48, 185, 53),
+                            ),
+                          ]),
+                        );
+                      default:
+                        return ListView(
+                          shrinkWrap: true,
+                          children: snapshot.data!.docs
+                              .map((DocumentSnapshot document) {
+                            return ListTile(
+                              title: Text(document.get('messeage')),
+                              // subtitle: Text(document.get('sendTime')),
+                              onLongPress: () {},
+                            );
+                          }).toList(),
+                        );
+                    }
+                  },
+                )),
+                TextField(
+                  controller: textEdit,
+                  decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 23.0, horizontal: 8.0),
                     border: const OutlineInputBorder(),
@@ -45,18 +76,19 @@ class ChatPage extends ConsumerWidget {
                     labelStyle: const TextStyle(fontSize: 20),
                     focusColor: Colors.green,
                     suffixIcon: IconButton(
-                        onPressed: () async {
-                          final messeage = textedit.text;
-                          _controller.onPressLoading();
-                          await Future.delayed(
-                              const Duration(milliseconds: 1500), () {});
-                          _controller.addMesseage(messeage);
-                        },
-                        icon: const Icon(Icons.send))),
-                style: const TextStyle(fontSize: 20.0),
-              ),
+                      onPressed: () async {
+                        final messeages = textEdit.text;
+                        _controller.onPressLoading();
+                        await _controller.addMesseage(messeages);
+                        textEdit.clear();
+                      },
+                      icon: const Icon(Icons.send),
+                    ),
+                  ),
+                  style: const TextStyle(fontSize: 20.0),
+                ),
+              ],
             ),
-            LoadingPage(loading: _controller.loading),
           ],
         ));
   }

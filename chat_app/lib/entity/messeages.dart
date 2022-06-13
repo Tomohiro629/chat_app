@@ -1,6 +1,9 @@
 class Messeages {
   Messeages({
-    required this.messeage,
+    required this.messeages,
+    required this.id,
   });
-  final String messeage;
+  final String messeages;
+
+  final String id;
 }

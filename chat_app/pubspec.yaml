@@ -36,11 +36,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   cloud_firestore: ^3.1.17
   flutter_riverpod: ^1.0.4
+  firebase_auth: ^3.3.19
   firebase_core: ^1.17.1
   intl: ^0.17.0
   riverpod: ^1.0.3
   uuid: ^3.0.6
   vm_service: ^8.3.0
+  
   
 
 dev_dependencies:

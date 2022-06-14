@@ -1,4 +1,5 @@
-import 'package:chat_app/room_select_page.dart';
+import 'package:chat_app/login_page/login_page.dart';
+import 'package:chat_app/login_page/registertion_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,18 +41,28 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RoomSelectPage(),
+                        builder: (context) => LoginPage(),
                       ));
                 },
                 child: const Text(
-                  "Start",
-                  style: TextStyle(fontSize: 20.0),
+                  "Login",
+                  style: TextStyle(fontSize: 18.0),
                 ),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegistertionPage(),
+                    ));
+              },
+              child: const Text("Sign Up"),
+            )
           ],
         ),
       ),

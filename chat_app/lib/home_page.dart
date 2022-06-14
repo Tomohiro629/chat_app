@@ -1,5 +1,3 @@
-import 'package:chat_app/chat_page/chat_room/chat_room1.dart';
-import 'package:chat_app/chat_page/chat_room/chat_room2.dart';
 import 'package:chat_app/room_select_page.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +31,11 @@ class HomePage extends StatelessWidget {
               height: 50.0,
               width: 150.0,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
                 onPressed: () {
                   Navigator.push(
                       context,

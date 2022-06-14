@@ -55,8 +55,20 @@ class ChatRoom2 extends ConsumerWidget {
                           children: snapshot.data!.docs
                               .map((DocumentSnapshot document) {
                             return ListTile(
+                              tileColor: Color.fromARGB(255, 165, 236, 167),
                               title: Text(document.get('messeage')),
                               subtitle: Text(document.get('sendTime')),
+                              leading: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    minHeight: 44,
+                                    minWidth: 34,
+                                    maxHeight: 64,
+                                    maxWidth: 54),
+                              ),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100)),
+                              ),
                               onLongPress: () {},
                             );
                           }).toList(),

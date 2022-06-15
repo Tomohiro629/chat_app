@@ -1,14 +1,32 @@
 import 'package:chat_app/chat_page/chat_room/chat_room1.dart';
 import 'package:chat_app/chat_page/chat_room/chat_room2.dart';
+import 'package:chat_app/home_page.dart';
+import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RoomSelectPage extends StatelessWidget {
+class RoomSelectPage extends ConsumerWidget {
+  const RoomSelectPage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = ref.watch(roomSelectControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Room Select"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              await _controller.logOut();
+              await Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (context) {
+                return const HomePage();
+              }));
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Card(

@@ -1,4 +1,4 @@
-import 'package:chat_app/room_select_page.dart';
+import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +45,7 @@ class RegistertionPage extends StatelessWidget {
                 height: 25,
               ),
               TextFormField(
+                keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: ' Password',

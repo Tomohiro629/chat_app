@@ -1,4 +1,4 @@
-import 'package:chat_app/room_select_page.dart';
+import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +41,7 @@ class LoginPage extends StatelessWidget {
                 height: 25.0,
               ),
               TextFormField(
+                keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: ' Password',
@@ -82,7 +83,7 @@ class LoginPage extends StatelessWidget {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return RoomSelectPage();
+                          return const RoomSelectPage();
                         }),
                       );
                     } catch (e) {

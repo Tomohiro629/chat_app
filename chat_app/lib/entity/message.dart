@@ -1,14 +1,14 @@
 class Message {
   Message({
     required this.message,
-    required this.id,
+    required this.messageId,
     required this.sendTime,
   });
 
   factory Message.fromJson(Map<String, dynamic> map) {
     return Message(
       message: map['message'],
-      id: map['id'],
+      messageId: map['id'],
       sendTime: map['sendTime'],
     );
   }
@@ -16,12 +16,12 @@ class Message {
   Map<String, dynamic> toJson() {
     return {
       'message': message,
-      'id': id,
+      'messageId': messageId,
       'sendTime': sendTime,
     };
   }
 
   final String message;
-  final String id;
+  final String messageId;
   final String sendTime;
 }

@@ -1,5 +1,6 @@
 import 'package:chat_app/login_page/login_page.dart';
 import 'package:chat_app/login_page/registertion_page.dart';
+import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,7 +27,20 @@ class HomePage extends StatelessWidget {
               style: TextStyle(color: Colors.green, fontSize: 45),
             ),
             const SizedBox(
-              height: 400,
+              height: 200,
+              //height:400
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RoomSelectPage(),
+                      ));
+                },
+                child: const Text("チャットへ")),
+            const SizedBox(
+              height: 150,
             ),
             SizedBox(
               height: 50.0,

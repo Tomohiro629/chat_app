@@ -27,12 +27,7 @@ class ChatRoom1 extends ConsumerWidget {
                 ),
                 Expanded(
                     child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('chat_rooms')
-                      .doc("room1")
-                      .collection("messeages")
-                      // .orderBy('sendtime', descending: true)
-                      .snapshots(),
+                  stream: _controller.fetchMessagesStream(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {

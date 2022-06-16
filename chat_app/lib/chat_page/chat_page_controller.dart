@@ -44,6 +44,15 @@ class ChatController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Stream<QuerySnapshot> fetchMessagesStream() {
+    return _firestore
+        .collection('chat_rooms')
+        .doc("room1")
+        .collection("messeages")
+        // .orderBy('sendtime', descending: true)
+        .snapshots();
+  }
+
   onPressLoading() async {
     //ローディング画面の表示
     loading = true;

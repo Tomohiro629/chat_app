@@ -1,10 +1,8 @@
-import 'package:chat_app/chat_page/chat_room/chat_room1.dart';
-import 'package:chat_app/chat_page/chat_room/chat_room2.dart';
+import 'package:chat_app/chat_page/chat_room/chat_room.dart';
 import 'package:chat_app/home_page.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vm_service/vm_service.dart';
 
 class RoomSelectPage extends ConsumerWidget {
   const RoomSelectPage({Key? key}) : super(key: key);
@@ -35,7 +33,7 @@ class RoomSelectPage extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(100),
                           ),
                           color: Color.fromARGB(255, 240, 124, 116),
-                          child: Text("Yes"),
+                          child: const Text("Yes"),
                           onPressed: () async {
                             await _controller.logOut();
                             await Navigator.of(context).pushReplacement(
@@ -93,7 +91,7 @@ class RoomSelectPage extends ConsumerWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ChatRoom1(),
+                        builder: (context) => const ChatRoom(chatId: 'room1'),
                       ));
                 },
               ),
@@ -118,7 +116,7 @@ class RoomSelectPage extends ConsumerWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ChatRoom2(),
+                        builder: (context) => const ChatRoom(chatId: 'room2'),
                       ));
                 },
               ),

@@ -83,17 +83,19 @@ class RoomSelectPage extends ConsumerWidget {
                   constraints: const BoxConstraints(
                       minHeight: 44, minWidth: 34, maxHeight: 64, maxWidth: 54),
                 ),
-                trailing: const Icon(Icons.login),
+                trailing: IconButton(
+                  icon: const Icon(Icons.login),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ChatRoom(chatId: 'room1'),
+                        ));
+                  },
+                ),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                 ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ChatRoom(chatId: 'room1'),
-                      ));
-                },
               ),
               const SizedBox(
                 height: 25,
@@ -108,16 +110,21 @@ class RoomSelectPage extends ConsumerWidget {
                   constraints: const BoxConstraints(
                       minHeight: 44, minWidth: 34, maxHeight: 64, maxWidth: 54),
                 ),
-                trailing: const Icon(Icons.login),
+                trailing: IconButton(
+                  icon: const Icon(Icons.login),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ChatRoom(chatId: 'room1'),
+                        ));
+                  },
+                ),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                 ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ChatRoom(chatId: 'room2'),
-                      ));
+                onLongPress: () {
+                  // _controller.deleteRoom(chatId: "chatId");
                 },
               ),
             ],
@@ -126,7 +133,7 @@ class RoomSelectPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //後々ルーム作成する
+          // _controller.addChatRoom( chatName: "chatName");
         },
         child: const Icon(Icons.add),
       ),

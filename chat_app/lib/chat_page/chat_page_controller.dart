@@ -19,7 +19,7 @@ class ChatController extends ChangeNotifier {
   }) async {
     changeLoadingStatus(true);
     final message = Message(
-      id: const Uuid().v4(),
+      messageId: const Uuid().v4(),
       message: messageText,
       sendTime: DateFormat("yyyy年MM月dd日 hh時mm分").format(DateTime.now()),
     );
@@ -27,8 +27,8 @@ class ChatController extends ChangeNotifier {
     await _firestore
         .collection("chat_rooms")
         .doc(chatId)
-        .collection("messeages")
-        .doc(message.id)
+        .collection("messages")
+        .doc(message.messageId)
         .set(message.toJson());
 
     changeLoadingStatus(false);
@@ -42,7 +42,7 @@ class ChatController extends ChangeNotifier {
     await _firestore
         .collection("chat_rooms")
         .doc(chatId)
-        .collection("messeages")
+        .collection("messages")
         .doc(messageId)
         .delete();
   }
@@ -51,7 +51,7 @@ class ChatController extends ChangeNotifier {
     final snapshots = _firestore
         .collection('chat_rooms')
         .doc(chatId)
-        .collection("messeages")
+        .collection("messages")
         .orderBy('sendTime', descending: true)
         .snapshots();
 

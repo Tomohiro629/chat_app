@@ -84,11 +84,15 @@ class ChatRoom extends ConsumerWidget {
                     focusColor: Colors.green,
                     suffixIcon: IconButton(
                       onPressed: () async {
-                        await _controller.addMesseage(
-                          messageText: textEdit.text,
-                          chatId: chatId,
-                        );
-                        textEdit.clear();
+                        try {
+                          await _controller.addMesseage(
+                            messageText: textEdit.text,
+                            chatId: chatId,
+                          );
+                          textEdit.clear();
+                        } catch (e) {
+                          const Text("Please enter a ChatRoomName");
+                        }
                       },
                       icon: const Icon(Icons.send),
                     ),

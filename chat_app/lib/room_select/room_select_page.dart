@@ -1,5 +1,6 @@
 import 'package:chat_app/chat_page/chat_room/chat_room.dart';
 import 'package:chat_app/home_page.dart';
+import 'package:chat_app/room_select/add_chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -133,7 +134,8 @@ class RoomSelectPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // _controller.addChatRoom( chatName: "chatName");
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddChatRoomPage()));
         },
         child: const Icon(Icons.add),
       ),

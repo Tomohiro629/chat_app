@@ -50,7 +50,7 @@ class ChatController extends ChangeNotifier {
   Stream<List<Message>> fetchMessagesStream(String chatId) {
     final snapshots = _firestore
         .collection('chat_rooms')
-        .doc(chatId)
+        .doc("room1")
         .collection("messages")
         .orderBy('sendTime', descending: true)
         .snapshots();

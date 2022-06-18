@@ -20,9 +20,9 @@ class RoomSelectController extends ChangeNotifier {
 
   Future<void> addChatRoom({
     required String chatId,
-    required String chatName,
+    required String? chatName,
   }) async {
-    final chat = Chat(chatName: chatName);
+    final chat = Chat(chatName: chatName!);
     await _firestore.collection("chat_rooms").doc(chatName).set(chat.toJson());
   }
 
@@ -30,7 +30,7 @@ class RoomSelectController extends ChangeNotifier {
     final snapshots = _firestore
         .collection('chat_rooms')
         .doc(chatId)
-        .collection("messeages")
+        .collection("messages")
         .snapshots();
 
     return snapshots

@@ -19,9 +19,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const SizedBox(
-              height: 80,
-            ),
+            const SizedBox(height: 10),
             const Text(
               'Chat App',
               style: TextStyle(color: Colors.green, fontSize: 45),
@@ -38,6 +36,9 @@ class HomePage extends StatelessWidget {
                 },
                 child: const Text("チャットへ")),
             _Buttons(),
+            const SizedBox(
+              height: 5,
+            )
           ],
         ),
       ),
@@ -50,22 +51,26 @@ class _Buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
+        SizedBox(
+          height: 50.0,
+          width: 150.0,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100),
+              ),
             ),
-          ),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginPage(),
-                ));
-          },
-          child: const Text(
-            "Login",
-            style: TextStyle(fontSize: 18.0),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ));
+            },
+            child: const Text(
+              "Login",
+              style: TextStyle(fontSize: 18.0),
+            ),
           ),
         ),
         TextButton(

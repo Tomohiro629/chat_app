@@ -24,11 +24,12 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 25),
                 decoration: InputDecoration(
                     labelText: ' Mail',
                     contentPadding: const EdgeInsets.symmetric(
-                      vertical: 20,
+                      horizontal: 10,
+                      vertical: 15,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
@@ -42,11 +43,12 @@ class LoginPage extends StatelessWidget {
               ),
               TextFormField(
                 keyboardType: TextInputType.visiblePassword,
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 25),
                 decoration: InputDecoration(
                     labelText: ' Password',
                     contentPadding: const EdgeInsets.symmetric(
-                      vertical: 20,
+                      horizontal: 10,
+                      vertical: 15,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),

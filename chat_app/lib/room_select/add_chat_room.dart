@@ -8,6 +8,7 @@ class AddChatRoomPage extends ConsumerWidget {
       : super(key: key);
   final String chatId;
   final String chatName;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(roomSelectControllerProvider);
@@ -26,11 +27,12 @@ class AddChatRoomPage extends ConsumerWidget {
             children: <Widget>[
               TextField(
                 controller: chatName,
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 25),
                 decoration: InputDecoration(
                     labelText: 'Chat Room Name',
                     contentPadding: const EdgeInsets.symmetric(
-                      vertical: 20,
+                      horizontal: 10,
+                      vertical: 15,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),

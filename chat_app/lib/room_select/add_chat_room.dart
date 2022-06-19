@@ -27,7 +27,7 @@ class AddChatRoomPage extends ConsumerWidget {
             children: <Widget>[
               TextField(
                 controller: chatName,
-                style: const TextStyle(fontSize: 25),
+                style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: 'Chat Room Name',
                     contentPadding: const EdgeInsets.symmetric(

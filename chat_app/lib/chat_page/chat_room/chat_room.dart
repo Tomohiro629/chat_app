@@ -77,8 +77,8 @@ class ChatRoom extends ConsumerWidget {
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(50)),
-                                          title:
-                                              Text("Delete ${chat.chatName}"),
+                                          title: Text(
+                                              "Delete message\n『${message.message}』"),
                                           content: const Text(
                                               "Do you want to Delete it?"),
                                           actions: <Widget>[
@@ -90,7 +90,20 @@ class ChatRoom extends ConsumerWidget {
                                               color: Color.fromARGB(
                                                   255, 240, 124, 116),
                                               child: const Text("Yes"),
-                                              onPressed: () async {},
+                                              onPressed: () async {
+                                                _controller.deleteMesseage(
+                                                    message: message);
+                                                await Navigator.of(context)
+                                                    .push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return ChatRoom(
+                                                        chat: chat,
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
                                             ),
                                             MaterialButton(
                                               shape: RoundedRectangleBorder(
@@ -100,7 +113,18 @@ class ChatRoom extends ConsumerWidget {
                                               color: Color.fromARGB(
                                                   255, 137, 196, 244),
                                               child: const Text("No"),
-                                              onPressed: () async {},
+                                              onPressed: () async {
+                                                await Navigator.of(context)
+                                                    .push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return ChatRoom(
+                                                        chat: chat,
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ],
                                         );

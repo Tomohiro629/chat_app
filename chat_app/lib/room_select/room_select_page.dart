@@ -1,4 +1,5 @@
 import 'package:chat_app/chat_page/chat_room/chat_room.dart';
+import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/home_page.dart';
 import 'package:chat_app/room_select/add_chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
@@ -6,11 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage({Key? key}) : super(key: key);
-
+  const RoomSelectPage({Key? key, required this.chatName}) : super(key: key);
+  final String chatName;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(roomSelectControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Room Select"),
@@ -56,7 +58,9 @@ class RoomSelectPage extends ConsumerWidget {
                             await Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const RoomSelectPage();
+                                  return const RoomSelectPage(
+                                    chatName: "chatName",
+                                  );
                                 },
                               ),
                             );
@@ -69,73 +73,78 @@ class RoomSelectPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Card(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Column(
             children: [
-              ListTile(
-                tileColor: Color.fromARGB(255, 199, 240, 201),
-                title: const Text(
-                  "Chat Room1",
-                  style: TextStyle(fontSize: 20),
-                ),
-                leading: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                      minHeight: 44, minWidth: 34, maxHeight: 64, maxWidth: 54),
-                ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.login),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ChatRoom(chatId: 'room1'),
-                        ));
+              Container(
+                padding: const EdgeInsets.all(8),
+              ),
+              Expanded(
+                child: StreamBuilder<List<Chat>>(
+                  stream: _controller.fetchChatRoomStream(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Chat>> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("Error:${snapshot.error}");
+                    }
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: Stack(children: const [
+                            CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color.fromARGB(255, 6, 121, 11)),
+                              backgroundColor: Color.fromARGB(255, 48, 185, 53),
+                            ),
+                          ]),
+                        );
+                      default:
+                        return ListView(
+                            shrinkWrap: true,
+                            children: snapshot.data!.map((Chat chat) {
+                              return ListTile(
+                                tileColor: Color.fromARGB(255, 199, 240, 201),
+                                title: Text(
+                                  chat.chatName,
+                                ),
+                                subtitle: Text("作成日${chat.addTime}"),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.login),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ChatRoom(
+                                            chat: chat,
+                                          ),
+                                        ));
+                                  },
+                                ),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                ),
+                              );
+                            }).toList());
+                    }
                   },
                 ),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              ListTile(
-                tileColor: Color.fromARGB(255, 165, 236, 167),
-                title: const Text(
-                  "Chat Room2",
-                  style: TextStyle(fontSize: 20),
-                ),
-                leading: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                      minHeight: 44, minWidth: 34, maxHeight: 64, maxWidth: 54),
-                ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.login),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ChatRoom(chatId: 'room1'),
-                        ));
-                  },
-                ),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                ),
-                onLongPress: () {
-                  // _controller.deleteRoom(chatId: "chatId");
-                },
               ),
             ],
           ),
-        ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddChatRoomPage()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AddChatRoomPage(
+                        chatId: "",
+                        chatName: "",
+                      )));
         },
         child: const Icon(Icons.add),
       ),

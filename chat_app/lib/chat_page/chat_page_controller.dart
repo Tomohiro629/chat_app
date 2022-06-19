@@ -1,49 +1,33 @@
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/repository/message_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
 
 final chatControllerProvider = ChangeNotifierProvider<ChatController>((ref) {
-  return ChatController();
+  return ChatController(ref.read);
 });
 
 class ChatController extends ChangeNotifier {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool loading = false;
+  final Reader _reader;
+  ChatController(this._reader);
 
   Future<void> addMesseage({
     required String messageText,
     required String chatId,
   }) async {
     changeLoadingStatus(true);
-    final message = Message(
-      messageId: const Uuid().v4(),
-      message: messageText,
-      sendTime: DateFormat("yyyy年MM月dd日 hh時mm分").format(DateTime.now()),
+    final message = Message.create(
+      chatId: chatId,
+      messageText: messageText,
     );
-    //firestoreにメッセージを追加
-    await _firestore
-        .collection("chat_rooms")
-        .doc(chatId)
-        .collection("messages")
-        .doc(message.messageId)
-        .set(message.toJson());
+    await _reader(messageRepositoryProvider).setMesseage(message: message);
 
     changeLoadingStatus(false);
   }
 
   Stream<List<Message>> fetchMessagesStream(String chatId) {
-    final snapshots = _firestore
-        .collection('chat_rooms')
-        .doc(chatId)
-        .collection("messages")
-        .orderBy('sendTime', descending: false)
-        .snapshots();
-
-    return snapshots.map(
-        (qs) => qs.docs.map((doc) => Message.fromJson(doc.data())).toList());
+    return _reader(messageRepositoryProvider).fetchMessagesStream(chatId);
   }
 
   void changeLoadingStatus(bool status) {
@@ -52,15 +36,9 @@ class ChatController extends ChangeNotifier {
   }
 
   Future<void> deleteMesseage({
-    required String chatId,
-    required String messageId,
+    required Message message,
   }) async {
     //firestoreのデータ削除
-    await _firestore
-        .collection("chat_rooms")
-        .doc(chatId)
-        .collection("messages")
-        .doc(messageId)
-        .delete();
+    await _reader(messageRepositoryProvider).deleteMesseage(message: message);
   }
 }

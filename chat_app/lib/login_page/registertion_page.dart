@@ -29,7 +29,8 @@ class RegistertionPage extends StatelessWidget {
                 decoration: InputDecoration(
                     labelText: ' Mail',
                     contentPadding: const EdgeInsets.symmetric(
-                      vertical: 20,
+                      horizontal: 10,
+                      vertical: 15,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
@@ -50,7 +51,8 @@ class RegistertionPage extends StatelessWidget {
                 decoration: InputDecoration(
                     labelText: ' Password',
                     contentPadding: const EdgeInsets.symmetric(
-                      vertical: 20,
+                      horizontal: 10,
+                      vertical: 15,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),

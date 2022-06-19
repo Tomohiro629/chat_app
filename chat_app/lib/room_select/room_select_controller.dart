@@ -24,10 +24,7 @@ class RoomSelectController extends ChangeNotifier {
   Future<void> addChatRoom({
     required String chatName,
   }) async {
-    final chat = Chat(
-        roomId: const Uuid().v4(),
-        chatName: chatName,
-        addTime: DateFormat("yyyy年MM月dd日").format(DateTime.now()));
+    final chat = Chat.create(chatName: chatName);
     await _reader(chatRepositoryProvider).addChatRoom(chat: chat);
   }
 

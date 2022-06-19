@@ -2,8 +2,6 @@ import 'package:chat_app/entity/message.dart';
 import 'package:chat_app/repository/message_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
 
 final chatControllerProvider = ChangeNotifierProvider<ChatController>((ref) {
   return ChatController(ref.read);
@@ -19,11 +17,9 @@ class ChatController extends ChangeNotifier {
     required String chatId,
   }) async {
     changeLoadingStatus(true);
-    final message = Message(
-      messageId: const Uuid().v4(),
-      message: messageText,
-      sendTime: DateFormat("yyyy年MM月dd日 hh時mm分").format(DateTime.now()),
+    final message = Message.create(
       chatId: chatId,
+      messageText: messageText,
     );
     await _reader(messageRepositoryProvider).setMesseage(message: message);
 

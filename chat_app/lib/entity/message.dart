@@ -1,3 +1,6 @@
+import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
+
 class Message {
   Message({
     required this.message,
@@ -5,6 +8,18 @@ class Message {
     required this.sendTime,
     required this.chatId,
   });
+
+  factory Message.create({
+    required String chatId,
+    required String messageText,
+  }) {
+    return Message(
+      messageId: const Uuid().v4(),
+      message: messageText,
+      sendTime: DateFormat("yyyy年MM月dd日 hh時mm分").format(DateTime.now()),
+      chatId: chatId,
+    );
+  }
 
   factory Message.fromJson(Map<String, dynamic> map) {
     return Message(

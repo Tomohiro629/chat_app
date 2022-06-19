@@ -1,3 +1,4 @@
+import 'package:chat_app/chat_page/chat_room/chat_room.dart';
 import 'package:chat_app/login_page/login_page.dart';
 import 'package:chat_app/login_page/registertion_page.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
@@ -35,7 +36,9 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RoomSelectPage(),
+                        builder: (context) => const RoomSelectPage(
+                          chatName: "chatName",
+                        ),
                       ));
                 },
                 child: const Text("チャットへ")),

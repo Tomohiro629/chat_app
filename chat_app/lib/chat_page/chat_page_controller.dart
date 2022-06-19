@@ -34,6 +34,23 @@ class ChatController extends ChangeNotifier {
     changeLoadingStatus(false);
   }
 
+  Stream<List<Message>> fetchMessagesStream(String chatId) {
+    final snapshots = _firestore
+        .collection('chat_rooms')
+        .doc(chatId)
+        .collection("messages")
+        .orderBy('sendTime', descending: false)
+        .snapshots();
+
+    return snapshots.map(
+        (qs) => qs.docs.map((doc) => Message.fromJson(doc.data())).toList());
+  }
+
+  void changeLoadingStatus(bool status) {
+    loading = status;
+    notifyListeners();
+  }
+
   Future<void> deleteMesseage({
     required String chatId,
     required String messageId,
@@ -45,22 +62,5 @@ class ChatController extends ChangeNotifier {
         .collection("messages")
         .doc(messageId)
         .delete();
-  }
-
-  Stream<List<Message>> fetchMessagesStream(String chatId) {
-    final snapshots = _firestore
-        .collection('chat_rooms')
-        .doc("room1")
-        .collection("messages")
-        .orderBy('sendTime', descending: true)
-        .snapshots();
-
-    return snapshots.map(
-        (qs) => qs.docs.map((doc) => Message.fromJson(doc.data())).toList());
-  }
-
-  void changeLoadingStatus(bool status) {
-    loading = status;
-    notifyListeners();
   }
 }

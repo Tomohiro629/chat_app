@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddChatRoomPage extends ConsumerWidget {
-  const AddChatRoomPage({Key? key}) : super(key: key);
-
+  const AddChatRoomPage(
+      {Key? key, required this.chatId, required this.chatName})
+      : super(key: key);
+  final String chatId;
+  final String chatName;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(roomSelectControllerProvider);
-    final chatRoomName = TextEditingController();
+    final chatName = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -21,8 +24,8 @@ class AddChatRoomPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFormField(
-                controller: chatRoomName,
+              TextField(
+                controller: chatName,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: 'Chat Room Name',
@@ -51,9 +54,10 @@ class AddChatRoomPage extends ConsumerWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     onPressed: () async {
-                      await _controller.addChatRoom(
-                          chatId: "chatId", chatName: chatRoomName.text);
-                      Navigator.pop;
+                      await _controller.addChatRoom(chatName: chatName.text);
+                      Navigator.pop(
+                        context,
+                      );
                     }),
               ),
             ],

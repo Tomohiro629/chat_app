@@ -83,7 +83,9 @@ class LoginPage extends StatelessWidget {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return const RoomSelectPage();
+                          return RoomSelectPage(
+                            chatName: "chatName",
+                          );
                         }),
                       );
                     } catch (e) {

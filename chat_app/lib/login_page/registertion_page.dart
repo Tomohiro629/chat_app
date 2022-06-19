@@ -89,7 +89,9 @@ class RegistertionPage extends StatelessWidget {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RoomSelectPage()),
+                            builder: (context) => RoomSelectPage(
+                                  chatName: "chatName",
+                                )),
                       );
                     } catch (e) {
                       infoText = "登録に失敗しました：${e.toString()}";

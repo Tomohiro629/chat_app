@@ -53,66 +53,75 @@ class ChatRoom extends ConsumerWidget {
                           return ListView(
                             shrinkWrap: true,
                             children: snapshot.data!.map((Message message) {
-                              return ListTile(
-                                tileColor: Color.fromARGB(255, 199, 240, 201),
-                                title: Text(message.message),
-                                subtitle: Text(message.sendTime),
-                                leading: ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                      minHeight: 44,
-                                      minWidth: 34,
-                                      maxHeight: 64,
-                                      maxWidth: 54),
-                                ),
+                              return Card(
                                 shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(100)),
                                 ),
-                                onLongPress: () {
-                                  showDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      builder: (childContext) {
-                                        return AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          title: Text(
-                                              "Delete message\n『${message.message}』"),
-                                          content: const Text(
-                                              "Do you want to Delete it?"),
-                                          actions: <Widget>[
-                                            MaterialButton(
-                                              shape: RoundedRectangleBorder(
+                                child: ListTile(
+                                  tileColor:
+                                      const Color.fromARGB(255, 199, 240, 201),
+                                  title: Text(message.message),
+                                  subtitle: Text(message.sendTime),
+                                  leading: ConstrainedBox(
+                                    constraints: const BoxConstraints(
+                                        minHeight: 44,
+                                        minWidth: 34,
+                                        maxHeight: 64,
+                                        maxWidth: 54),
+                                  ),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(100)),
+                                  ),
+                                  onLongPress: () {
+                                    showDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (childContext) {
+                                          return AlertDialog(
+                                            shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(100),
+                                                    BorderRadius.circular(50)),
+                                            title: Text(
+                                                "Delete message\n『${message.message}』"),
+                                            content: const Text(
+                                                "Do you want to Delete it?"),
+                                            actions: <Widget>[
+                                              MaterialButton(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                ),
+                                                color: const Color.fromARGB(
+                                                    255, 240, 124, 116),
+                                                child: const Text("Yes"),
+                                                onPressed: () async {
+                                                  await _controller
+                                                      .deleteMesseage(
+                                                          message: message);
+                                                  Navigator.of(context).pop();
+                                                },
                                               ),
-                                              color: const Color.fromARGB(
-                                                  255, 240, 124, 116),
-                                              child: const Text("Yes"),
-                                              onPressed: () async {
-                                                await _controller
-                                                    .deleteMesseage(
-                                                        message: message);
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            MaterialButton(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
+                                              MaterialButton(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                ),
+                                                color: const Color.fromARGB(
+                                                    255, 137, 196, 244),
+                                                child: const Text("No"),
+                                                onPressed: () async {
+                                                  Navigator.of(context).pop();
+                                                },
                                               ),
-                                              color: const Color.fromARGB(
-                                                  255, 137, 196, 244),
-                                              child: const Text("No"),
-                                              onPressed: () async {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
+                                            ],
+                                          );
+                                        });
+                                  },
+                                ),
                               );
                             }).toList(),
                           );
@@ -121,6 +130,8 @@ class ChatRoom extends ConsumerWidget {
                   ),
                 ),
                 TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   controller: textEdit,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(

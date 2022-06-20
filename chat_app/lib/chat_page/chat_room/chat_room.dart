@@ -121,6 +121,8 @@ class ChatRoom extends ConsumerWidget {
                   ),
                 ),
                 TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   controller: textEdit,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(

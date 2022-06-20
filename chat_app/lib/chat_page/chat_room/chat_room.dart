@@ -87,22 +87,14 @@ class ChatRoom extends ConsumerWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(100),
                                               ),
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 240, 124, 116),
                                               child: const Text("Yes"),
                                               onPressed: () async {
-                                                _controller.deleteMesseage(
-                                                    message: message);
-                                                await Navigator.of(context)
-                                                    .push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) {
-                                                      return ChatRoom(
-                                                        chat: chat,
-                                                      );
-                                                    },
-                                                  ),
-                                                );
+                                                await _controller
+                                                    .deleteMesseage(
+                                                        message: message);
+                                                Navigator.of(context).pop();
                                               },
                                             ),
                                             MaterialButton(
@@ -110,20 +102,11 @@ class ChatRoom extends ConsumerWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(100),
                                               ),
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 137, 196, 244),
                                               child: const Text("No"),
                                               onPressed: () async {
-                                                await Navigator.of(context)
-                                                    .push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) {
-                                                      return ChatRoom(
-                                                        chat: chat,
-                                                      );
-                                                    },
-                                                  ),
-                                                );
+                                                Navigator.of(context).pop();
                                               },
                                             ),
                                           ],

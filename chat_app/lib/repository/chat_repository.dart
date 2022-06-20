@@ -15,7 +15,7 @@ class ChatRepository {
     await _firestore
         .collection("chat_rooms")
         .doc(chat.roomId)
-        .set(chat.toJson());
+        .set(chat.toJson(), SetOptions(merge: true));
   }
 
   Future<void> deleteChatRoom({

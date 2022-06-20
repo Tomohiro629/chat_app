@@ -55,15 +55,7 @@ class RoomSelectPage extends ConsumerWidget {
                           color: const Color.fromARGB(255, 137, 196, 244),
                           child: const Text("No"),
                           onPressed: () async {
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const RoomSelectPage(
-                                    chatName: "chatName",
-                                  );
-                                },
-                              ),
-                            );
+                            Navigator.of(context).pop();
                           },
                         ),
                       ],
@@ -144,21 +136,13 @@ class RoomSelectPage extends ConsumerWidget {
                                               borderRadius:
                                                   BorderRadius.circular(100),
                                             ),
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 240, 124, 116),
                                             child: const Text("Yes"),
                                             onPressed: () async {
                                               _controller.deleteChatRoom(
                                                   chat: chat);
-                                              await Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return const RoomSelectPage(
-                                                      chatName: "chatName",
-                                                    );
-                                                  },
-                                                ),
-                                              );
+                                              Navigator.of(context).pop();
                                             },
                                           ),
                                           MaterialButton(
@@ -166,19 +150,11 @@ class RoomSelectPage extends ConsumerWidget {
                                               borderRadius:
                                                   BorderRadius.circular(100),
                                             ),
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 137, 196, 244),
                                             child: const Text("No"),
                                             onPressed: () async {
-                                              await Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return const RoomSelectPage(
-                                                      chatName: "chatName",
-                                                    );
-                                                  },
-                                                ),
-                                              );
+                                              Navigator.of(context).pop();
                                             },
                                           ),
                                         ],

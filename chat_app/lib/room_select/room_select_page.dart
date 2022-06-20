@@ -95,15 +95,22 @@ class RoomSelectPage extends ConsumerWidget {
                       return ListView(
                           shrinkWrap: true,
                           children: snapshot.data!.map((Chat chat) {
-                            return ListTile(
-                              tileColor: Color.fromARGB(255, 199, 240, 201),
-                              title: Text(
-                                chat.chatName,
+                            return Card(
+                              color: const Color.fromARGB(255, 199, 240, 201),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100)),
                               ),
-                              subtitle: Text("作成日${chat.addTime}"),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.login),
-                                onPressed: () {
+                              child: ListTile(
+                                title: Text(
+                                  chat.chatName,
+                                ),
+                                subtitle: Text("作成日${chat.addTime}"),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                ),
+                                onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -112,55 +119,51 @@ class RoomSelectPage extends ConsumerWidget {
                                         ),
                                       ));
                                 },
-                              ),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                              ),
-                              onLongPress: () {
-                                showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (childContext) {
-                                      return AlertDialog(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        title: Text(
-                                            "Delete Room\n『${chat.chatName}』"),
-                                        content: const Text(
-                                            "Do you want to Delete it?"),
-                                        actions: <Widget>[
-                                          MaterialButton(
-                                            shape: RoundedRectangleBorder(
+                                onLongPress: () {
+                                  showDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (childContext) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(100),
+                                                  BorderRadius.circular(50)),
+                                          title: Text(
+                                              "Delete Room\n『${chat.chatName}』"),
+                                          content: const Text(
+                                              "Do you want to Delete it?"),
+                                          actions: <Widget>[
+                                            MaterialButton(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              color: const Color.fromARGB(
+                                                  255, 240, 124, 116),
+                                              child: const Text("Yes"),
+                                              onPressed: () async {
+                                                _controller.deleteChatRoom(
+                                                    chat: chat);
+                                                Navigator.of(context).pop();
+                                              },
                                             ),
-                                            color: const Color.fromARGB(
-                                                255, 240, 124, 116),
-                                            child: const Text("Yes"),
-                                            onPressed: () async {
-                                              _controller.deleteChatRoom(
-                                                  chat: chat);
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          MaterialButton(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
+                                            MaterialButton(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              color: const Color.fromARGB(
+                                                  255, 137, 196, 244),
+                                              child: const Text("No"),
+                                              onPressed: () async {
+                                                Navigator.of(context).pop();
+                                              },
                                             ),
-                                            color: const Color.fromARGB(
-                                                255, 137, 196, 244),
-                                            child: const Text("No"),
-                                            onPressed: () async {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    });
-                              },
+                                          ],
+                                        );
+                                      });
+                                },
+                              ),
                             );
                           }).toList());
                   }

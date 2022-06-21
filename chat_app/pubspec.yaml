@@ -40,6 +40,7 @@ dependencies:
   firebase_core: ^1.17.1
   intl: ^0.17.0
   riverpod: ^1.0.3
+  settings_ui: ^1.0.0
   uuid: ^3.0.6
   vm_service: ^8.3.0
   

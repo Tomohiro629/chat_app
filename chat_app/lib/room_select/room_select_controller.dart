@@ -1,6 +1,5 @@
 import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/repository/chat_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,14 +9,8 @@ final roomSelectControllerProvider =
 });
 
 class RoomSelectController extends ChangeNotifier {
-  final auth = FirebaseAuth.instance;
   final Reader _reader;
   RoomSelectController(this._reader);
-
-  Future<void> logOut() async {
-    await auth.signOut();
-    notifyListeners();
-  }
 
   Future<void> addChatRoom({
     required String chatName,

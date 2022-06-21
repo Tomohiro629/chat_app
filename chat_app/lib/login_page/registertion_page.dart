@@ -1,10 +1,8 @@
-import 'package:chat_app/login_page/registration_page_controller.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegistertionPage extends ConsumerWidget {
+class RegistertionPage extends StatelessWidget {
   RegistertionPage({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -16,8 +14,9 @@ class RegistertionPage extends ConsumerWidget {
   String email = '';
   String password = '';
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(registertionControllerProvider);
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("Registertion Page")),
       body: Center(

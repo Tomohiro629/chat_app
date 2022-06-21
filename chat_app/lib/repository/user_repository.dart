@@ -10,7 +10,7 @@ class UserRepository {
   final _firestore = FirebaseFirestore.instance;
 
   Future<void> setUser({
-    required User user,
+    required Users user,
   }) async {
     await _firestore
         .collection("user")
@@ -19,7 +19,7 @@ class UserRepository {
   }
 
   Future<void> deleteUser({
-    required User user,
+    required Users user,
   }) async {
     await _firestore.collection("user").doc(user.userId).delete();
   }

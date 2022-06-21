@@ -19,4 +19,10 @@ class RegistertionController extends ChangeNotifier {
     final user = User.create(userNameText: userNameText, userId: userId);
     await _reader(userRepositoryProvider).setUser(user: user);
   }
+
+  Future<void> deleteUser({
+    required User user,
+  }) async {
+    await _reader(registertionControllerProvider).deleteUser(user: user);
+  }
 }

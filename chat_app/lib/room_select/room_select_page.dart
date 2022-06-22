@@ -1,6 +1,5 @@
 import 'package:chat_app/chat_page/chat_room/chat_room.dart';
 import 'package:chat_app/entity/chat.dart';
-import 'package:chat_app/home_page.dart';
 import 'package:chat_app/room_select/add_chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
@@ -8,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage({Key? key, required this.chatName}) : super(key: key);
+  const RoomSelectPage({
+    Key? key,
+    required this.chatName,
+  }) : super(key: key);
   final String chatName;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +25,9 @@ class RoomSelectPage extends ConsumerWidget {
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const SettingPage();
+                return const SettingPage(
+                  userId: "userId",
+                );
               }));
             },
           ),
@@ -60,7 +64,7 @@ class RoomSelectPage extends ConsumerWidget {
                           shrinkWrap: true,
                           children: snapshot.data!.map((Chat chat) {
                             return Card(
-                              color: const Color.fromARGB(255, 199, 240, 201),
+                              color: Color.fromARGB(255, 96, 235, 103),
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100)),

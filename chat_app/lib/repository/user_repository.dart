@@ -1,5 +1,6 @@
 import 'package:chat_app/entity/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userRepositoryProvider = Provider(((ref) {
@@ -13,7 +14,7 @@ class UserRepository {
     required Users user,
   }) async {
     await _firestore
-        .collection("user")
+        .collection("users")
         .doc(user.userId)
         .set(user.toJson(), SetOptions(merge: true));
   }
@@ -21,6 +22,13 @@ class UserRepository {
   Future<void> deleteUser({
     required Users user,
   }) async {
-    await _firestore.collection("user").doc(user.userId).delete();
+    await _firestore.collection("users").doc(user.userId).delete();
+  }
+
+  Stream<List<Users>> fetchUserStream() {
+    final snapshots = _firestore.collection('users').snapshots();
+
+    return snapshots
+        .map((qs) => qs.docs.map((doc) => Users.fromJson(doc.data())).toList());
   }
 }

@@ -22,6 +22,10 @@ class SettingController extends ChangeNotifier {
     await _reader(userRepositoryProvider).setUser(user: user);
   }
 
+  Stream<List<Users>> fetchUsersStream(String userId) {
+    return _reader(userRepositoryProvider).fetchUserStream();
+  }
+
   Future<void> deleteUser({
     required Users user,
   }) async {

@@ -27,6 +27,7 @@ class RoomSelectPage extends ConsumerWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                 return const SettingPage(
                   userId: "userId",
+                  userName: "userName",
                 );
               }));
             },

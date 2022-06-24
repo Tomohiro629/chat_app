@@ -8,8 +8,10 @@ class SettingPage extends ConsumerWidget {
   const SettingPage({
     Key? key,
     required this.userId,
+    required this.userName,
   }) : super(key: key);
   final String userId;
+  final String userName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -155,7 +157,6 @@ class SettingPage extends ConsumerWidget {
                                   } catch (e) {
                                     print(e);
                                   }
-
                                   Navigator.of(context).pop();
                                 },
                               ),

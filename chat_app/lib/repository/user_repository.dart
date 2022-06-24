@@ -18,10 +18,8 @@ class UserRepository {
         .set(user.toJson(), SetOptions(merge: true));
   }
 
-  Future<void> deleteUser({
-    required Users user,
-  }) async {
-    await _firestore.collection("users").doc(user.userId).delete();
+  Future<void> deleteUser() async {
+    await _firestore.collection("users").doc("user").delete();
   }
 
   Stream<List<Users>> fetchUserStream() {

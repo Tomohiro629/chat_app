@@ -70,6 +70,7 @@ class SettingPage extends ConsumerWidget {
                                 child: const Text("Yes"),
                                 onPressed: () async {
                                   await _controller.logOut();
+                                  await _controller.deleteUser();
                                   await Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) {
@@ -176,46 +177,43 @@ class SettingPage extends ConsumerWidget {
                   },
                 ),
               ),
-              Expanded(
-                child: StreamBuilder<List<Users>>(
-                  stream: _controller.fetchUsersStream(userId),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Users>> snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return Center(
-                          child: Stack(children: const [
-                            CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Color.fromARGB(255, 6, 121, 11)),
-                              backgroundColor: Color.fromARGB(255, 48, 185, 53),
-                            ),
-                          ]),
-                        );
-                      default:
-                        return ListView(
-                          shrinkWrap: true,
-                          children: snapshot.data!.map((Users user) {
-                            return Card(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                              ),
-                              child: ListTile(
-                                title: Text("${user.userName}でログイン中"),
-                              ),
-                            );
-                          }).toList(),
-                        );
-                    }
-                  },
-                ),
-              )
             ],
-          )
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: StreamBuilder<List<Users>>(
+              stream: _controller.fetchUsersStream(userId),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Users>> snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Center(
+                      child: Stack(children: const [
+                        CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Color.fromARGB(255, 6, 121, 11)),
+                          backgroundColor: Color.fromARGB(255, 48, 185, 53),
+                        ),
+                      ]),
+                    );
+                  default:
+                    return ListView(
+                      shrinkWrap: true,
+                      children: snapshot.data!.map((Users user) {
+                        return Align(
+                          child: Card(
+                            child: Text("${user.userName}でログイン中"),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                }
+              },
+            ),
+          ),
         ],
       ),
     );

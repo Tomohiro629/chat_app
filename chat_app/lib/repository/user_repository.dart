@@ -1,6 +1,5 @@
 import 'package:chat_app/entity/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userRepositoryProvider = Provider(((ref) {
@@ -15,7 +14,7 @@ class UserRepository {
   }) async {
     await _firestore
         .collection("users")
-        .doc(user.userId)
+        .doc("user")
         .set(user.toJson(), SetOptions(merge: true));
   }
 

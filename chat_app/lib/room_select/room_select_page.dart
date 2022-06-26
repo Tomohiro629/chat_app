@@ -51,87 +51,112 @@ class RoomSelectPage extends ConsumerWidget {
                   }
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
-                      return Center(
-                        child: Stack(children: const [
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                Color.fromARGB(255, 6, 121, 11)),
-                            backgroundColor: Color.fromARGB(255, 48, 185, 53),
-                          ),
-                        ]),
-                      );
+                      return Center();
                     default:
                       return ListView(
                           shrinkWrap: true,
                           children: snapshot.data!.map((Chat chat) {
-                            return Card(
-                              color: Color.fromARGB(255, 96, 235, 103),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                  chat.chatName,
+                            return Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 185, 235, 187),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(40),
+                                      topLeft: Radius.circular(40),
+                                      bottomLeft: Radius.circular(40),
+                                      bottomRight: Radius.circular(40)),
+                                  gradient: LinearGradient(
+                                    begin: FractionalOffset.topLeft,
+                                    end: FractionalOffset.bottomRight,
+                                    colors: [
+                                      Color.fromARGB(255, 13, 160, 87),
+                                      Color.fromARGB(222, 98, 203, 115),
+                                    ],
+                                    stops: [
+                                      0.0,
+                                      1.0,
+                                    ],
+                                  ),
                                 ),
-                                subtitle: Text("作成日${chat.addTime}"),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100)),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(30, 50, 0, 50),
+                                  child: ListTile(
+                                    title: Text(
+                                      "「 ${chat.chatName}」room",
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      " 作成日${chat.addTime}",
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color:
+                                            Color.fromARGB(255, 56, 255, 238),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ChatRoom(
+                                              chat: chat,
+                                            ),
+                                          ));
+                                    },
+                                    onLongPress: () {
+                                      showDialog(
+                                          barrierDismissible: false,
+                                          context: context,
+                                          builder: (childContext) {
+                                            return AlertDialog(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              title: Text(
+                                                  "Delete Room\n『${chat.chatName}』"),
+                                              content: const Text(
+                                                  "Do you want to Delete it?"),
+                                              actions: <Widget>[
+                                                MaterialButton(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                  ),
+                                                  color: const Color.fromARGB(
+                                                      255, 240, 124, 116),
+                                                  child: const Text("Yes"),
+                                                  onPressed: () async {
+                                                    _controller.deleteChatRoom(
+                                                        chat: chat);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                                MaterialButton(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                  ),
+                                                  color: const Color.fromARGB(
+                                                      255, 137, 196, 244),
+                                                  child: const Text("No"),
+                                                  onPressed: () async {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    },
+                                  ),
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatRoom(
-                                          chat: chat,
-                                        ),
-                                      ));
-                                },
-                                onLongPress: () {
-                                  showDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      builder: (childContext) {
-                                        return AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          title: Text(
-                                              "Delete Room\n『${chat.chatName}』"),
-                                          content: const Text(
-                                              "Do you want to Delete it?"),
-                                          actions: <Widget>[
-                                            MaterialButton(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                              ),
-                                              color: const Color.fromARGB(
-                                                  255, 240, 124, 116),
-                                              child: const Text("Yes"),
-                                              onPressed: () async {
-                                                _controller.deleteChatRoom(
-                                                    chat: chat);
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            MaterialButton(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                              ),
-                                              color: const Color.fromARGB(
-                                                  255, 137, 196, 244),
-                                              child: const Text("No"),
-                                              onPressed: () async {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
                               ),
                             );
                           }).toList());

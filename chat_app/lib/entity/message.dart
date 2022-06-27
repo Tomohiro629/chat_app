@@ -16,7 +16,7 @@ class Message {
     return Message(
       messageId: const Uuid().v4(),
       message: messageText,
-      sendTime: DateFormat("yyyy年MM月dd日 HH時mm分").format(DateTime.now()),
+      sendTime: DateFormat("MM月dd日 HH時mm分ss秒").format(DateTime.now()),
       chatId: chatId,
     );
   }

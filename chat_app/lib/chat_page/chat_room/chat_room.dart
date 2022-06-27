@@ -134,7 +134,7 @@ class ChatRoom extends ConsumerWidget {
                                                               116),
                                                       child: const Text("Yes"),
                                                       onPressed: () async {
-                                                        await _controller
+                                                        _controller
                                                             .deleteMesseage(
                                                                 message:
                                                                     message);
@@ -194,7 +194,9 @@ class ChatRoom extends ConsumerWidget {
                           );
                           textEdit.clear();
                         } catch (e) {
-                          const Text("Please enter a ChatRoomName");
+                          const Dialog(
+                            child: Text("Please enter a Message"),
+                          );
                         }
                       },
                       icon: const Icon(Icons.send),

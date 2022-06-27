@@ -80,7 +80,7 @@ class ChatRoom extends ConsumerWidget {
                                   child: Padding(
                                       //card内の隙間
                                       padding:
-                                          const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                          const EdgeInsets.fromLTRB(0, 3, 0, 0),
                                       child: ListTile(
                                         tileColor: const Color.fromARGB(
                                             255, 199, 240, 201),

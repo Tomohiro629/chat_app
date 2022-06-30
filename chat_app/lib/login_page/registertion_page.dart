@@ -1,8 +1,10 @@
+import 'package:chat_app/login_page/auth_service.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegistertionPage extends StatelessWidget {
+class RegistertionPage extends ConsumerWidget {
   RegistertionPage({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -13,10 +15,10 @@ class RegistertionPage extends StatelessWidget {
   String infoText = '';
   String email = '';
   String password = '';
+  String authName = '';
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = ref.watch(authServiceProvider);
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("Registertion Page")),
       body: Center(
@@ -38,9 +40,6 @@ class RegistertionPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100),
                     )),
                 onChanged: (String value) {
-                  // _editingController.selection = TextSelection.fromPosition(
-                  //   const TextPosition(offset: 30),
-                  // );
                   email = value;
                 },
               ),
@@ -63,7 +62,27 @@ class RegistertionPage extends StatelessWidget {
                 onChanged: (String value) {
                   if (value.length >= 8) {
                     password = value;
-                  } else {}
+                  } else {
+                    print("8文字以上で設定を");
+                  }
+                },
+              ),
+              TextFormField(
+                keyboardType: TextInputType.visiblePassword,
+                style: const TextStyle(fontSize: 20),
+                decoration: InputDecoration(
+                    labelText: ' Name',
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 15,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    )),
+                onChanged: (String value) {
+                  {
+                    authName = value;
+                  }
                 },
               ),
               Container(
@@ -86,16 +105,15 @@ class RegistertionPage extends StatelessWidget {
                   ),
                   onPressed: () async {
                     try {
-                      await auth.createUserWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
+                      _controller.createUserWithEmailAndPassword(
+                          email, password, authName);
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RoomSelectPage(
-                                  chatName: "chatName",
-                                )),
+                          builder: (context) => RoomSelectPage(
+                            chatName: "chatName",
+                          ),
+                        ),
                       );
                     } catch (e) {
                       infoText = "登録に失敗しました：${e.toString()}";

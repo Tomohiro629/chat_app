@@ -1,3 +1,4 @@
+import 'package:chat_app/home_page/home_page_controller.dart';
 import 'package:chat_app/login_page/login_page.dart';
 import 'package:chat_app/login_page/registertion_page.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
@@ -5,13 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({
+  HomePage({
     Key? key,
+    required this.userName,
+    required this.chatName,
   }) : super(key: key);
+
+  String userName;
+  String chatName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final _controller = ref.watch(homePageControllerProvider);
+    final _controller = ref.watch(homePageControllerProvider);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -29,8 +35,10 @@ class HomePage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
+                //Aを押したとき
                 MaterialButton(
                   onPressed: () {
+                    _controller.getDate(userName, chatName);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

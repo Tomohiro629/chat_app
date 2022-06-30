@@ -74,7 +74,10 @@ class SettingPage extends ConsumerWidget {
                                   await Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return const HomePage();
+                                        return HomePage(
+                                          chatName: '',
+                                          userName: '',
+                                        );
                                       },
                                     ),
                                   );

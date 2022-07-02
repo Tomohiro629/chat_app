@@ -8,7 +8,7 @@ class RegistertionPage extends ConsumerWidget {
   RegistertionPage({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  final _editingController = TextEditingController();
+  final txetEdit = TextEditingController();
   UserCredential? result;
   User? user;
 
@@ -28,7 +28,6 @@ class RegistertionPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
-                controller: _editingController,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: ' Mail',
@@ -68,7 +67,7 @@ class RegistertionPage extends ConsumerWidget {
                 },
               ),
               TextFormField(
-                keyboardType: TextInputType.visiblePassword,
+                controller: txetEdit,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: ' Name',
@@ -79,11 +78,6 @@ class RegistertionPage extends ConsumerWidget {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                     )),
-                onChanged: (String value) {
-                  {
-                    authName = value;
-                  }
-                },
               ),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -105,8 +99,17 @@ class RegistertionPage extends ConsumerWidget {
                   ),
                   onPressed: () async {
                     try {
+                      await _controller.addUser(
+                          userNameText: txetEdit.text, userId: "");
+                    } catch (e) {
+                      const Text('error');
+                    }
+
+                    try {
                       _controller.createUserWithEmailAndPassword(
-                          email, password, authName);
+                        email,
+                        password,
+                      );
                       await Navigator.push(
                         context,
                         MaterialPageRoute(

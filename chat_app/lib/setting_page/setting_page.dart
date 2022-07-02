@@ -76,7 +76,7 @@ class SettingPage extends ConsumerWidget {
                                       builder: (context) {
                                         return HomePage(
                                           chatName: '',
-                                          userName: '',
+                                          userName: "",
                                         );
                                       },
                                     ),

@@ -22,10 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: HomePage(
-        chatName: '',
-        userName: '',
-      ),
+      home: HomePage(),
     );
   }
 }

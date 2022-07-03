@@ -19,14 +19,14 @@ class Chat {
 
   factory Chat.fromJson(Map<String, dynamic> map) {
     return Chat(
-        chatName: map['chatName'],
+        chatName: map['chatRoomName'],
         addTime: map['addTime'],
         roomId: map['roomId']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'chatName': chatName,
+      'chatRoomName': chatName,
       'addTime': addTime,
       'roomId': roomId,
     };

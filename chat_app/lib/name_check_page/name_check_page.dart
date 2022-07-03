@@ -1,12 +1,11 @@
-import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/name_check_page/name_check_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NameCheckPage extends ConsumerWidget {
-  NameCheckPage({Key? key, required this.roomId}) : super(key: key);
-  final String roomId;
+  const NameCheckPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,7 +54,7 @@ class NameCheckPage extends ConsumerWidget {
                   ),
                   onPressed: () async {
                     await _controller.getChat(
-                        inputName: inputName.text, roomId: roomId);
+                        inputName: inputName.text, userName: "");
                   },
                 ),
               ),

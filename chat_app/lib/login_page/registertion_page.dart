@@ -1,6 +1,5 @@
 import 'package:chat_app/login_page/auth_service.dart';
 import 'package:chat_app/name_check_page/name_check_page.dart';
-import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -114,9 +113,7 @@ class RegistertionPage extends ConsumerWidget {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => NameCheckPage(
-                            roomId: "",
-                          ),
+                          builder: (context) => NameCheckPage(),
                         ),
                       );
                     } catch (e) {

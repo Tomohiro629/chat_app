@@ -8,12 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HomePage extends ConsumerWidget {
   HomePage({
     Key? key,
-    required this.userName,
-    required this.chatName,
   }) : super(key: key);
-
-  String userName;
-  String chatName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,7 +33,6 @@ class HomePage extends ConsumerWidget {
                 //Aを押したとき
                 MaterialButton(
                   onPressed: () {
-                    _controller.getDate(userName, chatName);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

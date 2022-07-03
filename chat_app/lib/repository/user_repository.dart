@@ -9,6 +9,17 @@ final userRepositoryProvider = Provider(((ref) {
 class UserRepository {
   final _firestore = FirebaseFirestore.instance;
 
+  Future<void> getChat(
+      {required String roomId,
+      required String userName,
+      required String inputName}) async {
+    if (inputName == userName) {
+      await _firestore.collection("chat_rooms").doc(roomId).get();
+    } else {
+      print("error");
+    }
+  }
+
   Future<void> setUser({
     required Users user,
   }) async {

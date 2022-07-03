@@ -1,4 +1,4 @@
-import 'package:chat_app/room_select/room_select_page.dart';
+import 'package:chat_app/name_check_page/name_check_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -82,13 +82,17 @@ class LoginPage extends StatelessWidget {
                         email: email,
                         password: password,
                       );
-                      await Navigator.push(
+
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) {
-                          return RoomSelectPage(
-                            chatName: "chatName",
-                          );
-                        }),
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return NameCheckPage(
+                              userName: '',
+                            );
+                          },
+                        ),
                       );
                     } catch (e) {
                       // ユーザー登録に失敗した場合

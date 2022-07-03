@@ -1,4 +1,3 @@
-import 'package:chat_app/home_page/home_page_controller.dart';
 import 'package:chat_app/login_page/login_page.dart';
 import 'package:chat_app/login_page/registertion_page.dart';
 import 'package:chat_app/room_select/room_select_page.dart';

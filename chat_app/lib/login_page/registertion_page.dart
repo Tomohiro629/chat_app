@@ -104,7 +104,6 @@ class RegistertionPage extends ConsumerWidget {
                     } catch (e) {
                       const Text('error');
                     }
-
                     try {
                       _controller.createUserWithEmailAndPassword(
                         email,
@@ -113,9 +112,12 @@ class RegistertionPage extends ConsumerWidget {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => NameCheckPage(),
+                          builder: (context) => NameCheckPage(
+                            userName: txetEdit.text,
+                          ),
                         ),
                       );
+                      txetEdit.clear();
                     } catch (e) {
                       infoText = "登録に失敗しました：${e.toString()}";
                     }

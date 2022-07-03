@@ -9,15 +9,13 @@ final nameCheckControllerProvider =
 
 class NameCheckController extends ChangeNotifier {
   final Reader _reader;
-  NameCheckController(this._reader);
+  NameCheckController(
+    this._reader,
+  );
 
-  Future<void> getChat(
-      {required String inputName, required String userName}) async {
-    if (inputName == userName) {
-      await _reader(userRepositoryProvider)
-          .getChat(roomId: "", userName: "", inputName: "");
-    } else {
-      print("error");
+  Future<void> getChat({required String inputName}) async {
+    {
+      await _reader(userRepositoryProvider).getChat();
     }
   }
 }

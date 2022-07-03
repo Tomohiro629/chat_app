@@ -1,11 +1,11 @@
 import 'package:chat_app/name_check_page/name_check_controller.dart';
+import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NameCheckPage extends ConsumerWidget {
-  const NameCheckPage({
-    Key? key,
-  }) : super(key: key);
+  const NameCheckPage({Key? key, required this.userName}) : super(key: key);
+  final String userName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,6 +24,7 @@ class NameCheckPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                controller: inputName,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                   labelText: 'your userName?',
@@ -53,8 +54,20 @@ class NameCheckPage extends ConsumerWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {
-                    await _controller.getChat(
-                        inputName: inputName.text, userName: "");
+                    if (inputName.text == userName) {
+                      await _controller.getChat(
+                        inputName: inputName.text,
+                      );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RoomSelectPage(
+                                    chatName: '',
+                                  )));
+                      ;
+                    } else {
+                      print("error");
+                    }
                   },
                 ),
               ),

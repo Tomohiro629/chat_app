@@ -20,7 +20,6 @@ class RegistertionPage extends ConsumerWidget {
   String email = '';
   String password = '';
   String authName = '';
-  bool passOK = true;
   bool _isObscure = true;
 
   @override
@@ -78,9 +77,8 @@ class RegistertionPage extends ConsumerWidget {
                 onChanged: (String value) {
                   if (value.length >= 8) {
                     password = value;
-                    passOK;
                   } else {
-                    passOK = false;
+                    print("passError");
                   }
                 },
               ),
@@ -122,28 +120,29 @@ class RegistertionPage extends ConsumerWidget {
                     } catch (e) {
                       const Text('error');
                     }
-                    if (passOK) {
+                    {
                       try {
-                        _controller.createUserWithEmailAndPassword(
+                        final newUser =
+                            _controller.createUserWithEmailAndPassword(
                           email,
                           password,
                         );
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NameCheckPage(
-                              userName: txetEdit.text,
+                        if (newUser != null) {
+                          // ignore: use_build_context_synchronously
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NameCheckPage(
+                                userName: txetEdit.text,
+                              ),
                             ),
-                          ),
-                        );
-                        txetEdit.clear();
+                          );
+                          txetEdit.clear();
+                        }
                       } catch (e) {
                         infoText = "登録できません";
                       }
-                    } else {
-                      infoText = "password must be at least 8 characters long";
                     }
-                    ;
                   },
                 ),
               )

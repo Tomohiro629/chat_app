@@ -1,3 +1,4 @@
+import 'package:chat_app/entity/authentication_error.dart';
 import 'package:chat_app/login_page/auth_service.dart';
 import 'package:chat_app/name_check_page/name_check_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +9,7 @@ class RegistertionPage extends ConsumerWidget {
   RegistertionPage({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final auth_error = Authentication_error();
   final txetEdit = TextEditingController();
   UserCredential? result;
   User? user;

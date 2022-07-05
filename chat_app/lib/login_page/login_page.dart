@@ -107,7 +107,6 @@ class LoginPage extends StatelessWidget {
                       );
                     } catch (e) {
                       // ユーザー登録に失敗した場合
-
                       infoText = "登録に失敗しました：${e.toString()}";
                     }
                   },

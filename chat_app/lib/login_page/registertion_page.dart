@@ -20,7 +20,6 @@ class RegistertionPage extends ConsumerWidget {
   String email = '';
   String password = '';
   String authName = '';
-  bool passOK = true;
   bool _isObscure = true;
 
   @override
@@ -78,9 +77,8 @@ class RegistertionPage extends ConsumerWidget {
                 onChanged: (String value) {
                   if (value.length >= 8) {
                     password = value;
-                    passOK;
                   } else {
-                    passOK = false;
+                    print("pass_error");
                   }
                 },
               ),
@@ -103,50 +101,50 @@ class RegistertionPage extends ConsumerWidget {
                 child: Text(infoText),
               ),
               SizedBox(
-                height: 50.0,
-                width: 150.0,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+                  height: 50.0,
+                  width: 150.0,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  onPressed: () async {
-                    try {
-                      await _controller.addUser(
-                          userNameText: txetEdit.text, userId: "");
-                    } catch (e) {
-                      const Text('error');
-                    }
-                    if (passOK) {
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    onPressed: () async {
                       try {
-                        _controller.createUserWithEmailAndPassword(
-                          email,
-                          password,
-                        );
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NameCheckPage(
-                              userName: txetEdit.text,
-                            ),
-                          ),
-                        );
-                        txetEdit.clear();
+                        await _controller.addUser(
+                            userNameText: txetEdit.text, userId: "");
                       } catch (e) {
-                        infoText = "登録できません";
+                        const Text('error');
                       }
-                    } else {
-                      infoText = "password must be at least 8 characters long";
-                    }
-                    ;
-                  },
-                ),
-              )
+                      {
+                        try {
+                          final newUser =
+                              await _controller.createUserWithEmailAndPassword(
+                            email,
+                            password,
+                          );
+                          if (newUser != null) {
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NameCheckPage(
+                                  userName: txetEdit.text,
+                                ),
+                              ),
+                            );
+                            txetEdit.clear();
+                          }
+                        } catch (e) {
+                          print("No Registertion");
+                        }
+                      }
+                    },
+                  ))
             ],
           ),
         ),

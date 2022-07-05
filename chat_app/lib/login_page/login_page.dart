@@ -9,6 +9,7 @@ class LoginPage extends StatelessWidget {
   String infoText = '';
   String email = '';
   String password = '';
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +46,24 @@ class LoginPage extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
-                    labelText: ' Password',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
+                  labelText: ' Password',
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 15,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(_isObscure
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined),
+                    onPressed: () {
+                      _isObscure = !_isObscure;
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                obscureText: _isObscure,
                 maxLength: 20,
                 onChanged: (String value) {
                   password = value;

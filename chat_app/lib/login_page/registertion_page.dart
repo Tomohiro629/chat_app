@@ -16,6 +16,8 @@ class RegistertionPage extends ConsumerWidget {
   String email = '';
   String password = '';
   String authName = '';
+  bool _isObscure = true;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(authServiceProvider);
@@ -49,14 +51,24 @@ class RegistertionPage extends ConsumerWidget {
                 keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
-                    labelText: ' Password',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
+                  labelText: ' Password(8~20)',
+                  suffixIcon: IconButton(
+                    icon: Icon(_isObscure
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined),
+                    onPressed: () {
+                      _isObscure = !_isObscure;
+                    },
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 15,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                obscureText: _isObscure,
                 maxLength: 20,
                 onChanged: (String value) {
                   if (value.length >= 8) {

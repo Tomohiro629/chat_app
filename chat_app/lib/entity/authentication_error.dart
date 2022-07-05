@@ -1,36 +1,36 @@
-class Authentication_error {
-  String login_error_msg(String error_code) {
-    String error_msg;
-    if (error_code == 'ERROR_INVALID_EMAIL') {
-      error_msg = '有効なメールアドレスを入力してください。';
-    } else if (error_code == 'ERROR_USER_NOT_FOUND') {
+class AuthenticationError {
+  String loginErrorMsg(String errorCode) {
+    String errorMsg;
+    if (errorCode == 'ERROR_INVALID_EMAIL') {
+      errorMsg = '有効なメールアドレスを入力してください。';
+    } else if (errorCode == 'ERROR_USER_NOT_FOUND') {
       // 入力されたメールアドレスが登録されていない場合
-      error_msg = 'メールアドレスかパスワードが間違っています。';
-    } else if (error_code == 'ERROR_WRONG_PASSWORD') {
+      errorMsg = 'メールアドレスかパスワードが間違っています。';
+    } else if (errorCode == 'ERROR_WRONG_PASSWORD') {
       // 入力されたパスワードが間違っている場合
-      error_msg = 'メールアドレスかパスワードが間違っています。';
-    } else if (error_code == 'error') {
+      errorMsg = 'メールアドレスかパスワードが間違っています。';
+    } else if (errorCode == 'error') {
       // メールアドレスかパスワードがEmpty or Nullの場合
-      error_msg = 'メールアドレスとパスワードを入力してください。';
+      errorMsg = 'メールアドレスとパスワードを入力してください。';
     } else {
-      error_msg = error_code;
+      errorMsg = errorCode;
     }
 
-    return error_msg;
+    return errorMsg;
   }
 
-  String register_error_msg(String error_code) {
-    String error_msg;
+  String registerErrorMsg(String errorCode) {
+    String errorMsg;
 
-    if (error_code == 'ERROR_INVALID_EMAIL') {
-      error_msg = '有効なメールアドレスを入力してください。';
-    } else if (error_code == 'error') {
+    if (errorCode == 'ERROR_INVALID_EMAIL') {
+      errorMsg = '有効なメールアドレスを入力してください。';
+    } else if (errorCode == 'error') {
       // メールアドレスかパスワードがEmpty or Nullの場合
-      error_msg = 'メールアドレスとパスワードを入力してください。';
+      errorMsg = 'メールアドレスとパスワードを入力してください。';
     } else {
-      error_msg = error_code;
+      errorMsg = errorCode;
     }
 
-    return error_msg;
+    return errorMsg;
   }
 }

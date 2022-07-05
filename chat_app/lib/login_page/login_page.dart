@@ -99,7 +99,7 @@ class LoginPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return NameCheckPage(
+                            return const NameCheckPage(
                               userName: '',
                             );
                           },

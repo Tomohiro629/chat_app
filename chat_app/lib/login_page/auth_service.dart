@@ -13,17 +13,6 @@ class AuthService extends ChangeNotifier {
   final Reader _reader;
   AuthService(this._reader);
 
-  Future<String> createUserWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    final authResult = await auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return authResult.user!.uid;
-  }
-
   Future<void> addUser({
     required String userNameText,
     required String userId,

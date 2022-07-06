@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:chat_app/entity/authentication_error.dart';
 import 'package:chat_app/login_page/auth_service.dart';
 import 'package:chat_app/name_check_page/name_check_page.dart';
@@ -17,10 +15,10 @@ class RegistertionPage extends ConsumerWidget {
   User? user;
 
   String infoText = '';
-  String email = '';
-  String password = '';
-  String authName = '';
+  String newEmail = '';
+  String newPassword = '';
   bool _isObscure = true;
+  bool passOK = true;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,20 +34,25 @@ class RegistertionPage extends ConsumerWidget {
               TextFormField(
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
-                    labelText: ' Mail',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
+                  labelText: ' Mail',
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 15,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
                 onChanged: (String value) {
-                  email = value;
+                  newEmail = value;
                 },
               ),
-              const SizedBox(
-                height: 25,
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 15),
+                child: Text(
+                  "メールエラー$infoText",
+                  style: const TextStyle(color: Colors.red),
+                ),
               ),
               TextFormField(
                 keyboardType: TextInputType.visiblePassword,
@@ -73,14 +76,22 @@ class RegistertionPage extends ConsumerWidget {
                   ),
                 ),
                 obscureText: _isObscure,
-                maxLength: 20,
                 onChanged: (String value) {
                   if (value.length >= 8) {
-                    password = value;
+                    newPassword = value;
+                    passOK;
                   } else {
+                    passOK = false;
                     print("passError");
                   }
                 },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 15),
+                child: Text(
+                  "パスワードエラー$infoText",
+                  style: const TextStyle(color: Colors.red),
+                ),
               ),
               TextFormField(
                 controller: txetEdit,
@@ -114,20 +125,19 @@ class RegistertionPage extends ConsumerWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {
-                    try {
-                      await _controller.addUser(
-                          userNameText: txetEdit.text, userId: "");
-                    } catch (e) {
-                      const Text('error');
-                    }
-                    {
+                    if (passOK) {
                       try {
-                        final newUser =
-                            _controller.createUserWithEmailAndPassword(
-                          email,
-                          password,
-                        );
-                        if (newUser != null) {
+                        await _controller.addUser(
+                            userNameText: txetEdit.text, userId: "");
+                      } catch (e) {
+                        const Text('error');
+                      }
+                      try {
+                        final result =
+                            await auth.createUserWithEmailAndPassword(
+                                email: newEmail, password: newPassword);
+                        user = result.user;
+                        {
                           // ignore: use_build_context_synchronously
                           await Navigator.push(
                             context,
@@ -137,11 +147,14 @@ class RegistertionPage extends ConsumerWidget {
                               ),
                             ),
                           );
+
                           txetEdit.clear();
                         }
-                      } catch (e) {
-                        infoText = "登録できません";
+                      } on FirebaseAuthException catch (e) {
+                        infoText = authError.registerErrorMsg(e.code);
                       }
+                    } else {
+                      infoText = "Password must be at least 8 characters long";
                     }
                   },
                 ),

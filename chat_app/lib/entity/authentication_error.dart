@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class AuthenticationError {
-  String loginErrorMsg(String errorCode) {
+  String loginErrorMsg(FirebaseException error) {
     String errorMsg;
+    final errorCode = error.code;
+
     if (errorCode == 'ERROR_INVALID_EMAIL') {
       errorMsg = '有効なメールアドレスを入力してください。';
     } else if (errorCode == 'ERROR_USER_NOT_FOUND') {

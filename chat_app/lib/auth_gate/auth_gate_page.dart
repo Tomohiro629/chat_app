@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class AuthGatePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _authUser = ref.watch(authServiceProvider).getAuthState();
+    final _authUser = ref.watch(authServiceProvider).getAuthState;
     return StreamBuilder<User?>(
       stream: _authUser,
       builder: ((context, snapshot) {

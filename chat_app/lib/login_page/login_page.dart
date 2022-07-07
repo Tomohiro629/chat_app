@@ -1,18 +1,20 @@
-import 'package:chat_app/name_check_page/name_check_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends StatelessWidget {
+final isObscureProvider = StateProvider<bool>((ref) => false);
+
+class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   String infoText = '';
   String email = '';
   String password = '';
-  bool _isObscure = true;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _isObscure = ref.watch(isObscureProvider);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -56,7 +58,7 @@ class LoginPage extends StatelessWidget {
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined),
                     onPressed: () {
-                      _isObscure = !_isObscure;
+                      ref.read(isObscureProvider.state).state = !_isObscure;
                     },
                   ),
                   border: OutlineInputBorder(
@@ -93,18 +95,7 @@ class LoginPage extends StatelessWidget {
                         email: email,
                         password: password,
                       );
-
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const NameCheckPage(
-                              userName: '',
-                            );
-                          },
-                        ),
-                      );
+                      Navigator.pop(context);
                     } catch (e) {
                       // ユーザー登録に失敗した場合
                       infoText = "登録に失敗しました：${e.toString()}";

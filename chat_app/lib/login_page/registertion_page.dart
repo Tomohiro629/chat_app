@@ -1,6 +1,5 @@
 import 'package:chat_app/entity/authentication_error.dart';
-import 'package:chat_app/login_page/auth_service.dart';
-import 'package:chat_app/name_check_page/name_check_page.dart';
+import 'package:chat_app/service/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +21,7 @@ class RegistertionPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(authServiceProvider);
+    final _controller = ref.watch(userServiceProvider);
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("Registertion Page")),
       body: Center(
@@ -79,7 +78,7 @@ class RegistertionPage extends ConsumerWidget {
                 onChanged: (String value) {
                   if (value.length >= 8) {
                     newPassword = value;
-                    passOK;
+                    passOK = true;
                   } else {
                     passOK = false;
                     print("passError");
@@ -127,30 +126,11 @@ class RegistertionPage extends ConsumerWidget {
                   onPressed: () async {
                     if (passOK) {
                       try {
-                        await _controller.addUser(
-                            userNameText: txetEdit.text, userId: "");
-                      } catch (e) {
-                        const Text('error');
-                      }
-                      try {
-                        final result =
-                            await auth.createUserWithEmailAndPassword(
-                                email: newEmail, password: newPassword);
-                        user = result.user;
-                        {
-                          // ignore: use_build_context_synchronously
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NameCheckPage(
-                                userName: txetEdit.text,
-                              ),
-                            ),
-                          );
-
-                          txetEdit.clear();
-                        }
+                        await auth.createUserWithEmailAndPassword(
+                            email: newEmail, password: newPassword);
+                        Navigator.pop(context);
                       } on FirebaseAuthException catch (e) {
+                        print(e);
                         infoText = authError.registerErrorMsg(e.code);
                       }
                     } else {

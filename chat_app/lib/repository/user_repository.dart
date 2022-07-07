@@ -26,7 +26,14 @@ class UserRepository {
     await _firestore.collection("users").doc("user").delete();
   }
 
-  Stream<List<Users>> fetchUserStream() {
+  Stream<Users?> fetchUserStream(String userId) {
+    final snapshots = _firestore.collection('users').doc(userId).snapshots();
+
+    return snapshots.map(
+        ((doc) => doc.data() == null ? null : Users.fromJson(doc.data()!)));
+  }
+
+  Stream<List<Users>> fetchUsersStream() {
     final snapshots = _firestore.collection('users').snapshots();
 
     return snapshots

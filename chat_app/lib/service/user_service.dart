@@ -1,17 +1,15 @@
 import 'package:chat_app/entity/users.dart';
 import 'package:chat_app/repository/user_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final authServiceProvider = ChangeNotifierProvider<AuthService>((ref) {
-  return AuthService(ref.read);
+final userServiceProvider = ChangeNotifierProvider<UserService>((ref) {
+  return UserService(ref.read);
 });
 
-class AuthService extends ChangeNotifier {
-  final auth = FirebaseAuth.instance;
+class UserService extends ChangeNotifier {
   final Reader _reader;
-  AuthService(this._reader);
+  UserService(this._reader);
 
   Future<void> addUser({
     required String userNameText,
@@ -21,16 +19,15 @@ class AuthService extends ChangeNotifier {
     await _reader(userRepositoryProvider).setUser(user: user);
   }
 
+  Stream<Users?> fetchUserStream(String userId) {
+    return _reader(userRepositoryProvider).fetchUserStream(userId);
+  }
+
   Stream<List<Users>> fetchUsersStream(String userId) {
-    return _reader(userRepositoryProvider).fetchUserStream();
+    return _reader(userRepositoryProvider).fetchUsersStream();
   }
 
   Future<void> deleteUser() async {
     await _reader(userRepositoryProvider).deleteUser();
-  }
-
-  Future<void> logOut() async {
-    await auth.signOut();
-    notifyListeners();
   }
 }

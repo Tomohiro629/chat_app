@@ -23,7 +23,7 @@ class SettingController extends ChangeNotifier {
   }
 
   Stream<List<Users>> fetchUsersStream(String userId) {
-    return _reader(userRepositoryProvider).fetchUserStream();
+    return _reader(userRepositoryProvider).fetchUsersStream();
   }
 
   Future<void> deleteUser() async {

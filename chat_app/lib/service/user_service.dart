@@ -1,4 +1,4 @@
-import 'package:chat_app/entity/users.dart';
+import 'package:chat_app/entity/user.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,19 +15,19 @@ class UserService extends ChangeNotifier {
     required String userNameText,
     required String userId,
   }) async {
-    final user = Users.create(userNameText: userNameText, userId: userId);
+    final user = User.create(userNameText: userNameText, userId: userId);
     await _reader(userRepositoryProvider).setUser(user: user);
   }
 
-  Stream<Users?> fetchUserStream(String userId) {
+  Stream<User?> fetchUserStream(String userId) {
     return _reader(userRepositoryProvider).fetchUserStream(userId);
   }
 
-  Stream<List<Users>> fetchUsersStream(String userId) {
+  Stream<List<User>> fetchUsersStream(String userId) {
     return _reader(userRepositoryProvider).fetchUsersStream();
   }
 
-  Future<void> deleteUser() async {
-    await _reader(userRepositoryProvider).deleteUser();
+  Future<void> deleteUser(String userId) async {
+    await _reader(userRepositoryProvider).deleteUser(userId);
   }
 }

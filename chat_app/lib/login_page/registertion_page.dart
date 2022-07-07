@@ -92,19 +92,6 @@ class RegistertionPage extends ConsumerWidget {
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
-              TextFormField(
-                controller: txetEdit,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                    labelText: ' Name',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
-              ),
               Container(
                 padding: const EdgeInsets.all(8),
                 // メッセージ表示

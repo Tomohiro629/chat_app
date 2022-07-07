@@ -1,23 +1,21 @@
-import 'package:uuid/uuid.dart';
-
-class Users {
-  Users({
+class User {
+  User({
     required this.userName,
     required this.userId,
   });
 
-  factory Users.create({
+  factory User.create({
     required String userId,
     required String userNameText,
   }) {
-    return Users(
-      userId: const Uuid().v4(),
+    return User(
+      userId: userId,
       userName: userNameText,
     );
   }
 
-  factory Users.fromJson(Map<String, dynamic> map) {
-    return Users(
+  factory User.fromJson(Map<String, dynamic> map) {
+    return User(
       userId: map['userId'],
       userName: map['userName'],
     );

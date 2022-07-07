@@ -78,7 +78,7 @@ class RegistertionPage extends ConsumerWidget {
                 onChanged: (String value) {
                   if (value.length >= 8) {
                     newPassword = value;
-                    passOK;
+                    passOK = true;
                   } else {
                     passOK = false;
                     print("passError");
@@ -126,20 +126,11 @@ class RegistertionPage extends ConsumerWidget {
                   onPressed: () async {
                     if (passOK) {
                       try {
-                        await _controller.addUser(
-                            userNameText: txetEdit.text, userId: "");
-                      } catch (e) {
-                        const Text('error');
-                      }
-                      try {
-                        final result =
-                            await auth.createUserWithEmailAndPassword(
-                                email: newEmail, password: newPassword);
-                        user = result.user;
-                        {
-                          txetEdit.clear();
-                        }
+                        await auth.createUserWithEmailAndPassword(
+                            email: newEmail, password: newPassword);
+                        Navigator.pop(context);
                       } on FirebaseAuthException catch (e) {
+                        print(e);
                         infoText = authError.registerErrorMsg(e.code);
                       }
                     } else {

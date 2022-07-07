@@ -1,4 +1,4 @@
-import 'package:chat_app/login_page/registertion_page.dart';
+import 'package:chat_app/home_page/home_page.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,9 +13,7 @@ class AuthGatePage extends ConsumerWidget {
       stream: _authUser,
       builder: ((context, snapshot) {
         final isLogin = snapshot.data != null;
-        return isLogin
-            ? const RoomSelectPage(chatName: "")
-            : RegistertionPage();
+        return isLogin ? const RoomSelectPage(chatName: "") : HomePage();
       }),
     );
   }

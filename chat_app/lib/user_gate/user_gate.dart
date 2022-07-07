@@ -2,6 +2,7 @@ import 'package:chat_app/entity/users.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
+import 'package:chat_app/set_profile/set_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +15,8 @@ class UserGatePage extends ConsumerWidget {
       stream: currentUser,
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;
-        return isExist ? const RoomSelectPage(chatName: "") : SetProfilPage();
+        return isExist ? const RoomSelectPage(chatName: "") : SetProfilePage();
+        //
       }),
     );
   }

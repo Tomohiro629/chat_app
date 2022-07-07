@@ -9,21 +9,17 @@ final userRepositoryProvider = Provider(((ref) {
 class UserRepository {
   final _firestore = FirebaseFirestore.instance;
 
-  Future<void> getChat() async {
-    await _firestore.collection("chat_rooms").get();
-  }
-
   Future<void> setUser({
     required Users user,
   }) async {
     await _firestore
         .collection("users")
-        .doc("user")
+        .doc(user.userId)
         .set(user.toJson(), SetOptions(merge: true));
   }
 
-  Future<void> deleteUser() async {
-    await _firestore.collection("users").doc("user").delete();
+  Future<void> deleteUser(String userId) async {
+    await _firestore.collection("users").doc(userId).delete();
   }
 
   Stream<Users?> fetchUserStream(String userId) {

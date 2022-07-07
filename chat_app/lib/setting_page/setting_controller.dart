@@ -14,22 +14,6 @@ class SettingController extends ChangeNotifier {
   final Reader _reader;
   SettingController(this._reader);
 
-  Future<void> addUser({
-    required String userNameText,
-    required String userId,
-  }) async {
-    final user = Users.create(userNameText: userNameText, userId: userId);
-    await _reader(userRepositoryProvider).setUser(user: user);
-  }
-
-  Stream<List<Users>> fetchUsersStream(String userId) {
-    return _reader(userRepositoryProvider).fetchUsersStream();
-  }
-
-  Future<void> deleteUser() async {
-    await _reader(userRepositoryProvider).deleteUser();
-  }
-
   Future<void> logOut() async {
     await auth.signOut();
     notifyListeners();

@@ -1,4 +1,4 @@
-import 'package:chat_app/entity/users.dart';
+import 'package:chat_app/entity/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,7 +10,7 @@ class UserRepository {
   final _firestore = FirebaseFirestore.instance;
 
   Future<void> setUser({
-    required Users user,
+    required User user,
   }) async {
     await _firestore
         .collection("users")
@@ -22,17 +22,17 @@ class UserRepository {
     await _firestore.collection("users").doc(userId).delete();
   }
 
-  Stream<Users?> fetchUserStream(String userId) {
+  Stream<User?> fetchUserStream(String userId) {
     final snapshots = _firestore.collection('users').doc(userId).snapshots();
 
-    return snapshots.map(
-        ((doc) => doc.data() == null ? null : Users.fromJson(doc.data()!)));
+    return snapshots
+        .map(((doc) => doc.data() == null ? null : User.fromJson(doc.data()!)));
   }
 
-  Stream<List<Users>> fetchUsersStream() {
+  Stream<List<User>> fetchUsersStream() {
     final snapshots = _firestore.collection('users').snapshots();
 
     return snapshots
-        .map((qs) => qs.docs.map((doc) => Users.fromJson(doc.data())).toList());
+        .map((qs) => qs.docs.map((doc) => User.fromJson(doc.data())).toList());
   }
 }

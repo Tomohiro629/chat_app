@@ -1,4 +1,3 @@
-import 'package:chat_app/name_check_page/name_check_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -92,18 +91,6 @@ class LoginPage extends StatelessWidget {
                       await auth.signInWithEmailAndPassword(
                         email: email,
                         password: password,
-                      );
-
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const NameCheckPage(
-                              userName: '',
-                            );
-                          },
-                        ),
                       );
                     } catch (e) {
                       // ユーザー登録に失敗した場合

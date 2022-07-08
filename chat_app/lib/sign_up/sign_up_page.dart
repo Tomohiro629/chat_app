@@ -1,27 +1,29 @@
 import 'package:chat_app/entity/authentication_error.dart';
-import 'package:chat_app/service/user_service.dart';
+import 'package:chat_app/sign_up/sign_up_controller.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegistertionPage extends ConsumerWidget {
-  RegistertionPage({Key? key}) : super(key: key);
+final isObscureProvider = StateProvider<bool>((ref) => true);
 
-  final FirebaseAuth auth = FirebaseAuth.instance;
+class SignUpPage extends ConsumerWidget {
+  SignUpPage({Key? key}) : super(key: key);
+
   final authError = AuthenticationError();
   final txetEdit = TextEditingController();
   UserCredential? result;
   User? user;
 
   String infoText = '';
-  String newEmail = '';
-  String newPassword = '';
-  bool _isObscure = true;
   bool passOK = true;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(userServiceProvider);
+    final _controller = ref.watch(signUpControllerProvider);
+    final _isObscure = ref.watch(isObscureProvider);
+    final newEmailEdit = TextEditingController();
+    final newPasswordEdit = TextEditingController();
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("Registertion Page")),
       body: Center(
@@ -31,6 +33,7 @@ class RegistertionPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                controller: newEmailEdit,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                   labelText: ' Mail',
@@ -42,18 +45,16 @@ class RegistertionPage extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(100),
                   ),
                 ),
-                onChanged: (String value) {
-                  newEmail = value;
-                },
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 15),
                 child: Text(
-                  "メールエラー$infoText",
+                  infoText,
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
               TextFormField(
+                controller: newPasswordEdit,
                 keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
@@ -63,7 +64,7 @@ class RegistertionPage extends ConsumerWidget {
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined),
                     onPressed: () {
-                      _isObscure = !_isObscure;
+                      ref.read(isObscureProvider.state).state = !_isObscure;
                     },
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -75,20 +76,11 @@ class RegistertionPage extends ConsumerWidget {
                   ),
                 ),
                 obscureText: _isObscure,
-                onChanged: (String value) {
-                  if (value.length >= 8) {
-                    newPassword = value;
-                    passOK = true;
-                  } else {
-                    passOK = false;
-                    print("passError");
-                  }
-                },
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 15),
                 child: Text(
-                  "パスワードエラー$infoText",
+                  infoText,
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
@@ -113,8 +105,10 @@ class RegistertionPage extends ConsumerWidget {
                   onPressed: () async {
                     if (passOK) {
                       try {
-                        await auth.createUserWithEmailAndPassword(
-                            email: newEmail, password: newPassword);
+                        await _controller.signUpUser(
+                          newEmail: newEmailEdit.text,
+                          newPassword: newPasswordEdit.text,
+                        );
                         Navigator.pop(context);
                       } on FirebaseAuthException catch (e) {
                         print(e);

@@ -1,20 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_app/login_page/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isObscureProvider = StateProvider<bool>((ref) => false);
+final isObscureProvider = StateProvider<bool>((ref) => true);
 
 class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final FirebaseAuth auth = FirebaseAuth.instance;
   String infoText = '';
-  String email = '';
-  String password = '';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = ref.watch(loginControllerProvider);
     final _isObscure = ref.watch(isObscureProvider);
+    final emailEdit = TextEditingController();
+    final passEdit = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,6 +27,7 @@ class LoginPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                controller: emailEdit,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     labelText: ' Mail',
@@ -37,14 +38,12 @@ class LoginPage extends ConsumerWidget {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                     )),
-                onChanged: (String value) {
-                  email = value;
-                },
               ),
               const SizedBox(
                 height: 25.0,
               ),
               TextFormField(
+                controller: passEdit,
                 keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
@@ -67,9 +66,6 @@ class LoginPage extends ConsumerWidget {
                 ),
                 obscureText: _isObscure,
                 maxLength: 20,
-                onChanged: (String value) {
-                  password = value;
-                },
               ),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -90,15 +86,13 @@ class LoginPage extends ConsumerWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {
+                    _controller.loginUser(
+                        email: emailEdit.text, password: passEdit.text);
                     try {
-                      await auth.signInWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
                       Navigator.pop(context);
                     } catch (e) {
                       // ユーザー登録に失敗した場合
-                      infoText = "登録に失敗しました：${e.toString()}";
+                      print(e);
                     }
                   },
                 ),

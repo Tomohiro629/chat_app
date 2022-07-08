@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final isObscureProvider = StateProvider<bool>((ref) => true);
 
-class SignInPage extends ConsumerWidget {
-  SignInPage({Key? key}) : super(key: key);
+class SignUpPage extends ConsumerWidget {
+  SignUpPage({Key? key}) : super(key: key);
 
   final authError = AuthenticationError();
   final txetEdit = TextEditingController();

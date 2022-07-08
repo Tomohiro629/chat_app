@@ -1,6 +1,7 @@
 import 'package:chat_app/login_page/login_page.dart';
-import 'package:chat_app/sign_in/sign_in_page.dart';
+
 import 'package:chat_app/room_select/room_select_page.dart';
+import 'package:chat_app/sign_up/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -68,7 +69,7 @@ class _Buttons extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SignInPage(),
+                  builder: (context) => SignUpPage(),
                 ));
           },
           child: const Text("Sign Up"),

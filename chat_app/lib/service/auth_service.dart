@@ -15,4 +15,12 @@ class AuthService {
     await _auth.createUserWithEmailAndPassword(
         email: newEmail, password: newPassword);
   }
+
+  Future<void> loginUser(
+      {required String email, required String password}) async {
+    await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
 }

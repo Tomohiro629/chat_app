@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isObscureProvider = StateProvider<bool>((ref) => false);
+final isObscureProvider = StateProvider<bool>((ref) => true);
 
 class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);

@@ -1,11 +1,11 @@
 import 'package:chat_app/login_page/login_page.dart';
-import 'package:chat_app/login_page/registertion_page.dart';
+import 'package:chat_app/sign_in/sign_in_page.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
-  HomePage({
+  const HomePage({
     Key? key,
   }) : super(key: key);
 
@@ -24,81 +24,6 @@ class HomePage extends ConsumerWidget {
             const Text(
               'Chat App',
               style: TextStyle(color: Colors.green, fontSize: 45),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                //Aを押したとき
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RoomSelectPage(
-                            chatName: "chatName",
-                          ),
-                        ));
-                  },
-                  color: const Color.fromARGB(255, 185, 255, 188),
-                  child: const Text(
-                    "A",
-                    style: TextStyle(color: Color.fromARGB(255, 0, 37, 100)),
-                  ),
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RoomSelectPage(
-                            chatName: "chatName",
-                          ),
-                        ));
-                  },
-                  color: const Color.fromARGB(255, 185, 255, 188),
-                  child: const Text(
-                    "B",
-                    style: TextStyle(color: Color.fromARGB(255, 0, 37, 100)),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RoomSelectPage(
-                            chatName: "chatName",
-                          ),
-                        ));
-                  },
-                  color: const Color.fromARGB(255, 185, 255, 188),
-                  child: const Text(
-                    "C",
-                    style: TextStyle(color: Color.fromARGB(255, 0, 37, 100)),
-                  ),
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RoomSelectPage(
-                            chatName: "chatName",
-                          ),
-                        ));
-                  },
-                  color: const Color.fromARGB(255, 185, 255, 188),
-                  child: const Text(
-                    "D",
-                    style: TextStyle(color: Color.fromARGB(255, 0, 37, 100)),
-                  ),
-                ),
-              ],
             ),
             _Buttons(),
             const SizedBox(
@@ -143,7 +68,7 @@ class _Buttons extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => RegistertionPage(),
+                  builder: (context) => SignInPage(),
                 ));
           },
           child: const Text("Sign Up"),

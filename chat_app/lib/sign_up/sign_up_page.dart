@@ -1,5 +1,6 @@
 import 'package:chat_app/entity/authentication_error.dart';
-import 'package:chat_app/sign_in/sign_in_controller.dart';
+import 'package:chat_app/sign_up/sign_up_controller.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +20,7 @@ class SignInPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(signInControllerProvider);
+    final _controller = ref.watch(signUpControllerProvider);
     final _isObscure = ref.watch(isObscureProvider);
     final newEmailEdit = TextEditingController();
     final newPasswordEdit = TextEditingController();
@@ -104,7 +105,7 @@ class SignInPage extends ConsumerWidget {
                   onPressed: () async {
                     if (passOK) {
                       try {
-                        await _controller.signInUser(
+                        await _controller.signUpUser(
                           newEmail: newEmailEdit.text,
                           newPassword: newPasswordEdit.text,
                         );

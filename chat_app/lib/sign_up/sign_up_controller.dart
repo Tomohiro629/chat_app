@@ -2,20 +2,20 @@ import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final signInControllerProvider =
-    ChangeNotifierProvider<SignInController>((ref) {
-  return SignInController(ref.read);
+final signUpControllerProvider =
+    ChangeNotifierProvider<SignUpController>((ref) {
+  return SignUpController(ref.read);
 });
 
-class SignInController extends ChangeNotifier {
+class SignUpController extends ChangeNotifier {
   final Reader _reader;
-  SignInController(this._reader);
+  SignUpController(this._reader);
 
-  Future<void> signInUser({
+  Future<void> signUpUser({
     required String newEmail,
     required String newPassword,
   }) async {
-    await _reader(authServiceProvider).signInUser(
+    await _reader(authServiceProvider).signUpUser(
       newEmail: newEmail,
       newPassword: newPassword,
     );

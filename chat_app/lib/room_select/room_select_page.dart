@@ -9,26 +9,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RoomSelectPage extends ConsumerWidget {
   const RoomSelectPage({
     Key? key,
-    required this.chatName,
   }) : super(key: key);
-  final String chatName;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(roomSelectControllerProvider);
+    final controller = ref.watch(roomSelectControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Room Select"),
+        title: Text(""),
         centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const SettingPage(
-                  userId: "userId",
-                  userName: "userName",
-                );
+                return const SettingPage();
               }));
             },
           ),
@@ -38,7 +34,7 @@ class RoomSelectPage extends ConsumerWidget {
         child: Column(
           children: [
             StreamBuilder<List<Chat>>(
-              stream: _controller.fetchChatRoomStream(),
+              stream: controller.fetchChatRoomStream(),
               builder:
                   (BuildContext context, AsyncSnapshot<List<Chat>> snapshot) {
                 if (snapshot.hasError) {
@@ -139,7 +135,7 @@ class RoomSelectPage extends ConsumerWidget {
                                                               116),
                                                       child: const Text("Yes"),
                                                       onPressed: () async {
-                                                        _controller
+                                                        controller
                                                             .deleteChatRoom(
                                                                 chat: chat);
                                                         Navigator.of(context)

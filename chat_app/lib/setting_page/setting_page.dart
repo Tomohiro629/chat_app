@@ -6,11 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SettingPage extends ConsumerWidget {
   const SettingPage({
     Key? key,
-    required this.userId,
-    required this.userName,
   }) : super(key: key);
-  final String userId;
-  final String userName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -72,7 +68,7 @@ class SettingPage extends ConsumerWidget {
                                   await Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return HomePage();
+                                        return const HomePage();
                                       },
                                     ),
                                   );

@@ -17,9 +17,9 @@ class UserGatePage extends ConsumerWidget {
       stream: currentUser,
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;
-        return isExist //isExistが真ならroomSelect偽ならsetProfile
-            ? const RoomSelectPage(chatName: "")
-            : const SetProfilePage();
+        return isExist
+            ? const RoomSelectPage() //成功
+            : const SetProfilePage(); //失敗
         //
       }),
     );

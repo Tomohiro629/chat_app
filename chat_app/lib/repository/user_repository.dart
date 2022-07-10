@@ -29,10 +29,10 @@ class UserRepository {
         .map(((doc) => doc.data() == null ? null : User.fromJson(doc.data()!)));
   }
 
-  // Stream<List<User>> fetchUsersStream(String userId) {
-  //   final snapshots = _firestore.collection('users').snapshots();
+  Stream<List<User>> fetchUsersStream() {
+    final snapshots = _firestore.collection('users').snapshots();
 
-  //   return snapshots
-  //       .map((qs) => qs.docs.map((doc) => User.fromJson(doc.data())).toList());
-  // }
+    return snapshots
+        .map((qs) => qs.docs.map((doc) => User.fromJson(doc.data())).toList());
+  }
 }

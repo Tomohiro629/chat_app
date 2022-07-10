@@ -1,5 +1,7 @@
 import 'package:chat_app/chat_page/chat_room/chat_room.dart';
 import 'package:chat_app/entity/chat.dart';
+import 'package:chat_app/entity/user.dart';
+import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/add_chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
@@ -14,10 +16,10 @@ class RoomSelectPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
-
+    final _user = ref.watch(userRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(""),
+        title: const Text("Room Select Page"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -33,6 +35,30 @@ class RoomSelectPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            StreamBuilder<List<User>>(
+                stream: _user.fetchUsersStream(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<List<User>> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("Error:${snapshot.error}");
+                  }
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return const Center();
+                    default:
+                      return ListView(
+                        shrinkWrap: true,
+                        children: snapshot.data!.map((User user) {
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: ListTile(
+                              title: Text(user.userName),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                  }
+                }),
             StreamBuilder<List<Chat>>(
               stream: controller.fetchChatRoomStream(),
               builder:

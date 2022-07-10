@@ -50,9 +50,9 @@ class RoomSelectPage extends ConsumerWidget {
                         shrinkWrap: true,
                         children: snapshot.data!.map((User user) {
                           return Padding(
-                            padding: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                             child: ListTile(
-                              title: Text(user.userName),
+                              title: Text("「${user.userName}」でログイン中"),
                             ),
                           );
                         }).toList(),

@@ -1,5 +1,4 @@
 import 'package:chat_app/entity/user.dart';
-import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';

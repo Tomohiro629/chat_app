@@ -59,9 +59,6 @@ class SetProfilePage extends ConsumerWidget {
                         userNameText: nameEdit.text,
                         userId: newUserId,
                       );
-                      Navigator.pop(
-                        context,
-                      );
                     } catch (e) {
                       print(e);
                     }

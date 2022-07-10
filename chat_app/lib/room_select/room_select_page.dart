@@ -16,7 +16,7 @@ class RoomSelectPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
-    final _user = ref.watch(userRepositoryProvider);
+    final user = ref.watch(userRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Room Select Page"),
@@ -36,7 +36,7 @@ class RoomSelectPage extends ConsumerWidget {
         child: Column(
           children: [
             StreamBuilder<List<User>>(
-                stream: _user.fetchUsersStream(),
+                stream: user.fetchUsersStream(),
                 builder:
                     (BuildContext context, AsyncSnapshot<List<User>> snapshot) {
                   if (snapshot.hasError) {

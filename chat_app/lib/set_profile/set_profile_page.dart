@@ -10,7 +10,7 @@ class SetProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _service = ref.watch(userServiceProvider);
+    final service = ref.watch(userServiceProvider);
     final nameEdit = TextEditingController();
     final newUserId = ref.watch(authServiceProvider).userId;
     return Scaffold(
@@ -55,7 +55,7 @@ class SetProfilePage extends ConsumerWidget {
                   ),
                   onPressed: () async {
                     try {
-                      _service.addUser(
+                      service.addUser(
                         userNameText: nameEdit.text,
                         userId: newUserId,
                       );
@@ -64,7 +64,7 @@ class SetProfilePage extends ConsumerWidget {
                     }
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),

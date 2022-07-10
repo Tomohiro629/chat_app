@@ -35,6 +35,30 @@ class RoomSelectPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            StreamBuilder<List<User>>(
+                stream: _user.fetchUsersStream(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<List<User>> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("Error:${snapshot.error}");
+                  }
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return const Center();
+                    default:
+                      return ListView(
+                        shrinkWrap: true,
+                        children: snapshot.data!.map((User user) {
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: ListTile(
+                              title: Text(user.userName),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                  }
+                }),
             StreamBuilder<List<Chat>>(
               stream: controller.fetchChatRoomStream(),
               builder:
@@ -178,30 +202,6 @@ class RoomSelectPage extends ConsumerWidget {
                 }
               },
             ),
-            StreamBuilder<List<User>>(
-                stream: _user.fetchUsersStream(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<List<User>> snapshot) {
-                  if (snapshot.hasError) {
-                    return Text("Error:${snapshot.error}");
-                  }
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const Center();
-                    default:
-                      return ListView(
-                        shrinkWrap: true,
-                        children: snapshot.data!.map((User user) {
-                          return Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: ListTile(
-                              title: Text(user.userName),
-                            ),
-                          );
-                        }).toList(),
-                      );
-                  }
-                })
           ],
         ),
       ),

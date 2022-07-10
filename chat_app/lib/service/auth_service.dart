@@ -7,7 +7,7 @@ final authServiceProvider = Provider<AuthService>((ref) {
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
-  String get userId => _auth.currentUser!.uid;
+  String get userId => _auth.currentUser!.uid; //カレントユーザーのIDをuserIdへ
   Stream<User?> get getAuthState => _auth.authStateChanges();
 
   Future<void> signUpUser(

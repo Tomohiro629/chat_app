@@ -1,4 +1,5 @@
 import 'package:chat_app/entity/user.dart';
+import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
@@ -7,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserGatePage extends ConsumerWidget {
-  const UserGatePage({Key? key}) : super(key: key);
+  const UserGatePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +21,7 @@ class UserGatePage extends ConsumerWidget {
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;
         return isExist
-            ? const RoomSelectPage() //成功
+            ? const RoomSelectPage() //ユーザーがいたら
             : const SetProfilePage(); //失敗
         //
       }),

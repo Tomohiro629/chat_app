@@ -45,7 +45,7 @@ class SettingPage extends ConsumerWidget {
                     constraints: const BoxConstraints(
                         minHeight: 44,
                         minWidth: 34,
-                        maxHeight: 64,
+                        maxHeight: 54,
                         maxWidth: 54),
                   ),
                   shape: const RoundedRectangleBorder(

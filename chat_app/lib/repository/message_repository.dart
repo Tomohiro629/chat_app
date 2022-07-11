@@ -38,7 +38,7 @@ class MessageRepository {
         .collection('chat_rooms')
         .doc(chatId)
         .collection("messages")
-        .orderBy('sendTime', descending: false)
+        .orderBy('sendTime', descending: true)
         .snapshots();
 
     return snapshots.map(

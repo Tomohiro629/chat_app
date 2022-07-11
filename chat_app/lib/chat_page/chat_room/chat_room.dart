@@ -51,121 +51,156 @@ class ChatRoom extends ConsumerWidget {
                           );
                         default:
                           return ListView(
+                            reverse: true,
                             shrinkWrap: true,
                             children: snapshot.data!.map((Message message) {
-                              return Padding(
-                                //card間の隙間
-                                padding: const EdgeInsets.fromLTRB(90, 5, 5, 5),
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 185, 235, 187),
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(40),
-                                      topLeft: Radius.circular(40),
-                                      bottomLeft: Radius.circular(40),
-                                    ),
-                                    gradient: LinearGradient(
-                                      begin: FractionalOffset.topLeft,
-                                      end: FractionalOffset.bottomRight,
-                                      colors: [
-                                        Color.fromARGB(255, 95, 244, 169),
-                                        Color.fromARGB(222, 177, 236, 187),
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Column(
+                                          children: <Widget>[
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: 0,
+                                                horizontal: 10,
+                                              ),
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.4,
+                                              ),
+                                              decoration: const BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 167, 254, 170),
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(30),
+                                                  topLeft: Radius.circular(30),
+                                                  bottomLeft:
+                                                      Radius.circular(30),
+                                                ),
+                                              ),
+                                              child: ListTile(
+                                                tileColor: const Color.fromARGB(
+                                                    255, 199, 240, 201),
+                                                title: Text(
+                                                  message.message,
+                                                  style: const TextStyle(
+                                                      height: 1.0,
+                                                      fontSize: 15),
+                                                ),
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(100)),
+                                                ),
+                                                onLongPress: () {
+                                                  showDialog(
+                                                      barrierDismissible: false,
+                                                      context: context,
+                                                      builder: (childContext) {
+                                                        return AlertDialog(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          50)),
+                                                          title: Text(
+                                                              "Delete message\n『${message.message}』"),
+                                                          content: const Text(
+                                                              "Do you want to Delete it?"),
+                                                          actions: <Widget>[
+                                                            MaterialButton(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100),
+                                                              ),
+                                                              color: const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  240,
+                                                                  124,
+                                                                  116),
+                                                              child: const Text(
+                                                                  "Yes"),
+                                                              onPressed:
+                                                                  () async {
+                                                                _controller
+                                                                    .deleteMesseage(
+                                                                        message:
+                                                                            message);
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                            MaterialButton(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100),
+                                                              ),
+                                                              color: const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  137,
+                                                                  196,
+                                                                  244),
+                                                              child: const Text(
+                                                                  "No"),
+                                                              onPressed:
+                                                                  () async {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      });
+                                                },
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              message.sendTime,
+                                              style:
+                                                  const TextStyle(fontSize: 10),
+                                            )
+                                          ],
+                                        ),
                                       ],
-                                      stops: [
-                                        0.0,
-                                        1.0,
-                                      ],
                                     ),
-                                  ),
-                                  child: Padding(
-                                      //card内の隙間
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 3, 0, 0),
-                                      child: ListTile(
-                                        tileColor: const Color.fromARGB(
-                                            255, 199, 240, 201),
-                                        title: Text(
-                                          message.message,
-                                          style: const TextStyle(
-                                              height: 1.0, fontSize: 18),
-                                        ),
-                                        subtitle: Text(
-                                          message.sendTime,
-                                          style: const TextStyle(
-                                              height: 1.0,
-                                              fontSize: 13,
-                                              color: Color.fromARGB(
-                                                  233, 255, 255, 255)),
-                                        ),
-                                        leading: const CircleAvatar(
-                                          child: Icon(Icons.face),
-                                        ),
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(100)),
-                                        ),
-                                        onLongPress: () {
-                                          showDialog(
-                                              barrierDismissible: false,
-                                              context: context,
-                                              builder: (childContext) {
-                                                return AlertDialog(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50)),
-                                                  title: Text(
-                                                      "Delete message\n『${message.message}』"),
-                                                  content: const Text(
-                                                      "Do you want to Delete it?"),
-                                                  actions: <Widget>[
-                                                    MaterialButton(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
-                                                      ),
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              240,
-                                                              124,
-                                                              116),
-                                                      child: const Text("Yes"),
-                                                      onPressed: () async {
-                                                        _controller
-                                                            .deleteMesseage(
-                                                                message:
-                                                                    message);
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                    MaterialButton(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
-                                                      ),
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              137,
-                                                              196,
-                                                              244),
-                                                      child: const Text("No"),
-                                                      onPressed: () async {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                      )),
+                                    Column(children: const <Widget>[
+                                      SizedBox(
+                                        height: 45,
+                                      ),
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 160, 212, 255),
+                                      ),
+                                    ])
+                                  ],
                                 ),
                               );
                             }).toList(),
@@ -180,7 +215,7 @@ class ChatRoom extends ConsumerWidget {
                   controller: textEdit,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                        vertical: 23.0, horizontal: 8.0),
+                        vertical: 5.0, horizontal: 10.0),
                     border: const OutlineInputBorder(),
                     labelText: "Text Form",
                     labelStyle: const TextStyle(fontSize: 20),

@@ -1,6 +1,7 @@
-import 'package:chat_app/chat_page/chat_room/chat_room.dart';
+import 'package:chat_app/chat_page/chat_room/components/build_chat.dart';
+import 'package:chat_app/chat_page/other_chat_room.dart';
 import 'package:chat_app/entity/chat.dart';
-import 'package:chat_app/entity/user.dart';
+import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/add_chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
@@ -35,10 +36,10 @@ class RoomSelectPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            StreamBuilder<List<User>>(
+            StreamBuilder<List<ChatUser>>(
                 stream: user.fetchUsersStream(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<List<User>> snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<ChatUser>> snapshot) {
                   if (snapshot.hasError) {
                     return Text("Error:${snapshot.error}");
                   }
@@ -48,7 +49,7 @@ class RoomSelectPage extends ConsumerWidget {
                     default:
                       return ListView(
                         shrinkWrap: true,
-                        children: snapshot.data!.map((User user) {
+                        children: snapshot.data!.map((ChatUser user) {
                           return Padding(
                             padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                             child: ListTile(
@@ -126,10 +127,11 @@ class RoomSelectPage extends ConsumerWidget {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => ChatRoom(
-                                                  chat: chat,
-                                                ),
-                                              ));
+                                                  builder: (context) =>
+                                                      BuildChat(
+                                                          chat: chat,
+                                                          userId: "",
+                                                          uid: "")));
                                         },
                                         onLongPress: () {
                                           showDialog(

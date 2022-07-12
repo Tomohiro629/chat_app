@@ -4,8 +4,8 @@ import 'package:chat_app/entity/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CurrentChatRoom extends ConsumerWidget {
-  const CurrentChatRoom({
+class OtherChatRoom extends ConsumerWidget {
+  const OtherChatRoom({
     Key? key,
     required this.chat,
   }) : super(key: key);
@@ -58,9 +58,18 @@ class CurrentChatRoom extends ConsumerWidget {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 10),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Column(children: const <Widget>[
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 250, 160, 255),
+                                      ),
+                                    ]),
                                     Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
@@ -84,13 +93,14 @@ class CurrentChatRoom extends ConsumerWidget {
                                               ),
                                               decoration: const BoxDecoration(
                                                 color: Color.fromARGB(
-                                                    255, 167, 254, 170),
+                                                    255, 149, 253, 251),
                                                 borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(30),
-                                                  topLeft: Radius.circular(30),
-                                                  bottomLeft:
-                                                      Radius.circular(30),
-                                                ),
+                                                    topRight:
+                                                        Radius.circular(30),
+                                                    topLeft:
+                                                        Radius.circular(30),
+                                                    bottomRight:
+                                                        Radius.circular(30)),
                                               ),
                                               child: ListTile(
                                                 tileColor: const Color.fromARGB(
@@ -191,15 +201,6 @@ class CurrentChatRoom extends ConsumerWidget {
                                         ),
                                       ],
                                     ),
-                                    Column(children: const <Widget>[
-                                      SizedBox(
-                                        height: 45,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            Color.fromARGB(255, 160, 212, 255),
-                                      ),
-                                    ])
                                   ],
                                 ),
                               );

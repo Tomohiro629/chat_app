@@ -1,4 +1,4 @@
-import 'package:chat_app/entity/user.dart';
+import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
@@ -15,7 +15,7 @@ class UserGatePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userId = ref.watch(authServiceProvider).userId;
     final currentUser = ref.watch(userServiceProvider).fetchUserStream(userId);
-    return StreamBuilder<User?>(
+    return StreamBuilder<ChatUser?>(
       stream: currentUser,
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;

@@ -4,8 +4,8 @@ import 'package:chat_app/entity/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChatRoom extends ConsumerWidget {
-  const ChatRoom({
+class CurrentChatRoom extends ConsumerWidget {
+  const CurrentChatRoom({
     Key? key,
     required this.chat,
   }) : super(key: key);

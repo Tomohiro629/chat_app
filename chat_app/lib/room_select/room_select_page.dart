@@ -1,4 +1,4 @@
-import 'package:chat_app/chat_page/chat_room/current_chat_room.dart';
+import 'package:chat_app/chat_page/chat_room/components/build_chat.dart';
 import 'package:chat_app/chat_page/other_chat_room.dart';
 import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/entity/chat_user.dart';
@@ -127,11 +127,11 @@ class RoomSelectPage extends ConsumerWidget {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) =>
-                                                    OtherChatRoom(
-                                                  chat: chat,
-                                                ),
-                                              ));
+                                                  builder: (context) =>
+                                                      BuildChat(
+                                                          chat: chat,
+                                                          userId: "",
+                                                          uid: "")));
                                         },
                                         onLongPress: () {
                                           showDialog(

@@ -1,4 +1,5 @@
 import 'package:chat_app/chat_page/chat_room/current_chat_room.dart';
+import 'package:chat_app/chat_page/other_chat_room.dart';
 import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/repository/user_repository.dart';
@@ -127,7 +128,7 @@ class RoomSelectPage extends ConsumerWidget {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    CurrentChatRoom(
+                                                    OtherChatRoom(
                                                   chat: chat,
                                                 ),
                                               ));

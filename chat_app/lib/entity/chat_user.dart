@@ -1,21 +1,21 @@
-class User {
-  User({
+class ChatUser {
+  ChatUser({
     required this.userName,
     required this.userId,
   });
 
-  factory User.create({
+  factory ChatUser.create({
     required String userId,
     required String userNameText,
   }) {
-    return User(
+    return ChatUser(
       userId: userId,
       userName: userNameText,
     );
   }
 
-  factory User.fromJson(Map<String, dynamic> map) {
-    return User(
+  factory ChatUser.fromJson(Map<String, dynamic> map) {
+    return ChatUser(
       userId: map['userId'],
       userName: map['userName'],
     );

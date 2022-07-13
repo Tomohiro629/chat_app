@@ -9,6 +9,7 @@ class AuthService {
   final _auth = FirebaseAuth.instance;
   String get userId => _auth.currentUser!.uid; //カレントユーザーのIDをuserIdへ
   Stream<User?> get getAuthState => _auth.authStateChanges();
+  String infoText = "";
 
   Future<void> signUpUser(
       {required String newEmail, required String newPassword}) async {
@@ -18,9 +19,14 @@ class AuthService {
 
   Future<void> loginUser(
       {required String email, required String password}) async {
-    await _auth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseException catch (e) {
+      print(e);
+      infoText = "Please Enter";
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:chat_app/login_page/login_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -67,35 +68,24 @@ class LoginPage extends ConsumerWidget {
                 obscureText: _isObscure,
                 maxLength: 20,
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                // メッセージ表示
-                child: Text(infoText),
-              ),
               SizedBox(
                 height: 50.0,
                 width: 150.0,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  onPressed: () async {
-                    _controller.loginUser(
-                        email: emailEdit.text, password: passEdit.text);
-                    try {
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    onPressed: () async {
+                      _controller.loginUser(
+                          email: emailEdit.text, password: passEdit.text);
                       Navigator.pop(context);
-                    } catch (e) {
-                      // ユーザー登録に失敗した場合
-                      print(e);
-                    }
-                  },
-                ),
+                    }),
               )
             ],
           ),

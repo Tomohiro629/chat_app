@@ -80,7 +80,7 @@ class CurrentChatRoom extends ConsumerWidget {
                                                 maxWidth: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.4,
+                                                    0.5,
                                               ),
                                               decoration: const BoxDecoration(
                                                 color: Color.fromARGB(

@@ -1,5 +1,4 @@
 import 'package:chat_app/login_page/login_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +14,8 @@ class LoginPage extends ConsumerWidget {
     final _controller = ref.watch(loginControllerProvider);
     final _isObscure = ref.watch(isObscureProvider);
     final emailEdit = TextEditingController();
-    final passEdit = TextEditingController();
+    String loginPassword = "";
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,7 +44,6 @@ class LoginPage extends ConsumerWidget {
                 height: 25.0,
               ),
               TextFormField(
-                controller: passEdit,
                 keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
@@ -67,6 +66,9 @@ class LoginPage extends ConsumerWidget {
                 ),
                 obscureText: _isObscure,
                 maxLength: 20,
+                onChanged: (String value) {
+                  loginPassword = value;
+                },
               ),
               SizedBox(
                 height: 50.0,
@@ -83,7 +85,7 @@ class LoginPage extends ConsumerWidget {
                     ),
                     onPressed: () async {
                       _controller.loginUser(
-                          email: emailEdit.text, password: passEdit.text);
+                          email: emailEdit.text, password: loginPassword);
                       Navigator.pop(context);
                     }),
               )

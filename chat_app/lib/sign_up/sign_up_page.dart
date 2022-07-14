@@ -23,7 +23,8 @@ class SignUpPage extends ConsumerWidget {
     final _controller = ref.watch(signUpControllerProvider);
     final _isObscure = ref.watch(isObscureProvider);
     final newEmailEdit = TextEditingController();
-    final newPasswordEdit = TextEditingController();
+    String newPassword = "";
+
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("Registertion Page")),
       body: Center(
@@ -54,7 +55,6 @@ class SignUpPage extends ConsumerWidget {
                 ),
               ),
               TextFormField(
-                controller: newPasswordEdit,
                 keyboardType: TextInputType.visiblePassword,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
@@ -76,6 +76,9 @@ class SignUpPage extends ConsumerWidget {
                   ),
                 ),
                 obscureText: _isObscure,
+                onChanged: (String value) {
+                  newPassword = value;
+                },
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 15),
@@ -107,7 +110,7 @@ class SignUpPage extends ConsumerWidget {
                       try {
                         await _controller.signUpUser(
                           newEmail: newEmailEdit.text,
-                          newPassword: newPasswordEdit.text,
+                          newPassword: newPassword,
                         );
                         Navigator.pop(context);
                       } on FirebaseAuthException catch (e) {

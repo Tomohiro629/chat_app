@@ -1,19 +1,22 @@
 import 'package:chat_app/chat_page/chat_room/chat_page_controller.dart';
 import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OtherChatRoom extends ConsumerWidget {
-  const OtherChatRoom({Key? key, required this.chat, required this.userId})
-      : super(key: key);
+  const OtherChatRoom({
+    Key? key,
+    required this.chat,
+  }) : super(key: key);
   final Chat chat;
-  final String userId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
     final textEdit = TextEditingController();
+    final userId = ref.watch(authServiceProvider).userId;
 
     return Scaffold(
         appBar: AppBar(

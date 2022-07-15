@@ -19,11 +19,9 @@ class BuildChat extends StatelessWidget {
         child: userId == uid
             ? CurrentChatRoom(
                 chat: chat,
-                userId: uid,
               )
             : OtherChatRoom(
                 chat: chat,
-                userId: uid,
               ));
   }
 }

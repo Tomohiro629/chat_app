@@ -33,11 +33,13 @@ class MessageRepository {
         .delete();
   }
 
-  Stream<List<Message>> fetchMessagesStream(String chatId) {
+  Stream<List<Message>> fetchMessagesStream(String chatId, String userId) {
     final snapshots = _firestore
         .collection('chat_rooms')
         .doc(chatId)
         .collection("messages")
+        .where('joinedUser', arrayContains: userId)
+        //userIdを含む配列を取得する
         .orderBy('sendTime', descending: true)
         .snapshots();
 

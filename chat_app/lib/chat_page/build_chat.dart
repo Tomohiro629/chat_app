@@ -17,7 +17,13 @@ class BuildChat extends StatelessWidget {
     return Container(
         margin: const EdgeInsets.only(top: 8),
         child: userId == uid
-            ? CurrentChatRoom(chat: chat)
-            : OtherChatRoom(chat: chat));
+            ? CurrentChatRoom(
+                chat: chat,
+                userId: uid,
+              )
+            : OtherChatRoom(
+                chat: chat,
+                userId: uid,
+              ));
   }
 }

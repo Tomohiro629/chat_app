@@ -8,8 +8,10 @@ class CurrentChatRoom extends ConsumerWidget {
   const CurrentChatRoom({
     Key? key,
     required this.chat,
+    required this.userId,
   }) : super(key: key);
   final Chat chat;
+  final String userId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +33,8 @@ class CurrentChatRoom extends ConsumerWidget {
                 ),
                 Expanded(
                   child: StreamBuilder<List<Message>>(
-                    stream: _controller.fetchMessagesStream(chat.roomId),
+                    stream:
+                        _controller.fetchMessagesStream(chat.roomId, userId),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Message>> snapshot) {
                       if (snapshot.hasError) {

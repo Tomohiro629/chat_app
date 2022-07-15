@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OtherChatRoom extends ConsumerWidget {
-  const OtherChatRoom({
-    Key? key,
-    required this.chat,
-  }) : super(key: key);
+  const OtherChatRoom({Key? key, required this.chat, required this.userId})
+      : super(key: key);
   final Chat chat;
+  final String userId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +30,8 @@ class OtherChatRoom extends ConsumerWidget {
                 ),
                 Expanded(
                   child: StreamBuilder<List<Message>>(
-                    stream: _controller.fetchMessagesStream(chat.roomId),
+                    stream:
+                        _controller.fetchMessagesStream(chat.roomId, userId),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Message>> snapshot) {
                       if (snapshot.hasError) {

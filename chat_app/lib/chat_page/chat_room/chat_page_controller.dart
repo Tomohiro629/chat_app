@@ -26,8 +26,9 @@ class ChatController extends ChangeNotifier {
     changeLoadingStatus(false);
   }
 
-  Stream<List<Message>> fetchMessagesStream(String chatId) {
-    return _reader(messageRepositoryProvider).fetchMessagesStream(chatId);
+  Stream<List<Message>> fetchMessagesStream(String chatId, String userId) {
+    return _reader(messageRepositoryProvider)
+        .fetchMessagesStream(chatId, userId);
   }
 
   void changeLoadingStatus(bool status) {

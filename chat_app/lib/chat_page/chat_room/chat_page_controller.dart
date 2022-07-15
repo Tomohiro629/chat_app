@@ -15,19 +15,22 @@ class ChatController extends ChangeNotifier {
   Future<void> addMesseage({
     required String messageText,
     required String chatId,
+    required String userId,
   }) async {
     changeLoadingStatus(true);
     final message = Message.create(
       chatId: chatId,
       messageText: messageText,
+      userId: userId,
     );
     await _reader(messageRepositoryProvider).setMesseage(message: message);
 
     changeLoadingStatus(false);
   }
 
-  Stream<List<Message>> fetchMessagesStream(String chatId) {
-    return _reader(messageRepositoryProvider).fetchMessagesStream(chatId);
+  Stream<List<Message>> fetchMessagesStream(String chatId, String userId) {
+    return _reader(messageRepositoryProvider)
+        .fetchMessagesStream(chatId, userId);
   }
 
   void changeLoadingStatus(bool status) {

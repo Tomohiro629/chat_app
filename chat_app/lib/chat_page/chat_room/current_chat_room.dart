@@ -1,6 +1,7 @@
 import 'package:chat_app/chat_page/chat_room/chat_page_controller.dart';
 import 'package:chat_app/entity/chat.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,6 +16,7 @@ class CurrentChatRoom extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
     final textEdit = TextEditingController();
+    final userId = ref.watch(authServiceProvider).userId;
 
     return Scaffold(
         appBar: AppBar(
@@ -31,7 +33,8 @@ class CurrentChatRoom extends ConsumerWidget {
                 ),
                 Expanded(
                   child: StreamBuilder<List<Message>>(
-                    stream: _controller.fetchMessagesStream(chat.roomId),
+                    stream:
+                        _controller.fetchMessagesStream(chat.roomId, userId),
                     builder: (BuildContext context,
                         AsyncSnapshot<List<Message>> snapshot) {
                       if (snapshot.hasError) {
@@ -226,6 +229,7 @@ class CurrentChatRoom extends ConsumerWidget {
                           await _controller.addMesseage(
                             messageText: textEdit.text,
                             chatId: chat.roomId,
+                            userId: userId,
                           );
                           textEdit.clear();
                         } catch (e) {

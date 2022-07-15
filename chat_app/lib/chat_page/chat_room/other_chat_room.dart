@@ -227,6 +227,7 @@ class OtherChatRoom extends ConsumerWidget {
                           await _controller.addMesseage(
                             messageText: textEdit.text,
                             chatId: chat.roomId,
+                            userId: userId,
                           );
                           textEdit.clear();
                         } catch (e) {

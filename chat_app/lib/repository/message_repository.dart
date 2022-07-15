@@ -38,10 +38,6 @@ class MessageRepository {
         .collection('chat_rooms')
         .doc(chatId)
         .collection("messages")
-        .where(
-          chatId,
-        )
-        //userIdを含む配列を取得する
         .orderBy('sendTime', descending: true)
         .snapshots();
 

@@ -1,5 +1,5 @@
 import 'package:chat_app/chat_page/build_chat.dart';
-import 'package:chat_app/entity/chat.dart';
+import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/add_chat_room.dart';
@@ -59,10 +59,10 @@ class RoomSelectPage extends ConsumerWidget {
                       );
                   }
                 }),
-            StreamBuilder<List<Chat>>(
+            StreamBuilder<List<ChatRoom>>(
               stream: controller.fetchChatRoomStream(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Chat>> snapshot) {
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<ChatRoom>> snapshot) {
                 if (snapshot.hasError) {
                   return Text("Error:${snapshot.error}");
                 }
@@ -73,7 +73,7 @@ class RoomSelectPage extends ConsumerWidget {
                     return ListView(
                       physics: const ClampingScrollPhysics(),
                       shrinkWrap: true,
-                      children: snapshot.data!.map((Chat chat) {
+                      children: snapshot.data!.map((ChatRoom chat) {
                         return Padding(
                           //card同士の余白
                           padding: const EdgeInsets.all(10),

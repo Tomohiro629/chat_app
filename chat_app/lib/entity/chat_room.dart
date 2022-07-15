@@ -1,24 +1,24 @@
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
-class Chat {
-  Chat({
+class ChatRoom {
+  ChatRoom({
     required this.chatName,
     required this.addTime,
     required this.roomId,
   });
 
-  factory Chat.create({
+  factory ChatRoom.create({
     required String chatName,
   }) {
-    return Chat(
+    return ChatRoom(
         roomId: const Uuid().v4(),
         chatName: chatName,
         addTime: DateFormat("yyyy年MM月dd日").format(DateTime.now()));
   }
 
-  factory Chat.fromJson(Map<String, dynamic> map) {
-    return Chat(
+  factory ChatRoom.fromJson(Map<String, dynamic> map) {
+    return ChatRoom(
         chatName: map['chatRoomName'],
         addTime: map['addTime'],
         roomId: map['roomId']);

@@ -1,16 +1,16 @@
-import 'package:chat_app/entity/chat.dart';
+import 'package:chat_app/entity/chat_room.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final chatRepositoryProvider = Provider(((ref) {
-  return ChatRepository();
+  return ChatRoomRepository();
 }));
 
-class ChatRepository {
+class ChatRoomRepository {
   final _firestore = FirebaseFirestore.instance;
 
   Future<void> addChatRoom({
-    required Chat chat,
+    required ChatRoom chat,
   }) async {
     await _firestore
         .collection("chat_rooms")
@@ -19,15 +19,15 @@ class ChatRepository {
   }
 
   Future<void> deleteChatRoom({
-    required Chat chat,
+    required ChatRoom chat,
   }) async {
     await _firestore.collection("chat_rooms").doc(chat.roomId).delete();
   }
 
-  Stream<List<Chat>> fetchChatRoomStream() {
+  Stream<List<ChatRoom>> fetchChatRoomStream() {
     final snapshots = _firestore.collection('chat_rooms').snapshots();
 
-    return snapshots
-        .map((qs) => qs.docs.map((doc) => Chat.fromJson(doc.data())).toList());
+    return snapshots.map(
+        (qs) => qs.docs.map((doc) => ChatRoom.fromJson(doc.data())).toList());
   }
 }

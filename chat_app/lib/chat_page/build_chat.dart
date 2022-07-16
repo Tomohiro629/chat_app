@@ -1,6 +1,6 @@
 import 'package:chat_app/chat_page/chat_room/current_chat_room.dart';
 import 'package:chat_app/chat_page/chat_room/other_chat_room.dart';
-import 'package:chat_app/entity/chat.dart';
+import 'package:chat_app/entity/chat_room.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class BuildChat extends StatelessWidget {
   const BuildChat(
       {Key? key, required this.chat, required this.userId, required this.uid})
       : super(key: key);
-  final Chat chat;
+  final ChatRoom chat;
   final String userId;
   final String uid;
 

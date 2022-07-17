@@ -18,8 +18,10 @@ class UserService extends ChangeNotifier {
   Future<void> addUser({
     required String userNameText,
     required String userId,
+    required String imgURL,
   }) async {
-    final user = ChatUser.create(userNameText: userNameText, userId: userId);
+    final user = ChatUser.create(
+        userNameText: userNameText, userId: userId, imgURL: imgURL);
     await _reader(userRepositoryProvider).setUser(user: user);
   }
 
@@ -37,8 +39,18 @@ class UserService extends ChangeNotifier {
 
   File? imageFile;
 
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await picker.pickImage(source: source);
+  void takeCamera() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+    }
+
+    notifyListeners;
+  }
+
+  void takeGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       imageFile = File(pickedFile.path);

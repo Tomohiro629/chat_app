@@ -151,7 +151,8 @@ class SettingPage extends ConsumerWidget {
                                   try {
                                     await userName.addUser(
                                         userNameText: editName.text,
-                                        userId: userId);
+                                        userId: userId,
+                                        imgURL: "");
                                     Navigator.of(context).pop();
                                   } catch (e) {
                                     print(e);

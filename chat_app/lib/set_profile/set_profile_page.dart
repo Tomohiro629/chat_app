@@ -13,71 +13,100 @@ class SetProfilePage extends ConsumerWidget {
     final service = ref.watch(userServiceProvider);
     final nameEdit = TextEditingController();
     final newUserId = ref.watch(authServiceProvider).userId;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Set Profile Page"),
       ),
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircleAvatar(
-                radius: 50,
-                backgroundColor: Color.fromARGB(255, 191, 244, 155),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.red,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: nameEdit,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                    labelText: 'Name',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 5, bottom: 15),
-              ),
-              SizedBox(
-                height: 50.0,
-                width: 150.0,
-                child: ElevatedButton(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 80,
+              backgroundColor: const Color.fromARGB(255, 191, 244, 155),
+              foregroundImage: (service.imageFile != null)
+                  //imgeFileに値があればURLから画像を取得
+                  ? FileImage(service.imageFile!)
+                  : null,
+              child: const Text("Add Photo"),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  child: const Text(
-                    'Set',
-                    style: TextStyle(fontSize: 18),
+                  onPressed: () {
+                    service.takeCamera();
+                  },
+                  child: const Icon(Icons.camera_alt),
+                ),
+                const SizedBox(
+                  width: 40,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                   ),
-                  onPressed: () async {
-                    try {
-                      service.addUser(
+                  onPressed: () {
+                    service.takeGallery();
+                  },
+                  child: const Icon(Icons.photo),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              controller: nameEdit,
+              style: const TextStyle(fontSize: 20),
+              decoration: InputDecoration(
+                  labelText: 'Name',
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 15,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  )),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 15),
+            ),
+            SizedBox(
+              height: 50.0,
+              width: 150.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                child: const Text(
+                  'Set',
+                  style: TextStyle(fontSize: 18),
+                ),
+                onPressed: () async {
+                  try {
+                    service.addUser(
                         userNameText: nameEdit.text,
                         userId: newUserId,
-                      );
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                ),
+                        imgURL: "");
+                  } catch (e) {
+                    print(e);
+                  }
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

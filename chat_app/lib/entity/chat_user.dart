@@ -2,15 +2,18 @@ class ChatUser {
   ChatUser({
     required this.userName,
     required this.userId,
+    required this.imgURL,
   });
 
   factory ChatUser.create({
     required String userId,
     required String userNameText,
+    required String imgURL,
   }) {
     return ChatUser(
       userId: userId,
       userName: userNameText,
+      imgURL: imgURL,
     );
   }
 
@@ -18,6 +21,7 @@ class ChatUser {
     return ChatUser(
       userId: map['userId'],
       userName: map['userName'],
+      imgURL: map['imgURL'],
     );
   }
 
@@ -25,9 +29,11 @@ class ChatUser {
     return {
       'userId': userId,
       'userName': userName,
+      'imgURL': imgURL,
     };
   }
 
   final String userId;
   final String userName;
+  final String imgURL;
 }

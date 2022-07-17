@@ -65,18 +65,21 @@ class SetProfilePage extends ConsumerWidget {
             const SizedBox(
               height: 15,
             ),
-            TextFormField(
-              controller: nameEdit,
-              style: const TextStyle(fontSize: 20),
-              decoration: InputDecoration(
-                  labelText: 'Name',
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 15,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  )),
+            SizedBox(
+              width: 300,
+              child: TextFormField(
+                controller: nameEdit,
+                style: const TextStyle(fontSize: 20),
+                decoration: InputDecoration(
+                    labelText: 'Name',
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 15,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    )),
+              ),
             ),
             const Padding(
               padding: EdgeInsets.only(top: 5, bottom: 15),

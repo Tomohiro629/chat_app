@@ -70,7 +70,6 @@ class SettingPage extends ConsumerWidget {
                                 child: const Text("Yes"),
                                 onPressed: () async {
                                   await _controller.logOut();
-
                                   await Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) {

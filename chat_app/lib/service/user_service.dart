@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 final userServiceProvider = ChangeNotifierProvider<UserService>((ref) {
   return UserService(ref.read);
@@ -12,7 +9,6 @@ final userServiceProvider = ChangeNotifierProvider<UserService>((ref) {
 
 class UserService extends ChangeNotifier {
   final Reader _reader;
-  final picker = ImagePicker();
   UserService(this._reader);
 
   Future<void> addUser({
@@ -37,25 +33,11 @@ class UserService extends ChangeNotifier {
     await _reader(userRepositoryProvider).deleteUser(userId);
   }
 
-  File? imageURL;
-
   void takeCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
-    if (pickedFile != null) {
-      imageURL = File(pickedFile.path);
-    }
-
-    notifyListeners;
+    _reader(userRepositoryProvider).takeCamera();
   }
 
   void takeGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      imageURL = File(pickedFile.path);
-    }
-
-    notifyListeners;
+    _reader(userRepositoryProvider).takeGallery();
   }
 }

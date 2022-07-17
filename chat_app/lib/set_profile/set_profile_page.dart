@@ -1,3 +1,4 @@
+import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class SetProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final service = ref.watch(userServiceProvider);
+    final image = ref.watch(userRepositoryProvider);
     final nameEdit = TextEditingController();
     final newUserId = ref.watch(authServiceProvider).userId;
 
@@ -21,14 +23,14 @@ class SetProfilePage extends ConsumerWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             CircleAvatar(
               radius: 80,
               backgroundColor: const Color.fromARGB(255, 191, 244, 155),
-              foregroundImage: (service.imageURL != null)
+              foregroundImage: (image.imageURL != null)
                   //imgeFileに値があればURLから画像を取得
-                  ? FileImage(service.imageURL!)
+                  ? FileImage(image.imageURL!)
                   : null,
               child: const Text("Add Photo"),
             ),
@@ -62,28 +64,26 @@ class SetProfilePage extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
             SizedBox(
-              width: 300,
-              child: TextFormField(
-                controller: nameEdit,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                    labelText: 'Name',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
+                height: 60,
+                width: 300,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      controller: nameEdit,
+                      style: const TextStyle(fontSize: 20),
+                      decoration: InputDecoration(
+                          labelText: 'Name',
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 15,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(100),
+                          )),
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 15),
-            ),
+                  ],
+                )),
             SizedBox(
               height: 50.0,
               width: 150.0,
@@ -98,17 +98,21 @@ class SetProfilePage extends ConsumerWidget {
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: () async {
+                  print(image.imageURL);
                   try {
                     service.addUser(
                         userNameText: nameEdit.text,
                         userId: newUserId,
-                        imgURL: "");
+                        imgURL: image.imageURL.toString());
                   } catch (e) {
                     print(e);
                   }
                 },
               ),
             ),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),

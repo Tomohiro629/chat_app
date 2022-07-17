@@ -28,7 +28,7 @@ class SetProfilePage extends ConsumerWidget {
             CircleAvatar(
               radius: 80,
               backgroundColor: const Color.fromARGB(255, 191, 244, 155),
-              foregroundImage: (image.imageURL != null)
+              foregroundImage: image.imageURL != null
                   //imgeFileに値があればURLから画像を取得
                   ? FileImage(image.imageURL!)
                   : null,
@@ -98,12 +98,13 @@ class SetProfilePage extends ConsumerWidget {
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: () async {
-                  print(image.imageURL);
                   try {
                     service.addUser(
                         userNameText: nameEdit.text,
                         userId: newUserId,
-                        imgURL: image.imageURL.toString());
+                        imageURL: image.imageURL.toString());
+
+                    service.loading;
                   } catch (e) {
                     print(e);
                   }

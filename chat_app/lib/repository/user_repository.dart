@@ -19,18 +19,19 @@ class UserRepository {
   Future<void> setUser({
     required ChatUser user,
   }) async {
-    // if (imageFile != null) {
-    try {
-      final task = await FirebaseStorage.instance
-          .ref('user_photo/${user.imgURL}')
-          .putFile(imageURL!);
-      imgURL = await task.ref.getDownloadURL();
-      await _firestore
-          .collection("users")
-          .doc(user.userId)
-          .set(user.toJson(), SetOptions(merge: true));
-    } catch (e) {
-      print(e);
+    if (imageURL != null) {
+      try {
+        final task = await FirebaseStorage.instance
+            .ref('user_photo/${user.imageURL}')
+            .putFile(imageURL!);
+        imgURL = await task.ref.getDownloadURL();
+        await _firestore
+            .collection("users")
+            .doc(user.userId)
+            .set(user.toJson(), SetOptions(merge: true));
+      } catch (e) {
+        print(e);
+      }
     }
   }
 

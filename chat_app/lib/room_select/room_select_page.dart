@@ -53,6 +53,7 @@ class RoomSelectPage extends ConsumerWidget {
                             padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                             child: ListTile(
                               title: Text("「${user.userName}」でログイン中"),
+                              // leading: Image.network(user.imageURL),
                             ),
                           );
                         }).toList(),

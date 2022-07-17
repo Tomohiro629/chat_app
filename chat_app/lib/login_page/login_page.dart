@@ -27,48 +27,54 @@ class LoginPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFormField(
-                controller: emailEdit,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                    labelText: ' Mail',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
+              SizedBox(
+                width: 300,
+                child: TextFormField(
+                  controller: emailEdit,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                      labelText: ' Mail',
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 15,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      )),
+                ),
               ),
               const SizedBox(
                 height: 25.0,
               ),
-              TextFormField(
-                keyboardType: TextInputType.visiblePassword,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                  labelText: ' Password',
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 15,
+              SizedBox(
+                width: 300,
+                child: TextFormField(
+                  keyboardType: TextInputType.visiblePassword,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    labelText: ' Password(8~20)',
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 15,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(_isObscure
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined),
+                      onPressed: () {
+                        ref.read(isObscureProvider.state).state = !_isObscure;
+                      },
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                   ),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isObscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined),
-                    onPressed: () {
-                      ref.read(isObscureProvider.state).state = !_isObscure;
-                    },
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+                  obscureText: _isObscure,
+                  maxLength: 20,
+                  onChanged: (String value) {
+                    loginPassword = value;
+                  },
                 ),
-                obscureText: _isObscure,
-                maxLength: 20,
-                onChanged: (String value) {
-                  loginPassword = value;
-                },
               ),
               SizedBox(
                 height: 50.0,

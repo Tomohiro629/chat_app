@@ -33,17 +33,20 @@ class SignUpPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFormField(
-                controller: newEmailEdit,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                  labelText: ' Mail',
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 15,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
+              SizedBox(
+                width: 300,
+                child: TextFormField(
+                  controller: newEmailEdit,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    labelText: ' Mail',
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 15,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                   ),
                 ),
               ),
@@ -54,31 +57,34 @@ class SignUpPage extends ConsumerWidget {
                   style: const TextStyle(color: Colors.red),
                 ),
               ),
-              TextFormField(
-                keyboardType: TextInputType.visiblePassword,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                  labelText: ' Password(8~20)',
-                  suffixIcon: IconButton(
-                    icon: Icon(_isObscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined),
-                    onPressed: () {
-                      ref.read(isObscureProvider.state).state = !_isObscure;
-                    },
+              SizedBox(
+                width: 300,
+                child: TextFormField(
+                  keyboardType: TextInputType.visiblePassword,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                    labelText: ' Password(8~20)',
+                    suffixIcon: IconButton(
+                      icon: Icon(_isObscure
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined),
+                      onPressed: () {
+                        ref.read(isObscureProvider.state).state = !_isObscure;
+                      },
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 15,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 15,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+                  obscureText: _isObscure,
+                  onChanged: (String value) {
+                    newPassword = value;
+                  },
                 ),
-                obscureText: _isObscure,
-                onChanged: (String value) {
-                  newPassword = value;
-                },
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 15),

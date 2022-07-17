@@ -1,8 +1,10 @@
 import 'package:chat_app/home_page/home_page.dart';
+import 'package:chat_app/loading_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:chat_app/setting_page/setting_controller.dart';
 import 'package:chat_app/user_gate/user_gate_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -70,7 +72,6 @@ class SettingPage extends ConsumerWidget {
                                 child: const Text("Yes"),
                                 onPressed: () async {
                                   await _controller.logOut();
-
                                   await Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) {
@@ -151,7 +152,8 @@ class SettingPage extends ConsumerWidget {
                                   try {
                                     await userName.addUser(
                                         userNameText: editName.text,
-                                        userId: userId);
+                                        userId: userId,
+                                        imageURL: "");
                                     Navigator.of(context).pop();
                                   } catch (e) {
                                     print(e);

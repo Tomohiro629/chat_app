@@ -24,6 +24,17 @@ class SetProfilePage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              CircleAvatar(
+                radius: 50,
+                backgroundColor: Color.fromARGB(255, 191, 244, 155),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.red,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: nameEdit,
                 style: const TextStyle(fontSize: 20),

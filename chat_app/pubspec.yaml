@@ -38,11 +38,15 @@ dependencies:
   flutter_riverpod: ^1.0.4
   firebase_auth: ^3.3.19
   firebase_core: ^1.17.1
+  firebase_storage: ^10.3.2
   intl: ^0.17.0
+  image_picker: ^0.8.5+3
   riverpod: ^1.0.3
   settings_ui: ^1.0.0
   uuid: ^3.0.6
   vm_service: ^8.3.0
+  
+  
   
   
 

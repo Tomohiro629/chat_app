@@ -37,13 +37,13 @@ class UserService extends ChangeNotifier {
     await _reader(userRepositoryProvider).deleteUser(userId);
   }
 
-  File? imageFile;
+  File? imageURL;
 
   void takeCamera() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      imageFile = File(pickedFile.path);
+      imageURL = File(pickedFile.path);
     }
 
     notifyListeners;
@@ -53,7 +53,7 @@ class UserService extends ChangeNotifier {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      imageFile = File(pickedFile.path);
+      imageURL = File(pickedFile.path);
     }
 
     notifyListeners;

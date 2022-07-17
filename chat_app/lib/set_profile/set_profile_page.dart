@@ -26,9 +26,9 @@ class SetProfilePage extends ConsumerWidget {
             CircleAvatar(
               radius: 80,
               backgroundColor: const Color.fromARGB(255, 191, 244, 155),
-              foregroundImage: (service.imageFile != null)
+              foregroundImage: (service.imageURL != null)
                   //imgeFileに値があればURLから画像を取得
-                  ? FileImage(service.imageFile!)
+                  ? FileImage(service.imageURL!)
                   : null,
               child: const Text("Add Photo"),
             ),

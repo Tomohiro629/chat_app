@@ -9,14 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage({
-    Key? key,
-  }) : super(key: key);
+  const RoomSelectPage(
+      {Key? key, required this.userId, required this.currentUserId})
+      : super(key: key);
+  final String userId;
+  final String currentUserId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
     final user = ref.watch(userRepositoryProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Room Select Page"),
@@ -36,32 +39,35 @@ class RoomSelectPage extends ConsumerWidget {
         child: Column(
           children: [
             StreamBuilder<List<ChatUser>>(
-                stream: user.fetchUsersStream(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<ChatUser>> snapshot) {
-                  if (snapshot.hasError) {
-                    return Text("Error:${snapshot.error}");
-                  }
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const Center();
-                    default:
-                      return ListView(
-                        shrinkWrap: true,
-                        children: snapshot.data!.map((ChatUser user) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                            child: ListTile(
-                              title: Text("「${user.userName}」でログイン中"),
-                              // leading: Image.network(user.imageURL),
-                            ),
-                          );
-                        }).toList(),
-                      );
-                  }
-                }),
+              stream: user.fetchUsersStream(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<ChatUser>> snapshot) {
+                if (snapshot.hasError) {
+                  return Text("Error:${snapshot.error}");
+                }
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Center();
+                  default:
+                    return ListView(
+                      shrinkWrap: true,
+                      children: snapshot.data!.map((ChatUser user) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                          child: ListTile(
+                            title: Text("「${user.userName}」でログイン中"),
+                            // trailing: Image.network(user.imageURL),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                }
+              },
+            ),
             StreamBuilder<List<ChatRoom>>(
-              stream: controller.fetchChatRoomStream(),
+              stream: controller.fetchChatRoomStream(
+                userId,
+              ),
               builder: (BuildContext context,
                   AsyncSnapshot<List<ChatRoom>> snapshot) {
                 if (snapshot.hasError) {

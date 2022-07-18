@@ -22,7 +22,7 @@ class UserRepository {
     if (imageURL != null) {
       try {
         final task = await FirebaseStorage.instance
-            .ref('user_photo/${user.imageURL}')
+            .ref('user_photo/${user.userId}')
             .putFile(imageURL!);
         imgURL = await task.ref.getDownloadURL();
         await _firestore

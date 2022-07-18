@@ -103,8 +103,6 @@ class SetProfilePage extends ConsumerWidget {
                         userNameText: nameEdit.text,
                         userId: newUserId,
                         imageURL: image.imageURL.toString());
-
-                    service.loading;
                   } catch (e) {
                     print(e);
                   }

@@ -20,7 +20,9 @@ class UserService extends ChangeNotifier {
     changeLoadingStatus(true);
     final user = ChatUser.create(
         userNameText: userNameText, userId: userId, imageURL: imageURL);
-    await _reader(userRepositoryProvider).setUser(user: user);
+    await _reader(userRepositoryProvider).setUser(
+      user: user,
+    );
     changeLoadingStatus(true);
   }
 
@@ -34,14 +36,6 @@ class UserService extends ChangeNotifier {
 
   Future<void> deleteUser(String userId) async {
     await _reader(userRepositoryProvider).deleteUser(userId);
-  }
-
-  void takeCamera() async {
-    _reader(userRepositoryProvider).takeCamera();
-  }
-
-  void takeGallery() async {
-    _reader(userRepositoryProvider).takeGallery();
   }
 
   void changeLoadingStatus(bool status) {

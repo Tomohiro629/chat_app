@@ -20,8 +20,12 @@ class RoomSelectController extends ChangeNotifier {
     await _reader(chatRepositoryProvider).addChatRoom(chat: chat);
   }
 
-  Stream<List<ChatRoom>> fetchChatRoomStream(String userId) {
-    return _reader(chatRepositoryProvider).fetchChatRoomStream(userId);
+  Stream<List<ChatRoom>> fetchChatRoomStream(
+    String userId,
+  ) {
+    return _reader(chatRepositoryProvider).fetchChatRoomStream(
+      userId,
+    );
   }
 
   Future<void> deleteChatRoom({

@@ -65,7 +65,9 @@ class RoomSelectPage extends ConsumerWidget {
               },
             ),
             StreamBuilder<List<ChatRoom>>(
-              stream: controller.fetchChatRoomStream(userId),
+              stream: controller.fetchChatRoomStream(
+                userId,
+              ),
               builder: (BuildContext context,
                   AsyncSnapshot<List<ChatRoom>> snapshot) {
                 if (snapshot.hasError) {

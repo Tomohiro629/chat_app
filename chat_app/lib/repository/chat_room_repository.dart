@@ -24,7 +24,9 @@ class ChatRoomRepository {
     await _firestore.collection("chat_rooms").doc(chat.roomId).delete();
   }
 
-  Stream<List<ChatRoom>> fetchChatRoomStream() {
+  Stream<List<ChatRoom>> fetchChatRoomStream(
+    String userId,
+  ) {
     final snapshots = _firestore.collection('chat_rooms').snapshots();
 
     return snapshots.map(

@@ -9,14 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage({
-    Key? key,
-  }) : super(key: key);
+  const RoomSelectPage(
+      {Key? key, required this.userId, required this.currentUserId})
+      : super(key: key);
+  final String userId;
+  final String currentUserId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
     final user = ref.watch(userRepositoryProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Room Select Page"),
@@ -62,7 +65,7 @@ class RoomSelectPage extends ConsumerWidget {
               },
             ),
             StreamBuilder<List<ChatRoom>>(
-              stream: controller.fetchChatRoomStream(),
+              stream: controller.fetchChatRoomStream(userId),
               builder: (BuildContext context,
                   AsyncSnapshot<List<ChatRoom>> snapshot) {
                 if (snapshot.hasError) {

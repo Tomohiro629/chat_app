@@ -17,9 +17,11 @@ class UserService extends ChangeNotifier {
     required String userId,
     required String imageURL,
   }) async {
+    changeLoadingStatus(true);
     final user = ChatUser.create(
         userNameText: userNameText, userId: userId, imageURL: imageURL);
     await _reader(userRepositoryProvider).setUser(user: user);
+    changeLoadingStatus(true);
   }
 
   Stream<ChatUser?> fetchUserStream(String userId) {

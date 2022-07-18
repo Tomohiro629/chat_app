@@ -36,30 +36,31 @@ class RoomSelectPage extends ConsumerWidget {
         child: Column(
           children: [
             StreamBuilder<List<ChatUser>>(
-                stream: user.fetchUsersStream(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<ChatUser>> snapshot) {
-                  if (snapshot.hasError) {
-                    return Text("Error:${snapshot.error}");
-                  }
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const Center();
-                    default:
-                      return ListView(
-                        shrinkWrap: true,
-                        children: snapshot.data!.map((ChatUser user) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                            child: ListTile(
-                              title: Text("「${user.userName}」でログイン中"),
-                              // leading: Image.network(user.imageURL),
-                            ),
-                          );
-                        }).toList(),
-                      );
-                  }
-                }),
+              stream: user.fetchUsersStream(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<ChatUser>> snapshot) {
+                if (snapshot.hasError) {
+                  return Text("Error:${snapshot.error}");
+                }
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Center();
+                  default:
+                    return ListView(
+                      shrinkWrap: true,
+                      children: snapshot.data!.map((ChatUser user) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                          child: ListTile(
+                            title: Text("「${user.userName}」でログイン中"),
+                            // trailing: Image.network(user.imageURL),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                }
+              },
+            ),
             StreamBuilder<List<ChatRoom>>(
               stream: controller.fetchChatRoomStream(),
               builder: (BuildContext context,

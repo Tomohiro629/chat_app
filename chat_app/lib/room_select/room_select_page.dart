@@ -53,10 +53,13 @@ class RoomSelectPage extends ConsumerWidget {
                       shrinkWrap: true,
                       children: snapshot.data!.map((ChatUser user) {
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                          padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                           child: ListTile(
                             title: Text("「${user.userName}」でログイン中"),
-                            // trailing: Image.network(user.imageURL),
+                            leading: CircleAvatar(
+                              radius: 35,
+                              foregroundImage: NetworkImage(user.imageURL),
+                            ),
                           ),
                         );
                       }).toList(),

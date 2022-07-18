@@ -1,8 +1,11 @@
-import 'package:chat_app/repository/user_repository.dart';
+import 'dart:io';
+
 import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SetProfilePage extends ConsumerWidget {
   const SetProfilePage({
@@ -12,9 +15,10 @@ class SetProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final service = ref.watch(userServiceProvider);
-    final image = ref.watch(userRepositoryProvider);
+    final image = ref.watch(storageServiceProvider);
     final nameEdit = TextEditingController();
     final newUserId = ref.watch(authServiceProvider).userId;
+    final picker = ImagePicker();
 
     return Scaffold(
       appBar: AppBar(
@@ -25,14 +29,10 @@ class SetProfilePage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            CircleAvatar(
+            const CircleAvatar(
               radius: 80,
-              backgroundColor: const Color.fromARGB(255, 191, 244, 155),
-              foregroundImage: image.imageURL != null
-                  //imgeFileに値があればURLから画像を取得
-                  ? FileImage(image.imageURL!)
-                  : null,
-              child: const Text("Add Photo"),
+              backgroundColor: Color.fromARGB(255, 191, 244, 155),
+              child: Text("Add Photo"),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,7 @@ class SetProfilePage extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    service.takeCamera();
+                    image.takeCamera();
                   },
                   child: const Icon(Icons.camera_alt),
                 ),
@@ -58,7 +58,7 @@ class SetProfilePage extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    service.takeGallery();
+                    image.takeGallery();
                   },
                   child: const Icon(Icons.photo),
                 ),
@@ -99,10 +99,12 @@ class SetProfilePage extends ConsumerWidget {
                 ),
                 onPressed: () async {
                   try {
+                    image.uploadPostImageAndGetUrl(file: image.imagePath!);
                     service.addUser(
-                        userNameText: nameEdit.text,
-                        userId: newUserId,
-                        imageURL: image.imageURL.toString());
+                      userNameText: nameEdit.text,
+                      userId: newUserId,
+                      imageURL: image.imageURL!,
+                    );
                   } catch (e) {
                     print(e);
                   }

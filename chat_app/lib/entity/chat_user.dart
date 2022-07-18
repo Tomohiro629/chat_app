@@ -8,12 +8,12 @@ class ChatUser {
   factory ChatUser.create({
     required String userId,
     required String userNameText,
-    required String? imageURL,
+    required String imageURL,
   }) {
     return ChatUser(
       userId: userId,
       userName: userNameText,
-      imageURL: imageURL.toString(),
+      imageURL: imageURL,
     );
   }
 

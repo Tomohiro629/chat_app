@@ -46,17 +46,29 @@ class CloudStorageService extends ChangeNotifier {
     return await ref.getDownloadURL();
   }
 
+  // Future<void> deleteStorage(String ref) async {
+  //   _storage.ref().delete();
+  // }
+
   void takeCamera() async {
     final picekdfile = await _picker.pickImage(source: ImageSource.camera);
     if (picekdfile != null) {
-      imagePath = File(picekdfile.path);
+      try {
+        imagePath = File(picekdfile.path);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
   void takeGallery() async {
     final picekdfile = await _picker.pickImage(source: ImageSource.gallery);
     if (picekdfile != null) {
-      imagePath = File(picekdfile.path);
+      try {
+        imagePath = File(picekdfile.path);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 }

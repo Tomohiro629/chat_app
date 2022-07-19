@@ -12,8 +12,12 @@ class AuthService {
 
   Future<void> signUpUser(
       {required String newEmail, required String newPassword}) async {
-    await _auth.createUserWithEmailAndPassword(
-        email: newEmail, password: newPassword);
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: newEmail, password: newPassword);
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 
   Future<void> loginUser(
@@ -25,6 +29,13 @@ class AuthService {
       );
     } on FirebaseException catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> logOut() async {
+    await _auth.signOut();
+    if (_auth.currentUser == null) {
+      print('ログアウト成功');
     }
   }
 }

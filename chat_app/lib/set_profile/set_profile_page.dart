@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SetProfilePage extends ConsumerWidget {
   const SetProfilePage({
@@ -18,7 +15,6 @@ class SetProfilePage extends ConsumerWidget {
     final image = ref.watch(storageServiceProvider);
     final nameEdit = TextEditingController();
     final newUserId = ref.watch(authServiceProvider).userId;
-    final picker = ImagePicker();
 
     return Scaffold(
       appBar: AppBar(
@@ -100,6 +96,7 @@ class SetProfilePage extends ConsumerWidget {
                 onPressed: () async {
                   try {
                     image.uploadPostImageAndGetUrl(file: image.imagePath!);
+
                     service.addUser(
                       userNameText: nameEdit.text,
                       userId: newUserId,

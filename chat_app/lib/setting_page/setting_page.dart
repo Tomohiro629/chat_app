@@ -1,5 +1,6 @@
 import 'package:chat_app/home_page/home_page.dart';
 import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:chat_app/user_gate/user_gate_page.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class SettingPage extends ConsumerWidget {
     final _controller = ref.watch(authServiceProvider);
     final userName = ref.watch(userServiceProvider);
     final userId = ref.watch(authServiceProvider).userId;
+    final storage = ref.watch(storageServiceProvider);
     final editName = TextEditingController();
 
     return Scaffold(

@@ -1,10 +1,7 @@
 import 'package:chat_app/home_page/home_page.dart';
-import 'package:chat_app/loading_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
-import 'package:chat_app/setting_page/setting_controller.dart';
 import 'package:chat_app/user_gate/user_gate_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +12,7 @@ class SettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(settingControllerProvider);
+    final _controller = ref.watch(authServiceProvider);
     final userName = ref.watch(userServiceProvider);
     final userId = ref.watch(authServiceProvider).userId;
     final editName = TextEditingController();

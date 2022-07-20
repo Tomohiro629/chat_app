@@ -1,3 +1,5 @@
+import 'package:flutter/src/material/circle_avatar.dart';
+
 class ChatUser {
   ChatUser({
     required this.userName,
@@ -36,4 +38,6 @@ class ChatUser {
   final String userId;
   final String userName;
   final String imageURL;
+
+  map(CircleAvatar Function(ChatUser user) param0) {}
 }

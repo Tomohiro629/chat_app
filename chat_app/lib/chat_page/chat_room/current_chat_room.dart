@@ -1,6 +1,8 @@
 import 'package:chat_app/chat_page/chat_room/chat_page_controller.dart';
 import 'package:chat_app/entity/chat_room.dart';
+import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +17,7 @@ class CurrentChatRoom extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.watch(chatControllerProvider);
+    final user = ref.watch(userRepositoryProvider);
     final textEdit = TextEditingController();
     final userId = ref.watch(authServiceProvider).userId;
 
@@ -85,15 +88,11 @@ class CurrentChatRoom extends ConsumerWidget {
                                                         .width *
                                                     0.5,
                                               ),
-                                              decoration: const BoxDecoration(
-                                                color: Color.fromARGB(
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
                                                     255, 167, 254, 170),
-                                                borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(30),
-                                                  topLeft: Radius.circular(30),
-                                                  bottomLeft:
-                                                      Radius.circular(30),
-                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
                                               ),
                                               child: ListTile(
                                                 tileColor: const Color.fromARGB(
@@ -194,15 +193,30 @@ class CurrentChatRoom extends ConsumerWidget {
                                         ),
                                       ],
                                     ),
-                                    Column(children: const <Widget>[
-                                      SizedBox(
-                                        height: 45,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            Color.fromARGB(255, 160, 212, 255),
-                                      ),
-                                    ])
+                                    StreamBuilder<List<ChatUser>>(
+                                      stream: user.fetchUsersStream(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<List<ChatUser>>
+                                              snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Column(
+                                              children: snapshot.data!
+                                                  .map((ChatUser user) {
+                                            return CircleAvatar(
+                                              radius: 30,
+                                              foregroundImage:
+                                                  NetworkImage(user.imageURL),
+                                            );
+                                          }).toList());
+                                        }
+                                        if (snapshot.hasError) {
+                                          return const Text("error");
+                                        }
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      },
+                                    ),
                                   ],
                                 ),
                               );

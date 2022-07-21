@@ -29,7 +29,7 @@ class ChatRoomRepository {
   ) {
     final snapshots = _firestore
         .collection('chat_rooms')
-        .where('currentUserId', isEqualTo: userId)
+        .where('userIds', arrayContains: userId)
         .snapshots();
 
     return snapshots.map(

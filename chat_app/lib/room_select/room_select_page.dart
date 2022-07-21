@@ -20,7 +20,6 @@ class RoomSelectPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
-    final user = ref.watch(userRepositoryProvider);
 
     return Scaffold(
       appBar: AppBar(

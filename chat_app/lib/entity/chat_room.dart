@@ -26,7 +26,7 @@ class ChatRoom {
         chatName: map['chatRoomName'],
         addTime: map['addTime'],
         roomId: map['roomId'],
-        userIds: map['userIds']);
+        userIds: (map['userIds'] as List<dynamic>).cast<String>());
   }
 
   Map<String, dynamic> toJson() {

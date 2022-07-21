@@ -24,15 +24,15 @@ class ChatRoomRepository {
     await _firestore.collection("chat_rooms").doc(chat.roomId).delete();
   }
 
-  Stream<List<ChatRoom>> fetchChatRoomStream(
+  Query<ChatRoom> chatRoomQuery(
     String userId,
   ) {
-    final snapshots = _firestore
+    final query = _firestore
         .collection('chat_rooms')
-        .where('userIds', arrayContains: userId)
-        .snapshots();
-
-    return snapshots.map(
-        (qs) => qs.docs.map((doc) => ChatRoom.fromJson(doc.data())).toList());
+        .where('userIds', arrayContains: userId);
+    return query.withConverter<ChatRoom>(
+      fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),
+      toFirestore: (chatRoom, _) => chatRoom.toJson(),
+    );
   }
 }

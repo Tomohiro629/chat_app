@@ -62,7 +62,8 @@ class CloudStorageService extends ChangeNotifier {
   }
 
   void takeGallery() async {
-    final picekdfile = await _picker.pickImage(source: ImageSource.gallery);
+    final picekdfile =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 1);
     if (picekdfile != null) {
       try {
         imagePath = File(picekdfile.path);

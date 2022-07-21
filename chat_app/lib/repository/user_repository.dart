@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

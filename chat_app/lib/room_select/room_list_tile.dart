@@ -1,11 +1,12 @@
-import 'package:chat_app/chat_page/build_chat.dart';
+import 'package:chat_app/chat_page/chat_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:flutter/material.dart';
 
-class ChatRoomTile extends StatelessWidget {
+class RoomListTile extends StatelessWidget {
   final ChatRoom chat;
 
-  const ChatRoomTile({super.key, required this.chat});
+  const RoomListTile(
+      {super.key, required this.chat, required List<String> userIds});
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,9 @@ class ChatRoomTile extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  BuildChat(chat: chat, userId: "", uid: "")));
+                              builder: (context) => ChatPage(
+                                    chat: chat,
+                                  )));
                     },
                     onLongPress: () {
                       showDialog(

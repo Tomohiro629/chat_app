@@ -33,15 +33,15 @@ class MessageRepository {
         .delete();
   }
 
-  Stream<List<Message>> fetchMessagesStream(String chatId, String userId) {
-    final snapshots = _firestore
+  Query<Message> messageQuery(String userId, {required String chatId}) {
+    final query = _firestore
         .collection('chat_rooms')
         .doc(chatId)
         .collection("messages")
-        .orderBy('sendTime', descending: true)
-        .snapshots();
-
-    return snapshots.map(
-        (qs) => qs.docs.map((doc) => Message.fromJson(doc.data())).toList());
+        .orderBy('sendTime', descending: true);
+    return query.withConverter<Message>(
+      fromFirestore: (snapshot, _) => Message.fromJson(snapshot.data()!),
+      toFirestore: (message, _) => message.toJson(),
+    );
   }
 }

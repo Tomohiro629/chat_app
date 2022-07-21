@@ -1,5 +1,7 @@
 import 'package:chat_app/entity/message.dart';
 import 'package:chat_app/repository/message_repository.dart';
+import 'package:chat_app/service/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,22 +17,21 @@ class ChatController extends ChangeNotifier {
   Future<void> addMesseage({
     required String messageText,
     required String chatId,
-    required String userId,
   }) async {
     changeLoadingStatus(true);
     final message = Message.create(
       chatId: chatId,
       messageText: messageText,
-      userId: userId,
+      userId: _reader(authServiceProvider).userId,
     );
     await _reader(messageRepositoryProvider).setMesseage(message: message);
 
     changeLoadingStatus(false);
   }
 
-  Stream<List<Message>> fetchMessagesStream(String chatId, String userId) {
+  Query<Message> messageQuery({required String chatId}) {
     return _reader(messageRepositoryProvider)
-        .fetchMessagesStream(chatId, userId);
+        .messageQuery(_reader(authServiceProvider).userId, chatId: chatId);
   }
 
   void changeLoadingStatus(bool status) {

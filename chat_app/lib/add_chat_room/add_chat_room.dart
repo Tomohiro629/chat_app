@@ -1,5 +1,4 @@
-import 'package:chat_app/room_select/room_select_controller.dart';
-import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,9 +11,8 @@ class AddChatRoomPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(roomSelectControllerProvider);
+    final _controller = ref.watch(addChatRoomControllerProvider);
     final chatName = TextEditingController();
-    final userId = ref.watch(authServiceProvider).userId;
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +57,7 @@ class AddChatRoomPage extends ConsumerWidget {
                     ),
                     onPressed: () async {
                       await _controller.addChatRoom(
-                          chatName: chatName.text, userId: userId);
+                          chatName: chatName.text, userId: "");
                       Navigator.pop(
                         context,
                       );

@@ -12,14 +12,6 @@ class RoomSelectController extends ChangeNotifier {
   final Reader _reader;
   RoomSelectController(this._reader);
 
-  Future<void> addChatRoom({
-    required String chatName,
-    required String userId,
-  }) async {
-    final chat = ChatRoom.create(chatName: chatName, currentUserId: userId);
-    await _reader(chatRepositoryProvider).addChatRoom(chat: chat);
-  }
-
   Stream<List<ChatRoom>> fetchChatRoomStream(
     String userId,
   ) {

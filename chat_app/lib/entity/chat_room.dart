@@ -6,18 +6,19 @@ class ChatRoom {
     required this.chatName,
     required this.addTime,
     required this.roomId,
-    required this.currentUserId,
+    required this.userIds,
   });
 
   factory ChatRoom.create({
     required String chatName,
     required String currentUserId,
+    required String partnerUserId,
   }) {
     return ChatRoom(
         roomId: const Uuid().v4(),
         chatName: chatName,
         addTime: DateFormat("yyyy年MM月dd日").format(DateTime.now()),
-        currentUserId: currentUserId);
+        userIds: [currentUserId, partnerUserId]);
   }
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {
@@ -25,7 +26,7 @@ class ChatRoom {
         chatName: map['chatRoomName'],
         addTime: map['addTime'],
         roomId: map['roomId'],
-        currentUserId: map['currentUserId']);
+        userIds: map['userIds']);
   }
 
   Map<String, dynamic> toJson() {
@@ -33,12 +34,12 @@ class ChatRoom {
       'chatRoomName': chatName,
       'addTime': addTime,
       'roomId': roomId,
-      'currentUserId': currentUserId,
+      'userIds': userIds,
     };
   }
 
   final String chatName;
   final String addTime;
   final String roomId;
-  final String currentUserId;
+  final List<String> userIds;
 }

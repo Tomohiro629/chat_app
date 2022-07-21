@@ -2,7 +2,7 @@ import 'package:chat_app/chat_page/build_chat.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/repository/user_repository.dart';
-import 'package:chat_app/room_select/add_chat_room.dart';
+import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';

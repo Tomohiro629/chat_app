@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^3.3.19
   firebase_core: ^1.19.2
   firebase_storage: ^10.3.2
+  flutterfire_ui: ^0.4.2+3
+  firestore_ui: ^1.23.0
   intl: ^0.17.0
   image_picker: ^0.8.5+3
   riverpod: ^1.0.3

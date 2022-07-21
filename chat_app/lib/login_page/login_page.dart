@@ -85,6 +85,7 @@ class LoginPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(100),
                       ),
                     ),
+<<<<<<< HEAD
                     child: const Text(
                       'Login',
                       style: TextStyle(fontSize: 18),
@@ -94,6 +95,37 @@ class LoginPage extends ConsumerWidget {
                           email: emailEdit.text, password: loginPassword);
                       Navigator.pop(context);
                     }),
+=======
+                  ),
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  onPressed: () async {
+                    try {
+                      await auth.signInWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const NameCheckPage(
+                              userName: '',
+                            );
+                          },
+                        ),
+                      );
+                    } catch (e) {
+                      // ユーザー登録に失敗した場合
+                      infoText = "登録に失敗しました：${e.toString()}";
+                    }
+                  },
+                ),
+>>>>>>> 02b86fc91db39357cee6f1636c0a41430475b9ff
               )
             ],
           ),

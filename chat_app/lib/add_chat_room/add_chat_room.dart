@@ -56,7 +56,7 @@ class AddChatRoomPage extends ConsumerWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     onPressed: () async {
-                      await _controller.addChatRoom(
+                      _controller.addChatRoom(
                           chatName: chatName.text, userId: "");
                       Navigator.pop(
                         context,

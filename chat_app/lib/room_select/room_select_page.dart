@@ -1,9 +1,6 @@
-import 'package:chat_app/chat_page/build_chat.dart';
 import 'package:chat_app/entity/chat_room.dart';
-import 'package:chat_app/entity/chat_user.dart';
-import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
-import 'package:chat_app/room_select/chat_room_tile.dart';
+import 'package:chat_app/room_select/room_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +37,10 @@ class RoomSelectPage extends ConsumerWidget {
         query: controller.chatRoomQuery(),
         itemBuilder: (context, snapshot) {
           final chat = snapshot.data();
-          return ChatRoomTile(chat: chat);
+          return RoomListTile(
+            chat: chat,
+            userIds: [],
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(

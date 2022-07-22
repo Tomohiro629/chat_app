@@ -33,7 +33,9 @@ class ChatPage extends ConsumerWidget {
                 query: controller.messageQuery(chatId: chat.roomId),
                 itemBuilder: (context, snapshot) {
                   final message = snapshot.data();
-                  return MessageListTile(message: message);
+                  return MessageListTile(
+                    message: message,
+                  );
                 }),
           ),
           Align(

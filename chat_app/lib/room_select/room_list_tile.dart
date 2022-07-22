@@ -1,15 +1,19 @@
 import 'package:chat_app/chat_page/chat_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
+import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RoomListTile extends StatelessWidget {
+class RoomListTile extends ConsumerWidget {
   final ChatRoom chat;
 
   const RoomListTile(
       {super.key, required this.chat, required List<String> userIds});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(roomSelectControllerProvider);
+
     return Padding(
       //card同士の余白
       padding: const EdgeInsets.all(10),
@@ -82,7 +86,7 @@ class RoomListTile extends StatelessWidget {
                                       const Color.fromARGB(255, 240, 124, 116),
                                   child: const Text("Yes"),
                                   onPressed: () async {
-                                    // controller.deleteChatRoom(chat: chat);
+                                    controller.deleteChatRoom(chat: chat);
                                     Navigator.of(context).pop();
                                   },
                                 ),

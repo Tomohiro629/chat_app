@@ -1,13 +1,16 @@
+import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/entity/message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MessageListTile extends StatelessWidget {
+class MessageListTile extends ConsumerWidget {
   final Message message;
 
   const MessageListTile({super.key, required this.message});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(chatControllerProvider);
     return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,8 +65,8 @@ class MessageListTile extends StatelessWidget {
                                         255, 240, 124, 116),
                                     child: const Text("Yes"),
                                     onPressed: () async {
-                                      // _controller.deleteMesseage(
-                                      //     message: message);
+                                      controller.deleteMesseage(
+                                          message: message);
                                       Navigator.of(context).pop();
                                     },
                                   ),

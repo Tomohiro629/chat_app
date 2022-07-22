@@ -11,7 +11,7 @@ class AddChatRoomPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(addChatRoomControllerProvider);
+    final controller = ref.watch(addChatRoomControllerProvider);
     final chatName = TextEditingController();
 
     return Scaffold(
@@ -56,7 +56,7 @@ class AddChatRoomPage extends ConsumerWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     onPressed: () async {
-                      _controller.addChatRoom(
+                      controller.addChatRoom(
                           chatName: chatName.text, userId: "");
                       Navigator.pop(
                         context,

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 final storageServiceProvider =
     ChangeNotifierProvider<CloudStorageService>((ref) {
@@ -14,8 +13,6 @@ class CloudStorageService extends ChangeNotifier {
   final Reader reader;
   CloudStorageService(this.reader);
   final _storage = FirebaseStorage.instance;
-  final _picker = ImagePicker();
-  File? imagePath;
   String? imageURL;
 
   Future<String> uploadPostImageAndGetUrl({
@@ -50,26 +47,4 @@ class CloudStorageService extends ChangeNotifier {
   //   _storage.ref().delete();
   // }
 
-  void takeCamera() async {
-    final picekdfile = await _picker.pickImage(source: ImageSource.camera);
-    if (picekdfile != null) {
-      try {
-        imagePath = File(picekdfile.path);
-      } catch (e) {
-        print(e);
-      }
-    }
-  }
-
-  void takeGallery() async {
-    final picekdfile =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 1);
-    if (picekdfile != null) {
-      try {
-        imagePath = File(picekdfile.path);
-      } catch (e) {
-        print(e);
-      }
-    }
-  }
 }

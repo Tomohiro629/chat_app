@@ -1,3 +1,4 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
@@ -19,9 +20,9 @@ class SetProfilePage extends ConsumerWidget {
     final newUserId = ref.watch(authServiceProvider).userId;
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Set Profile Page"),
+      appBar: const BaseAppBar(
+        title: Text("Set Profile Page"),
+        widgets: [],
       ),
       body: Center(
         child: Column(

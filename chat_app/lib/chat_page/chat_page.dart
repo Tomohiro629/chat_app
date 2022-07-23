@@ -1,7 +1,10 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/message_list_tile.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
+import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -19,9 +22,22 @@ class ChatPage extends ConsumerWidget {
     final textEdit = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
+      appBar: BaseAppBar(
         title: const Text("Chat Room"),
+        widgets: [
+          CircleAvatar(
+            backgroundImage:
+                NetworkImage(ref.watch(storageServiceProvider).imageURL!),
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const SettingPage();
+              }));
+            },
+          ),
+        ],
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -72,7 +88,7 @@ class ChatPage extends ConsumerWidget {
               ),
               style: const TextStyle(fontSize: 20.0),
             ),
-          )
+          ),
         ],
       ),
     );

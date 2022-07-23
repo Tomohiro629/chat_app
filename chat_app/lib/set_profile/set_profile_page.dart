@@ -1,5 +1,6 @@
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
+import 'package:chat_app/service/image_picker_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,8 +12,9 @@ class SetProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final service = ref.watch(userServiceProvider);
-    final image = ref.watch(storageServiceProvider);
+    final userService = ref.watch(userServiceProvider);
+    final storageService = ref.watch(storageServiceProvider);
+    final imagePickerService = ref.watch(imagePickerServiceProvider);
     final nameEdit = TextEditingController();
     final newUserId = ref.watch(authServiceProvider).userId;
 
@@ -40,7 +42,7 @@ class SetProfilePage extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    image.takeCamera();
+                    imagePickerService.takeCamera();
                   },
                   child: const Icon(Icons.camera_alt),
                 ),
@@ -54,7 +56,7 @@ class SetProfilePage extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    image.takeGallery();
+                    imagePickerService.takeGallery();
                   },
                   child: const Icon(Icons.photo),
                 ),
@@ -95,12 +97,13 @@ class SetProfilePage extends ConsumerWidget {
                 ),
                 onPressed: () async {
                   try {
-                    image.uploadPostImageAndGetUrl(file: image.imagePath!);
+                    storageService.uploadPostImageAndGetUrl(
+                        file: imagePickerService.imagePath!);
 
-                    service.addUser(
+                    userService.addUser(
                       userNameText: nameEdit.text,
                       userId: newUserId,
-                      imageURL: image.imageURL!,
+                      imageURL: storageService.imageURL!,
                     );
                   } catch (e) {
                     print(e);

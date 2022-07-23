@@ -11,8 +11,8 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(loginControllerProvider);
-    final _isObscure = ref.watch(isObscureProvider);
+    final controller = ref.watch(loginControllerProvider);
+    final isObscure = ref.watch(isObscureProvider);
     final emailEdit = TextEditingController();
     String loginPassword = "";
 
@@ -58,18 +58,18 @@ class LoginPage extends ConsumerWidget {
                         vertical: 15,
                       ),
                       suffixIcon: IconButton(
-                        icon: Icon(_isObscure
+                        icon: Icon(isObscure
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined),
                         onPressed: () {
-                          ref.read(isObscureProvider.state).state = !_isObscure;
+                          ref.read(isObscureProvider.state).state = !isObscure;
                         },
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(100),
                       ),
                     ),
-                    obscureText: _isObscure,
+                    obscureText: isObscure,
                     maxLength: 20,
                     onChanged: (String value) {
                       loginPassword = value;
@@ -90,7 +90,7 @@ class LoginPage extends ConsumerWidget {
                           style: TextStyle(fontSize: 18),
                         ),
                         onPressed: () async {
-                          _controller.loginUser(
+                          controller.loginUser(
                               email: emailEdit.text, password: loginPassword);
                           Navigator.pop(context);
                         })),

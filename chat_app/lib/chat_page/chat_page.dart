@@ -1,7 +1,9 @@
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/message_list_tile.dart';
+import 'package:chat_app/chat_page/partner_message_list_tile.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -33,9 +35,11 @@ class ChatPage extends ConsumerWidget {
                 query: controller.messageQuery(chatId: chat.roomId),
                 itemBuilder: (context, snapshot) {
                   final message = snapshot.data();
+                  // ref.watch(authServiceProvider).userId == userIds ?
                   return MessageListTile(
                     message: message,
                   );
+                  // : PartnerMessageListTile(message: message);
                 }),
           ),
           Align(

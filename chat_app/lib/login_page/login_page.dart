@@ -1,3 +1,4 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/login_page/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,9 +18,9 @@ class LoginPage extends ConsumerWidget {
     String loginPassword = "";
 
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Login Page"),
+        appBar: const BaseAppBar(
+          title: Text("Login Page"),
+          widgets: [],
         ),
         body: Center(
             child: Container(

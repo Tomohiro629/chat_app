@@ -1,3 +1,4 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/home_page/home_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
@@ -18,9 +19,9 @@ class SettingPage extends ConsumerWidget {
     final editName = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Settings"),
+      appBar: const BaseAppBar(
+        title: Text("Settings"),
+        widgets: [],
       ),
       body: Stack(
         fit: StackFit.expand,

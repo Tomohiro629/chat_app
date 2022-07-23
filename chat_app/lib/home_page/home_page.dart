@@ -1,3 +1,4 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/login_page/login_page.dart';
 
 import 'package:chat_app/sign_up/sign_up_page.dart';
@@ -12,9 +13,9 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Home Page"),
+      appBar: const BaseAppBar(
+        title: Text("Home Page"),
+        widgets: [],
       ),
       body: Center(
         child: Column(

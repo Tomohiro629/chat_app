@@ -1,7 +1,9 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/room_select/room_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,12 +19,15 @@ class RoomSelectPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
+    final storageSrvice = ref.watch(storageServiceProvider);
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: BaseAppBar(
         title: const Text("Room Select Page"),
-        centerTitle: true,
-        actions: [
+        widgets: [
+          CircleAvatar(
+            backgroundImage: NetworkImage(storageSrvice.imageURL!),
+          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
@@ -39,7 +44,7 @@ class RoomSelectPage extends ConsumerWidget {
           final chat = snapshot.data();
           return RoomListTile(
             chat: chat,
-            userIds: [],
+            userIds: const [],
           );
         },
       ),

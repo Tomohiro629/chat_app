@@ -1,3 +1,4 @@
+import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/authentication_error.dart';
 import 'package:chat_app/sign_up/sign_up_controller.dart';
 
@@ -20,13 +21,16 @@ class SignUpPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = ref.watch(signUpControllerProvider);
-    final _isObscure = ref.watch(isObscureProvider);
+    final controller = ref.watch(signUpControllerProvider);
+    final isObscure = ref.watch(isObscureProvider);
     final newEmailEdit = TextEditingController();
     String newPassword = "";
 
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const Text("Registertion Page")),
+      appBar: const BaseAppBar(
+        title: Text("Registertion Page"),
+        widgets: [],
+      ),
       body: Center(
         child: Container(
           padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
@@ -65,11 +69,11 @@ class SignUpPage extends ConsumerWidget {
                   decoration: InputDecoration(
                     labelText: ' Password(8~20)',
                     suffixIcon: IconButton(
-                      icon: Icon(_isObscure
+                      icon: Icon(isObscure
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined),
                       onPressed: () {
-                        ref.read(isObscureProvider.state).state = !_isObscure;
+                        ref.read(isObscureProvider.state).state = !isObscure;
                       },
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -80,7 +84,7 @@ class SignUpPage extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  obscureText: _isObscure,
+                  obscureText: isObscure,
                   onChanged: (String value) {
                     newPassword = value;
                   },
@@ -114,7 +118,7 @@ class SignUpPage extends ConsumerWidget {
                   onPressed: () async {
                     if (passOK) {
                       try {
-                        await _controller.signUpUser(
+                        await controller.signUpUser(
                           newEmail: newEmailEdit.text,
                           newPassword: newPassword,
                         );

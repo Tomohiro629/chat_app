@@ -1,4 +1,5 @@
 import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
+import 'package:chat_app/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,9 +16,9 @@ class AddChatRoomPage extends ConsumerWidget {
     final chatName = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Add Chat Room"),
+      appBar: const BaseAppBar(
+        title: Text("Add Chat Room"),
+        widgets: [],
       ),
       body: Center(
         child: Container(

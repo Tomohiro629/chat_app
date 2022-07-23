@@ -25,18 +25,21 @@ class AddChatRoomPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                controller: chatName,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                    labelText: 'Chat Room Name',
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: chatName,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                      labelText: 'Chat Room Name',
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 15,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      )),
+                ),
               ),
               const SizedBox(
                 height: 50.0,

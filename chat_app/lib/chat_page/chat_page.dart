@@ -25,10 +25,6 @@ class ChatPage extends ConsumerWidget {
       appBar: BaseAppBar(
         title: const Text("Chat Room"),
         widgets: [
-          CircleAvatar(
-            backgroundImage:
-                NetworkImage(ref.watch(storageServiceProvider).imageURL!),
-          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {

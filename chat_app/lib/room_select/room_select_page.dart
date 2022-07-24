@@ -10,11 +10,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage(
-      {Key? key, required this.userId, required this.currentUserId})
-      : super(key: key);
-  final String userId;
-  final String currentUserId;
+  const RoomSelectPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

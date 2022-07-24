@@ -20,10 +20,7 @@ class UserGatePage extends ConsumerWidget {
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;
         return isExist
-            ? RoomSelectPage(
-                userId: userId,
-                currentUserId: userId,
-              ) //ユーザーがいたら
+            ? const RoomSelectPage() //ユーザーがいたら
             : const SetProfilePage(); //失敗
         //
       }),

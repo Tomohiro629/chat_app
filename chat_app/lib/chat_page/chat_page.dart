@@ -58,7 +58,7 @@ class ChatPage extends ConsumerWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: TextField(
+            child: TextFormField(
               keyboardType: TextInputType.multiline,
               maxLines: null,
               controller: textEdit,

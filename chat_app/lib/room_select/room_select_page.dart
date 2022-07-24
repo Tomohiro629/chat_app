@@ -40,7 +40,9 @@ class RoomSelectPage extends ConsumerWidget {
                   );
                 }
                 if (snapshot.hasError) {
-                  return const Text("error");
+                  return const CircleAvatar(
+                    child: Text("No Image..."),
+                  );
                 }
                 return const Center(
                   child: CircularProgressIndicator(),

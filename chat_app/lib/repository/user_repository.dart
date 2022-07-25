@@ -12,10 +12,9 @@ class UserRepository {
     required ChatUser user,
   }) async {
     try {
-      await _firestore
-          .collection("users")
-          .doc(user.userId)
-          .set(user.toJson(), SetOptions(merge: true));
+      await _firestore.collection("users").doc(user.userId).set(
+            user.toJson(),
+          );
     } catch (e) {
       print(e);
     }

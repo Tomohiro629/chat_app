@@ -42,15 +42,6 @@ class ChatPage extends ConsumerWidget {
                         CircleAvatar(
                           foregroundImage: NetworkImage(user.imageURL),
                         ),
-                        RawMaterialButton(
-                          onPressed: () {},
-                          shape: const CircleBorder(),
-                          elevation: 0.0,
-                          child: const SizedBox(
-                            width: 120.0, // CircleAvatarのradiusの2倍
-                            height: 120.0,
-                          ),
-                        ),
                       ]);
                     }).toList(),
                   );

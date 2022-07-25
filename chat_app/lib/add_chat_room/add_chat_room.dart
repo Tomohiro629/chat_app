@@ -14,6 +14,7 @@ class AddChatRoomPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(addChatRoomControllerProvider);
     final chatName = TextEditingController();
+    final partnerUserId = TextEditingController();
 
     return Scaffold(
       appBar: const BaseAppBar(
@@ -43,6 +44,25 @@ class AddChatRoomPage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(
+                height: 25.0,
+              ),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: partnerUserId,
+                  style: const TextStyle(fontSize: 20),
+                  decoration: InputDecoration(
+                      labelText: 'Add Partner User',
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 15,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      )),
+                ),
+              ),
+              const SizedBox(
                 height: 50.0,
                 width: 150.0,
               ),
@@ -61,7 +81,7 @@ class AddChatRoomPage extends ConsumerWidget {
                     ),
                     onPressed: () async {
                       controller.addChatRoom(
-                          chatName: chatName.text, userId: "");
+                          chatName: chatName.text, userId: partnerUserId.text);
                       Navigator.pop(
                         context,
                       );

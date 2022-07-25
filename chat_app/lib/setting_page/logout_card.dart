@@ -44,13 +44,7 @@ class LogoutCard extends ConsumerWidget {
                       child: const Text("Yes"),
                       onPressed: () {
                         controller.logOut();
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const HomePage();
-                            },
-                          ),
-                        );
+                        Navigator.of(context).pop();
                       },
                     ),
                     MaterialButton(

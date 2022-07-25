@@ -1,6 +1,8 @@
+import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:chat_app/chat_page/chat_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
-import 'package:chat_app/room_select/room_select_controller.dart';
+import 'package:chat_app/repository/chat_room_repository.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,11 +14,13 @@ class RoomListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(roomSelectControllerProvider);
+    final addChatRoomController = ref.watch(addChatRoomControllerProvider);
+    final chatRoomController = ref.watch(chatRepositoryProvider);
+    final editChatRoomName = TextEditingController();
 
     return Padding(
       //card同士の余白
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       child: Container(
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 185, 235, 187),
@@ -40,24 +44,85 @@ class RoomListTile extends ConsumerWidget {
         ),
         child: Padding(
             //cardの幅
-            padding: const EdgeInsets.fromLTRB(30, 50, 0, 50),
+            padding: const EdgeInsets.fromLTRB(70, 20, 0, 20),
             child: Column(
               children: <Widget>[
                 Center(
                   child: ListTile(
                     title: Text(
-                      "「 ${chat.chatName}」room",
+                      "「 ${chat.chatName}」ROOM",
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 25,
                         color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                     subtitle: Text(
-                      " 作成日${chat.addTime}",
+                      "  「 作成日${chat.addTime}」",
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 15,
                         color: Color.fromARGB(255, 202, 224, 7),
                       ),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (childContext) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                title: const Text("Change ChatRoomName?"),
+                                content: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 50,
+                                  child: TextFormField(
+                                      maxLines: 1,
+                                      controller: editChatRoomName,
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 23.0, horizontal: 8.0),
+                                        border: OutlineInputBorder(),
+                                        labelText: "Text Form",
+                                        labelStyle: TextStyle(fontSize: 20),
+                                        focusColor: Colors.green,
+                                      )),
+                                ),
+                                actions: <Widget>[
+                                  MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    color: const Color.fromARGB(
+                                        255, 240, 124, 116),
+                                    child: const Text("Yes"),
+                                    onPressed: () async {
+                                      try {
+                                        addChatRoomController.updateChatRoom(
+                                            editChatName: editChatRoomName.text,
+                                            roomId: chat.roomId);
+                                        Navigator.of(context).pop();
+                                      } catch (e) {
+                                        print(e);
+                                      }
+                                    },
+                                  ),
+                                  MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    color: const Color.fromARGB(
+                                        255, 137, 196, 244),
+                                    child: const Text("No"),
+                                    onPressed: () async {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
                     ),
                     onTap: () {
                       Navigator.push(
@@ -86,7 +151,8 @@ class RoomListTile extends ConsumerWidget {
                                       const Color.fromARGB(255, 240, 124, 116),
                                   child: const Text("Yes"),
                                   onPressed: () async {
-                                    controller.deleteChatRoom(chat: chat);
+                                    chatRoomController.deleteChatRoom(
+                                        chat: chat);
                                     Navigator.of(context).pop();
                                   },
                                 ),

@@ -36,7 +36,11 @@ class ChatRoomRepository {
     );
   }
 
-  Future<void> updateChatRoom({required String userId}) async {
-    _firestore.collection('chat_room').add({'userIds': userId});
+  Future<void> updateChatRoom(
+      {required String editChatName, required String roomId}) async {
+    _firestore
+        .collection('chat_rooms')
+        .doc(roomId)
+        .update({"chatRoomName": editChatName});
   }
 }

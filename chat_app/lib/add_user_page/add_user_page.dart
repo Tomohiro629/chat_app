@@ -1,3 +1,4 @@
+import 'package:chat_app/add_user_page/add_user_page_controller.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ class AddUserPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(addUserControllerProvider);
     final partnerUserId = TextEditingController();
     return Scaffold(
       appBar: const BaseAppBar(
@@ -25,7 +27,7 @@ class AddUserPage extends ConsumerWidget {
                   controller: partnerUserId,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
-                      labelText: 'Chat Room Name',
+                      labelText: 'Add UserId',
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 10,
                         vertical: 15,
@@ -53,6 +55,7 @@ class AddUserPage extends ConsumerWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     onPressed: () async {
+                      controller.addUser(userId: partnerUserId.text);
                       Navigator.pop(
                         context,
                       );

@@ -35,4 +35,8 @@ class ChatRoomRepository {
       toFirestore: (chatRoom, _) => chatRoom.toJson(),
     );
   }
+
+  Future<void> updateChatRoom({required String userId}) async {
+    _firestore.collection('chat_room').add({'userIds': userId});
+  }
 }

@@ -1,6 +1,9 @@
+import 'dart:html';
+
 import 'package:chat_app/my_profile/my_profile_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/user_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

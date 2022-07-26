@@ -1,5 +1,4 @@
 import 'package:chat_app/base_app_bar.dart';
-import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';

@@ -2,6 +2,7 @@ import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/entity/chat_user.dart';
+import 'package:chat_app/my_profile/my_profile_page.dart';
 import 'package:chat_app/room_select/room_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
@@ -19,33 +20,19 @@ class RoomSelectPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(roomSelectControllerProvider);
-    final userController = ref.watch(userServiceProvider);
-    final userId = ref.watch(authServiceProvider).userId;
 
     return Scaffold(
       appBar: BaseAppBar(
         title: const Text("Room Select Page"),
         widgets: [
-          StreamBuilder<List<ChatUser>>(
-              stream: userController.fetchUsersStream(userId),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<ChatUser>> snapshot) {
-                if (snapshot.hasData) {
-                  return Row(
-                    children: snapshot.data!.map((ChatUser user) {
-                      return CircleAvatar(
-                        foregroundImage: NetworkImage(user.imageURL),
-                      );
-                    }).toList(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return const Text("error");
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }),
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const MyProfilePage();
+              }));
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {

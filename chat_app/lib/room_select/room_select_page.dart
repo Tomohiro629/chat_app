@@ -10,8 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage(
-    getuser, {
+  const RoomSelectPage({
     Key? key,
   }) : super(key: key);
 

@@ -27,15 +27,15 @@ class UserService extends ChangeNotifier {
     }
   }
 
+  Future<void> deleteUser(String userId) async {
+    await _reader(userRepositoryProvider).deleteUser(userId);
+  }
+
   Stream<ChatUser?> fetchUserStream(String userId) {
     return _reader(userRepositoryProvider).fetchUserStream(userId);
   }
 
   Stream<List<ChatUser>> fetchUsersStream(String userId) {
     return _reader(userRepositoryProvider).fetchUsersStream();
-  }
-
-  Future<void> deleteUser(String userId) async {
-    await _reader(userRepositoryProvider).deleteUser(userId);
   }
 }

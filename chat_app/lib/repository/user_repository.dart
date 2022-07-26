@@ -38,6 +38,16 @@ class UserRepository {
         (qs) => qs.docs.map((doc) => ChatUser.fromJson(doc.data())).toList());
   }
 
+  Future<void> getUser(String userId) async {
+    _firestore
+        .collection('users')
+        .doc(userId)
+        .get()
+        .then((DocumentSnapshot doc) {
+      final data = doc.data() as Map<String, dynamic>;
+    });
+  }
+
   Future<void> updateUserName(
       {required String editUserName, required String userId}) async {
     _firestore

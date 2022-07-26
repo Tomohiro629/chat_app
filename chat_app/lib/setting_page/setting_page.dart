@@ -1,6 +1,5 @@
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/setting_page/delete_user_card.dart';
-import 'package:chat_app/setting_page/edit_user_name.dart';
 import 'package:chat_app/setting_page/logout_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +25,6 @@ class SettingPage extends ConsumerWidget {
                 padding: const EdgeInsets.all(8),
               ),
               const LogoutCard(),
-              const EditUserNameCard(),
               const DeleteUserCard(),
             ],
           ),

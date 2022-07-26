@@ -66,7 +66,7 @@ class MyProfilePage extends ConsumerWidget {
               height: 60,
             ),
             SizedBox(
-                width: 350,
+                width: 370,
                 child: Column(
                   children: const <Widget>[
                     EditNameListTile(),

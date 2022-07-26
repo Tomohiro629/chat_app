@@ -9,12 +9,11 @@ class EditNameListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(myProfileControllerProvider);
-    final userName = ref.watch(userServiceProvider);
     final userId = ref.watch(authServiceProvider).userId;
     final editName = TextEditingController();
 
     return ListTile(
-      title: Text(userName.toString()),
+      title: const Text("Name:aaaaaaa"),
       trailing: IconButton(
         icon: const Icon(Icons.edit),
         onPressed: () async {
@@ -72,10 +71,6 @@ class EditNameListTile extends ConsumerWidget {
                 );
               });
         },
-      ),
-      leading: ConstrainedBox(
-        constraints: const BoxConstraints(
-            minHeight: 44, minWidth: 34, maxHeight: 64, maxWidth: 54),
       ),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(100)),

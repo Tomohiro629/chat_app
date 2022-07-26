@@ -9,11 +9,7 @@ class CurrentUserIdListTile extends ConsumerWidget {
     final userId = ref.watch(authServiceProvider).userId;
 
     return ListTile(
-      title: Text(userId),
-      leading: ConstrainedBox(
-        constraints: const BoxConstraints(
-            minHeight: 44, minWidth: 34, maxHeight: 64, maxWidth: 54),
-      ),
+      title: Text('ID:$userId'),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(100)),
           side: BorderSide(color: Colors.lightGreen)),

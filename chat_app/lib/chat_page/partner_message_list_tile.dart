@@ -24,10 +24,14 @@ class PartnerMessageListTile extends ConsumerWidget {
                 height: 5,
               ),
               ChatBubble(
-                  clipper: ChatBubbleClipper4(type: BubbleType.receiverBubble),
-                  margin: const EdgeInsets.all(3),
-                  padding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
-                  backGroundColor: const Color.fromARGB(255, 64, 195, 255),
+                clipper: ChatBubbleClipper4(type: BubbleType.receiverBubble),
+                margin: const EdgeInsets.all(3),
+                padding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
+                backGroundColor: const Color.fromARGB(255, 132, 215, 254),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.5,
+                  ),
                   child: TextButton(
                     child: Text(
                       message.message,
@@ -73,7 +77,9 @@ class PartnerMessageListTile extends ConsumerWidget {
                           });
                     },
                     onPressed: () {},
-                  )),
+                  ),
+                ),
+              ),
               Text(
                 message.sendTime,
                 style: const TextStyle(fontSize: 10),

@@ -27,10 +27,14 @@ class MessageListTile extends ConsumerWidget {
                     height: 5,
                   ),
                   ChatBubble(
-                      clipper: ChatBubbleClipper4(type: BubbleType.sendBubble),
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
-                      backGroundColor: const Color.fromARGB(255, 64, 255, 156),
+                    clipper: ChatBubbleClipper4(type: BubbleType.sendBubble),
+                    margin: const EdgeInsets.all(3),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
+                    backGroundColor: const Color.fromARGB(255, 126, 246, 184),
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.5,
+                      ),
                       child: TextButton(
                         child: Text(
                           message.message,
@@ -81,7 +85,9 @@ class MessageListTile extends ConsumerWidget {
                               });
                         },
                         onPressed: () {},
-                      )),
+                      ),
+                    ),
+                  ),
                   Text(
                     message.sendTime,
                     style: const TextStyle(fontSize: 10),

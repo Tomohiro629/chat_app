@@ -10,9 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage({
-    Key? key,
-  }) : super(key: key);
+  const RoomSelectPage({Key? key, required this.chatName}) : super(key: key);
+  final String chatName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,7 +56,7 @@ class RoomSelectPage extends ConsumerWidget {
               MaterialPageRoute(
                   builder: (context) => const AddChatRoomPage(
                         chatId: "",
-                        chatName: "",
+                        userName: "",
                       )));
         },
         child: const Icon(Icons.add),

@@ -27,9 +27,4 @@ class RoomSelectController extends ChangeNotifier {
   }) async {
     await _reader(chatRepositoryProvider).deleteChatRoom(chat: chat);
   }
-
-  Future<void> getUser() async {
-    await _reader(userRepositoryProvider)
-        .getUser(_reader(authServiceProvider).userId);
-  }
 }

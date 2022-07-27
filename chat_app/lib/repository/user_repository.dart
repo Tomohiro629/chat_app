@@ -8,6 +8,7 @@ final userRepositoryProvider = Provider(((ref) {
 
 class UserRepository {
   final _firestore = FirebaseFirestore.instance;
+
   Future<void> setUser({
     required ChatUser user,
   }) async {
@@ -38,14 +39,13 @@ class UserRepository {
         (qs) => qs.docs.map((doc) => ChatUser.fromJson(doc.data())).toList());
   }
 
-  Future<void> getUser(String userId) async {
-    _firestore
+  Future<QuerySnapshot<Map<String, dynamic>>> searchUser(
+    String inputUserName,
+  ) {
+    return _firestore
         .collection('users')
-        .doc(userId)
-        .get()
-        .then((DocumentSnapshot doc) {
-      final data = doc.data() as Map<String, dynamic>;
-    });
+        .where('userName', isEqualTo: inputUserName)
+        .get();
   }
 
   Future<void> updateUserName(

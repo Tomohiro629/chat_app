@@ -12,10 +12,6 @@ class MyProfileController extends ChangeNotifier {
   final Reader _reader;
   MyProfileController(this._reader);
 
-  Future<void> getUser(String userId) async {
-    await _reader(userRepositoryProvider).getUser(userId);
-  }
-
   Future<void> updataUserName(
       {required String editUserName, required String userId}) async {
     await _reader(userRepositoryProvider)

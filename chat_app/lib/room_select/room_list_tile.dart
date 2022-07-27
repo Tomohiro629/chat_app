@@ -9,8 +9,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RoomListTile extends ConsumerWidget {
   final ChatRoom chat;
 
-  const RoomListTile(
-      {super.key, required this.chat, required List<String> userIds});
+  const RoomListTile({
+    super.key,
+    required this.chat,
+    required List<String> userIds,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,23 +47,16 @@ class RoomListTile extends ConsumerWidget {
         ),
         child: Padding(
             //cardの幅
-            padding: const EdgeInsets.fromLTRB(70, 20, 0, 20),
+            padding: const EdgeInsets.fromLTRB(70, 10, 0, 10),
             child: Column(
               children: <Widget>[
                 Center(
                   child: ListTile(
                     title: Text(
-                      "「 ${chat.chatName}」ROOM",
+                      chat.chatName,
                       style: const TextStyle(
                         fontSize: 25,
                         color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                    ),
-                    subtitle: Text(
-                      "  「 作成日${chat.addTime}」",
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 202, 224, 7),
                       ),
                     ),
                     trailing: IconButton(

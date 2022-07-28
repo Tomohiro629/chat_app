@@ -1,5 +1,4 @@
 import 'package:chat_app/base_app_bar.dart';
-import 'package:chat_app/my_profile/current_userId_list_tile.dart';
 import 'package:chat_app/my_profile/edit_name_lits_tile.dart';
 import 'package:chat_app/service/image_picker_service.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +72,6 @@ class MyProfilePage extends ConsumerWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    CurrentUserIdListTile(),
                   ],
                 )),
           ],

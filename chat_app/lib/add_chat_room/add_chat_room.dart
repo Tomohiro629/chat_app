@@ -95,8 +95,8 @@ class AddChatRoomPage extends ConsumerWidget {
                                           child: const Text("Start"),
                                           onPressed: () async {
                                             controller.addChatRoom(
-                                              chatName: doc.get("userName"),
-                                              userId: '',
+                                              chatName: searchUserName.text,
+                                              userId: doc.get("userId"),
                                             );
                                             Navigator.push(
                                                 context,

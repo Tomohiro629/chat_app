@@ -23,7 +23,7 @@ class SignUpPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(signUpControllerProvider);
     final isObscure = ref.watch(isObscureProvider);
-    final newEmailEdit = TextEditingController();
+    String newEmailAddress = "";
     String newPassword = "";
 
     return Scaffold(
@@ -40,7 +40,6 @@ class SignUpPage extends ConsumerWidget {
               SizedBox(
                 width: 300,
                 child: TextFormField(
-                  controller: newEmailEdit,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                     labelText: ' Mail',
@@ -52,6 +51,9 @@ class SignUpPage extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
+                  onChanged: (String value) {
+                    newEmailAddress = value;
+                  },
                 ),
               ),
               Padding(
@@ -119,7 +121,7 @@ class SignUpPage extends ConsumerWidget {
                     if (passOK) {
                       try {
                         await controller.signUpUser(
-                          newEmail: newEmailEdit.text,
+                          newEmail: newEmailAddress,
                           newPassword: newPassword,
                         );
                         Navigator.pop(context);

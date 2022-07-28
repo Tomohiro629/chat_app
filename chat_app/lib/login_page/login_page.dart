@@ -14,7 +14,8 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(loginControllerProvider);
     final isObscure = ref.watch(isObscureProvider);
-    final emailEdit = TextEditingController();
+
+    String loginMailAddress = "";
     String loginPassword = "";
 
     return Scaffold(
@@ -31,17 +32,20 @@ class LoginPage extends ConsumerWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    controller: emailEdit,
                     style: const TextStyle(fontSize: 20),
                     decoration: InputDecoration(
-                        labelText: ' Mail',
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 15,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        )),
+                      labelText: ' Mail',
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 15,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                    onChanged: (String value) {
+                      loginMailAddress = value;
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -90,9 +94,9 @@ class LoginPage extends ConsumerWidget {
                           'Login',
                           style: TextStyle(fontSize: 18),
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           controller.loginUser(
-                              email: emailEdit.text, password: loginPassword);
+                              email: loginMailAddress, password: loginPassword);
                           Navigator.pop(context);
                         })),
               ]),

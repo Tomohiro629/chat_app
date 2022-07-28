@@ -98,7 +98,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                               chatName: searchUserName.text,
                                               userId: doc.get("userId"),
                                             );
-                                            Navigator.push(
+                                            Navigator.pushAndRemoveUntil(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
@@ -106,7 +106,8 @@ class AddChatRoomPage extends ConsumerWidget {
                                                           chatName:
                                                               searchUserName
                                                                   .text,
-                                                        )));
+                                                        )),
+                                                (_) => false);
                                           },
                                         ),
                                         MaterialButton(

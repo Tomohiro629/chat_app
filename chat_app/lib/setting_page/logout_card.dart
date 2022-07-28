@@ -14,7 +14,7 @@ class LogoutCard extends ConsumerWidget {
       ),
       child: ListTile(
         title: const Text(
-          "Log Out",
+          "Logout",
         ),
         tileColor: const Color.fromARGB(255, 127, 241, 92),
         trailing: const Icon(Icons.logout),
@@ -33,7 +33,7 @@ class LogoutCard extends ConsumerWidget {
                 return AlertDialog(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
-                  title: const Text("Log Out!"),
+                  title: const Text("Logout!"),
                   content: const Text("Do you want to logout it?"),
                   actions: <Widget>[
                     MaterialButton(

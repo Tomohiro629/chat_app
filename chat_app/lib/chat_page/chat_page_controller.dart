@@ -1,4 +1,6 @@
+import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/repository/chat_room_repository.dart';
 import 'package:chat_app/repository/message_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +15,16 @@ class ChatController extends ChangeNotifier {
   bool loading = false;
   final Reader _reader;
   ChatController(this._reader);
+
+  addLastMessage(
+      {required String chatId,
+      required String lastMessage,
+      required String sendTime}) async {
+    _reader(chatRepositoryProvider).addLastMessage(
+      chatId: chatId,
+      lastMessage: lastMessage,
+    );
+  }
 
   Future<void> addMesseage({
     required String messageText,

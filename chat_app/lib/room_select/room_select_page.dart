@@ -39,15 +39,17 @@ class RoomSelectPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: FirestoreListView<ChatRoom>(
-        query: roomSelectController.chatRoomQuery(),
-        itemBuilder: (context, snapshot) {
-          final chat = snapshot.data();
-          return RoomListTile(
-            chat: chat,
-            userIds: const [],
-          );
-        },
+      body: Center(
+        child: FirestoreListView<ChatRoom>(
+          query: roomSelectController.chatRoomQuery(),
+          itemBuilder: (context, snapshot) {
+            final chat = snapshot.data();
+            return RoomListTile(
+              chat: chat,
+              userIds: const [],
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -57,6 +59,7 @@ class RoomSelectPage extends ConsumerWidget {
                   builder: (context) => const AddChatRoomPage(
                         chatId: "",
                         userName: "",
+                        lastMessage: '',
                       )));
         },
         child: const Icon(Icons.add),

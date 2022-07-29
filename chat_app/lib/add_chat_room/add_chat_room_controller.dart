@@ -13,12 +13,13 @@ class AddChatRoomController extends ChangeNotifier {
   final Reader _reader;
   AddChatRoomController(this._reader);
 
-  Future<void> setChatRoom({
-    required String chatName,
-    required String userId,
-  }) async {
+  Future<void> setChatRoom(
+      {required String chatName,
+      required String userId,
+      required String lastMessage}) async {
     final chat = ChatRoom.create(
         chatName: chatName,
+        lastMessage: lastMessage,
         currentUserId: _reader(authServiceProvider).userId,
         partnerUserId: userId);
     await _reader(chatRepositoryProvider).setChatRoom(chat: chat);

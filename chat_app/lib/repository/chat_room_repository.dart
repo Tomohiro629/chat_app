@@ -9,6 +9,13 @@ final chatRepositoryProvider = Provider(((ref) {
 class ChatRoomRepository {
   final _firestore = FirebaseFirestore.instance;
 
+  Future<void> addLastMessage(
+      {required String chatId, required String lastMessage}) async {
+    await _firestore.collection("chat_rooms").doc(chatId).update({
+      "lastMessage": lastMessage,
+    });
+  }
+
   Future<void> setChatRoom({
     required ChatRoom chat,
   }) async {

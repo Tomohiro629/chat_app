@@ -14,6 +14,7 @@ class ChatRoom {
     required String chatName,
     required String currentUserId,
     required String partnerUserId,
+    required String lastMessage,
   }) {
     return ChatRoom(
         roomId: const Uuid().v4(),
@@ -43,6 +44,6 @@ class ChatRoom {
   final String chatName;
   final String addTime;
   final String roomId;
-  final String lastMessage;
+  final String? lastMessage;
   final List<String> userIds;
 }

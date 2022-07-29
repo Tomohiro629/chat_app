@@ -8,10 +8,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddChatRoomPage extends ConsumerWidget {
   const AddChatRoomPage(
-      {Key? key, required this.chatId, required this.userName})
+      {Key? key,
+      required this.chatId,
+      required this.userName,
+      required this.lastMessage})
       : super(key: key);
   final String chatId;
   final String userName;
+  final String lastMessage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -95,6 +99,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                           child: const Text("Start"),
                                           onPressed: () async {
                                             controller.setChatRoom(
+                                              lastMessage: "",
                                               chatName: searchUserName.text,
                                               userId: doc.get("userId"),
                                             );

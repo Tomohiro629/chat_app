@@ -1,3 +1,4 @@
+import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/message_list_tile.dart';
@@ -21,6 +22,7 @@ class ChatPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
+    final chatRoomController = ref.watch(addChatRoomControllerProvider);
 
     final textEdit = TextEditingController();
 
@@ -83,6 +85,8 @@ class ChatPage extends ConsumerWidget {
                         messageText: textEdit.text,
                         chatId: chat.roomId,
                       );
+                      await controller.addLastMessage(
+                          chatId: chat.roomId, lastMessage: textEdit.text);
                       textEdit.clear();
                     } catch (e) {
                       const Dialog(

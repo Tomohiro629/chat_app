@@ -37,11 +37,13 @@ class RoomSelectPage extends ConsumerWidget {
                     context: context,
                     builder: (childContext) {
                       return AlertDialog(
+                        backgroundColor: Colors.green[100],
                         content: Stack(
                           alignment: Alignment.center,
                           children: [
                             CircleAvatar(
                               radius: 75.0,
+                              backgroundColor: Colors.amber[100],
                               foregroundImage:
                                   NetworkImage(doc.get("imageURL")),
                             ),

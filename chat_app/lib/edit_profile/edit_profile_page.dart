@@ -1,17 +1,28 @@
 import 'package:chat_app/base_app_bar.dart';
-import 'package:chat_app/edit_profile/edit_name_lits_tile.dart';
-import 'package:chat_app/repository/user_repository.dart';
+import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
+import 'package:chat_app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EditProfilePage extends ConsumerWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+  const EditProfilePage({
+    Key? key,
+    required this.imageURL,
+    required this.userName,
+  }) : super(key: key);
+  final String imageURL;
+  final String userName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userService = ref.watch(userServiceProvider);
+    final storageService = ref.watch(storageServiceProvider);
     final imagePickerService = ref.watch(imagePickerServiceProvider);
-    final userController = ref.watch(userRepositoryProvider);
+    final userId = ref.watch(authServiceProvider).userId;
+    final editName = TextEditingController();
+    editName.text = userName;
 
     return Scaffold(
       appBar: const BaseAppBar(
@@ -20,18 +31,12 @@ class EditProfilePage extends ConsumerWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const SizedBox(
-              height: 80,
-            ),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 80,
-              backgroundColor: Color.fromARGB(255, 191, 244, 155),
-              child: Text("Add Photo"),
-            ),
-            const SizedBox(
-              height: 20,
+              backgroundColor: const Color.fromARGB(255, 191, 244, 155),
+              foregroundImage: NetworkImage(imageURL),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,19 +68,58 @@ class EditProfilePage extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 60,
+            SizedBox(
+              height: 50.0,
+              width: 300.0,
+              child: SizedBox(
+                width: 300.0,
+                child: TextFormField(
+                  style: const TextStyle(fontSize: 20),
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    labelText: "UserName",
+                    labelStyle: const TextStyle(fontSize: 20),
+                    focusColor: Colors.green,
+                  ),
+                  controller: editName,
+                ),
+              ),
             ),
             SizedBox(
-                width: 370,
-                child: Column(
-                  children: const <Widget>[
-                    EditNameListTile(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                )),
+              height: 50.0,
+              width: 150.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                child: const Text(
+                  'Edit',
+                  style: TextStyle(fontSize: 18),
+                ),
+                onPressed: () async {
+                  try {
+                    userService.addUser(
+                      userNameText: editName.text,
+                      userId: userId,
+                      imageURL: imageURL,
+                    );
+                    Navigator.pop(context);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),

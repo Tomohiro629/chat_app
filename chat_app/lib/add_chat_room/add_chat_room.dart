@@ -82,6 +82,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                           alignment: Alignment.center,
                                           children: [
                                             CircleAvatar(
+                                              radius: 75.0,
                                               foregroundImage: NetworkImage(
                                                   doc.get("imageURL")),
                                             ),

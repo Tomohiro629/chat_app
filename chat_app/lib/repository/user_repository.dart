@@ -1,5 +1,6 @@
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userRepositoryProvider = Provider(((ref) {
@@ -13,11 +14,14 @@ class UserRepository {
     required ChatUser user,
   }) async {
     try {
-      await _firestore.collection("users").doc(user.userId).set(
-            user.toJson(),
-          );
+      await _firestore
+          .collection("users")
+          .doc(user.userId)
+          .set(user.toJson(), SetOptions(merge: true));
     } catch (e) {
-      print(e);
+      const Dialog(
+        child: Text("Registartion Error"),
+      );
     }
   }
 

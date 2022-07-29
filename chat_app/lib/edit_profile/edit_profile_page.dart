@@ -22,6 +22,7 @@ class EditProfilePage extends ConsumerWidget {
     final imagePickerService = ref.watch(imagePickerServiceProvider);
     final userId = ref.watch(authServiceProvider).userId;
     final editName = TextEditingController();
+    editName.text = userName;
 
     return Scaffold(
       appBar: const BaseAppBar(

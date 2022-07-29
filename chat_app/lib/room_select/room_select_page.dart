@@ -68,8 +68,10 @@ class RoomSelectPage extends ConsumerWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const EditProfilePage()),
+                                    builder: (context) => EditProfilePage(
+                                          imageURL: doc.get("imageURL"),
+                                          userName: doc.get("userName"),
+                                        )),
                               );
                             },
                           ),

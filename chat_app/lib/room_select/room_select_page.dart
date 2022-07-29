@@ -23,11 +23,7 @@ class RoomSelectPage extends ConsumerWidget {
         widgets: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const MyProfilePage();
-              }));
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.settings),

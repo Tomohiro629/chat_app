@@ -31,14 +31,6 @@ class ChatPage extends ConsumerWidget {
         title: const Text("Chat Room"),
         widgets: [
           IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const MyProfilePage();
-              }));
-            },
-          ),
-          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {

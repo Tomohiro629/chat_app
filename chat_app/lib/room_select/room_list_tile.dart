@@ -48,8 +48,8 @@ class RoomListTile extends ConsumerWidget {
                       Text(
                         chat.chatName,
                         style: const TextStyle(
-                          fontSize: 25,
-                          color: Color.fromARGB(255, 7, 205, 142),
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 7, 205, 30),
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -63,7 +63,7 @@ class RoomListTile extends ConsumerWidget {
                   subtitle: Text("『" "${chat.lastMessage.toString()}" "』",
                       style: const TextStyle(
                         fontSize: 15,
-                        color: Color.fromARGB(150, 7, 205, 142),
+                        color: Color.fromARGB(148, 104, 255, 255),
                       ),
                       overflow: TextOverflow.ellipsis),
                   trailing: IconButton(

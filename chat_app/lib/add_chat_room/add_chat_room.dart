@@ -69,7 +69,7 @@ class AddChatRoomPage extends ConsumerWidget {
                       ),
                       onPressed: () async {
                         userController
-                            .searchUser(searchUserName.text)
+                            .getUserData(searchUserName.text)
                             .then((QuerySnapshot snapshot) {
                           snapshot.docs.forEach((doc) {
                             if (searchUserName.text == doc.get("userName")) {

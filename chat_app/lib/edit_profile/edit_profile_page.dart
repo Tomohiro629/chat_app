@@ -1,19 +1,21 @@
 import 'package:chat_app/base_app_bar.dart';
-import 'package:chat_app/my_profile/edit_name_lits_tile.dart';
+import 'package:chat_app/edit_profile/edit_name_lits_tile.dart';
+import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/service/image_picker_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyProfilePage extends ConsumerWidget {
-  const MyProfilePage({Key? key}) : super(key: key);
+class EditProfilePage extends ConsumerWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagePickerService = ref.watch(imagePickerServiceProvider);
+    final userController = ref.watch(userRepositoryProvider);
 
     return Scaffold(
       appBar: const BaseAppBar(
-        title: Text("My Profile Page"),
+        title: Text("Edit Profile Page"),
         widgets: [],
       ),
       body: Center(

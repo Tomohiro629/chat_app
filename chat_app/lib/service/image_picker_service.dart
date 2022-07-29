@@ -13,7 +13,7 @@ class ImagePickerService {
 
   void takeCamera() async {
     final picekdfile =
-        await _picker.pickImage(source: ImageSource.camera, imageQuality: 1);
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 100);
     if (picekdfile != null) {
       imagePath = File(picekdfile.path);
     }
@@ -21,7 +21,7 @@ class ImagePickerService {
 
   void takeGallery() async {
     final picekdfile =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 1);
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (picekdfile != null) {
       imagePath = File(picekdfile.path);
     }

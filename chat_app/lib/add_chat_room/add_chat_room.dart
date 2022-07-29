@@ -69,7 +69,7 @@ class AddChatRoomPage extends ConsumerWidget {
                       ),
                       onPressed: () async {
                         userController
-                            .searchUser(searchUserName.text)
+                            .searchUserData(searchUserName.text)
                             .then((QuerySnapshot snapshot) {
                           snapshot.docs.forEach((doc) {
                             if (searchUserName.text == doc.get("userName")) {
@@ -81,7 +81,10 @@ class AddChatRoomPage extends ConsumerWidget {
                                       content: Stack(
                                           alignment: Alignment.center,
                                           children: [
-                                            Image.network(doc.get("imageURL"))
+                                            CircleAvatar(
+                                              foregroundImage: NetworkImage(
+                                                  doc.get("imageURL")),
+                                            ),
                                           ]),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:

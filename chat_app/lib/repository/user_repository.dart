@@ -39,8 +39,9 @@ class UserRepository {
         (qs) => qs.docs.map((doc) => ChatUser.fromJson(doc.data())).toList());
   }
 
-  Future<void> getUserDate({required String userId}) async {
-    _firestore.collection("users").doc(userId).get();
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserDate(
+      {required String userId}) {
+    return _firestore.collection("users").doc(userId).get();
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> searchUserData(

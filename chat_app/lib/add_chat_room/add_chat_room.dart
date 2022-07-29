@@ -81,7 +81,10 @@ class AddChatRoomPage extends ConsumerWidget {
                                       content: Stack(
                                           alignment: Alignment.center,
                                           children: [
-                                            Image.network(doc.get("imageURL"))
+                                            CircleAvatar(
+                                              foregroundImage: NetworkImage(
+                                                  doc.get("imageURL")),
+                                            ),
                                           ]),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:

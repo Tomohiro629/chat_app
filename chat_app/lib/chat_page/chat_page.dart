@@ -5,7 +5,6 @@ import 'package:chat_app/chat_page/message_list_tile.dart';
 import 'package:chat_app/chat_page/partner_message_list_tile.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
-import 'package:chat_app/my_profile/my_profile_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +21,6 @@ class ChatPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
-    final chatRoomController = ref.watch(addChatRoomControllerProvider);
-
     final textEdit = TextEditingController();
 
     return Scaffold(

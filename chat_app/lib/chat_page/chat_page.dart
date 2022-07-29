@@ -86,7 +86,9 @@ class ChatPage extends ConsumerWidget {
                         chatId: chat.roomId,
                       );
                       await controller.addLastMessage(
-                          chatId: chat.roomId, lastMessage: textEdit.text);
+                          chatId: chat.roomId,
+                          lastMessage: textEdit.text,
+                          sendTime: "");
                       textEdit.clear();
                     } catch (e) {
                       const Dialog(

@@ -38,25 +38,34 @@ class RoomListTile extends ConsumerWidget {
                 width: 350.0,
                 child: ListTile(
                   leading: const CircleAvatar(
-                      radius: 25.0, backgroundImage: NetworkImage("")),
-                  title: Text(
-                    chat.chatName,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      color: Color.fromARGB(255, 7, 205, 142),
-                    ),
+                    radius: 25.0,
+                    foregroundImage: NetworkImage(""),
+                    backgroundColor: Color.fromARGB(123, 246, 233, 116),
                   ),
-                  subtitle: Row(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        chat.lastMessage.toString(),
+                        chat.chatName,
                         style: const TextStyle(
-                          fontSize: 15,
-                          color: Color.fromARGB(150, 7, 205, 142),
+                          fontSize: 25,
+                          color: Color.fromARGB(255, 7, 205, 142),
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
+                      Text(chat.sendTime.toString(),
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
+                          overflow: TextOverflow.ellipsis),
                     ],
                   ),
+                  subtitle: Text("『" "${chat.lastMessage.toString()}" "』",
+                      style: const TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(150, 7, 205, 142),
+                      ),
+                      overflow: TextOverflow.ellipsis),
                   trailing: IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {

@@ -94,7 +94,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                               255, 240, 124, 116),
                                           child: const Text("Start"),
                                           onPressed: () async {
-                                            controller.addChatRoom(
+                                            controller.setChatRoom(
                                               chatName: searchUserName.text,
                                               userId: doc.get("userId"),
                                             );

@@ -6,6 +6,7 @@ class ChatRoom {
     required this.chatName,
     required this.addTime,
     required this.roomId,
+    this.lastMessage = "",
     required this.userIds,
   });
 
@@ -26,6 +27,7 @@ class ChatRoom {
         chatName: map['chatRoomName'],
         addTime: map['addTime'],
         roomId: map['roomId'],
+        lastMessage: map['lastMessage'],
         userIds: (map['userIds'] as List<dynamic>).cast<String>());
   }
 
@@ -41,5 +43,6 @@ class ChatRoom {
   final String chatName;
   final String addTime;
   final String roomId;
+  final String lastMessage;
   final List<String> userIds;
 }

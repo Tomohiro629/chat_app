@@ -9,7 +9,7 @@ final chatRepositoryProvider = Provider(((ref) {
 class ChatRoomRepository {
   final _firestore = FirebaseFirestore.instance;
 
-  Future<void> addChatRoom({
+  Future<void> setChatRoom({
     required ChatRoom chat,
   }) async {
     await _firestore

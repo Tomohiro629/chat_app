@@ -13,7 +13,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
 class RoomSelectPage extends ConsumerWidget {
-  const RoomSelectPage({Key? key, required this.chatName}) : super(key: key);
+  const RoomSelectPage({
+    Key? key,
+    required this.chatName,
+  }) : super(key: key);
   final String chatName;
 
   @override
@@ -109,6 +112,7 @@ class RoomSelectPage extends ConsumerWidget {
             return RoomListTile(
               chat: chat,
               userIds: const [],
+              partnerUserId: "",
             );
           },
         ),

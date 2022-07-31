@@ -1,5 +1,6 @@
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,6 +47,12 @@ class UserRepository {
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDate(
       {required String userId}) {
     return _firestore.collection("users").doc(userId).get();
+  }
+
+  Stream<ChatUser?> getPartnerUserData({required String userId}) {
+    final snapshots = _firestore.collection('users').doc(userId).snapshots();
+    return snapshots.map(
+        ((doc) => doc.data() == null ? null : ChatUser.fromJson(doc.data()!)));
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> searchUserData(

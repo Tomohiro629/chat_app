@@ -21,7 +21,7 @@ class UserGatePage extends ConsumerWidget {
         final isExist = snapshot.data != null;
         return isExist
             ? const RoomSelectPage(
-                chatName: '',
+                chatName: "",
               ) //ユーザーがいたら
             : const SetProfilePage(); //失敗
         //

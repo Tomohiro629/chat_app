@@ -17,13 +17,11 @@ class AddChatRoomController extends ChangeNotifier {
       {required String chatName,
       required String userId,
       required String lastMessage,
-      required String userImageURL,
       required String sendTime}) async {
     final chat = ChatRoom.create(
         chatName: chatName,
         sendTime: sendTime,
         lastMessage: lastMessage,
-        userImageURL: userImageURL,
         currentUserId: _reader(authServiceProvider).userId,
         partnerUserId: userId);
     await _reader(chatRepositoryProvider).setChatRoom(chat: chat);

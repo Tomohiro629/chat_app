@@ -150,8 +150,7 @@ class RoomListTile extends ConsumerWidget {
                                 MaterialPageRoute(
                                     builder: (context) => ChatPage(
                                           chat: chat,
-                                          userImageURL:
-                                              chat.userImageURL.toString(),
+                                          userImageURL: data.imageURL,
                                         )));
                           },
                           onLongPress: () {
@@ -330,8 +329,7 @@ class RoomListTile extends ConsumerWidget {
                                 MaterialPageRoute(
                                     builder: (context) => ChatPage(
                                           chat: chat,
-                                          userImageURL:
-                                              chat.userImageURL.toString(),
+                                          userImageURL: data.imageURL,
                                         )));
                           },
                           onLongPress: () {

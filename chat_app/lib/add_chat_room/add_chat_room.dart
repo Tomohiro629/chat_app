@@ -106,7 +106,6 @@ class AddChatRoomPage extends ConsumerWidget {
                                               lastMessage: "",
                                               chatName: searchUserName.text,
                                               userId: doc.get("userId"),
-                                              userImageURL: doc.get("imageURL"),
                                               sendTime: "",
                                             );
 

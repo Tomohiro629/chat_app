@@ -10,8 +10,11 @@ class PartnerMessageListTile extends ConsumerWidget {
   final Message message;
   final String userImageURL;
 
-  const PartnerMessageListTile(
-      {super.key, required this.message, required this.userImageURL});
+  const PartnerMessageListTile({
+    super.key,
+    required this.userImageURL,
+    required this.message,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

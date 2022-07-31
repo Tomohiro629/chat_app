@@ -53,7 +53,9 @@ class ChatPage extends ConsumerWidget {
                           message: message,
                         )
                       : PartnerMessageListTile(
-                          message: message, userImageURL: userImageURL);
+                          message: message,
+                          userImageURL: userImageURL,
+                        );
                 }),
           ),
           Align(

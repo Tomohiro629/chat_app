@@ -22,25 +22,19 @@ class RoomListTile extends ConsumerWidget {
     final editChatRoomName = TextEditingController();
 
     return Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40.0),
-              topLeft: Radius.circular(40.0),
-              bottomLeft: Radius.circular(40.0),
-              bottomRight: Radius.circular(40.0)),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.0)),
         child: Padding(
           //cardの幅
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             children: <Widget>[
               SizedBox(
                 width: 350.0,
                 child: ListTile(
-                  leading: const CircleAvatar(
+                  leading: CircleAvatar(
                     radius: 25.0,
-                    foregroundImage: NetworkImage(""),
-                    backgroundColor: Color.fromARGB(123, 246, 233, 116),
+                    foregroundImage: NetworkImage(chat.userImageURL.toString()),
+                    backgroundColor: const Color.fromARGB(123, 246, 233, 116),
                   ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,6 +127,7 @@ class RoomListTile extends ConsumerWidget {
                         MaterialPageRoute(
                             builder: (context) => ChatPage(
                                   chat: chat,
+                                  userImageURL: chat.userImageURL.toString(),
                                 )));
                   },
                   onLongPress: () {

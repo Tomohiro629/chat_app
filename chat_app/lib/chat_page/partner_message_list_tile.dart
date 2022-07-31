@@ -8,86 +8,107 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PartnerMessageListTile extends ConsumerWidget {
   final Message message;
+  final String userImageURL;
 
-  const PartnerMessageListTile({super.key, required this.message});
+  const PartnerMessageListTile(
+      {super.key, required this.message, required this.userImageURL});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
-    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 5,
-              ),
-              ChatBubble(
-                clipper: ChatBubbleClipper4(type: BubbleType.receiverBubble),
-                margin: const EdgeInsets.all(3),
-                padding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
-                backGroundColor: const Color.fromARGB(255, 132, 215, 254),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.5,
-                  ),
-                  child: TextButton(
-                    child: Text(
-                      message.message,
-                      style: const TextStyle(color: Colors.black, fontSize: 18),
-                    ),
-                    onLongPress: () {
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (childContext) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              title:
-                                  Text("Delete message\n『${message.message}』"),
-                              content: const Text("Do you want to Delete it?"),
-                              actions: <Widget>[
-                                MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  color:
-                                      const Color.fromARGB(255, 240, 124, 116),
-                                  child: const Text("Yes"),
-                                  onPressed: () async {
-                                    controller.deleteMesseage(message: message);
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  color:
-                                      const Color.fromARGB(255, 137, 196, 244),
-                                  child: const Text("No"),
-                                  onPressed: () async {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                    onPressed: () {},
-                  ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 5,
                 ),
-              ),
-              Text(
-                message.sendTime,
-                style: const TextStyle(fontSize: 10),
-              )
-            ],
-          ),
-        ],
-      ),
-    ]);
+                Row(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 25.0,
+                      foregroundImage: NetworkImage(userImageURL),
+                      backgroundColor: Colors.amber[100],
+                    ),
+                    ChatBubble(
+                      clipper:
+                          ChatBubbleClipper4(type: BubbleType.receiverBubble),
+                      margin: const EdgeInsets.all(3),
+                      padding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
+                      backGroundColor: const Color.fromARGB(255, 132, 215, 254),
+                      child: Container(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.5,
+                        ),
+                        child: TextButton(
+                          child: Text(
+                            message.message,
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 18),
+                          ),
+                          onLongPress: () {
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (childContext) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    title: Text(
+                                        "Delete message\n『${message.message}』"),
+                                    content:
+                                        const Text("Do you want to Delete it?"),
+                                    actions: <Widget>[
+                                      MaterialButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        color: const Color.fromARGB(
+                                            255, 240, 124, 116),
+                                        child: const Text("Yes"),
+                                        onPressed: () async {
+                                          controller.deleteMesseage(
+                                              message: message);
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      MaterialButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        color: const Color.fromARGB(
+                                            255, 137, 196, 244),
+                                        child: const Text("No"),
+                                        onPressed: () async {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  message.sendTime,
+                  style: const TextStyle(fontSize: 10),
+                )
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

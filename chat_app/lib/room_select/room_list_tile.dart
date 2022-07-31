@@ -48,6 +48,14 @@ class RoomListTile extends ConsumerWidget {
                             foregroundImage: NetworkImage(data!.imageURL),
                             backgroundColor:
                                 const Color.fromARGB(123, 246, 233, 116),
+                            child: const SizedBox(
+                              width: 20.0,
+                              height: 20.0,
+                              child: CircularProgressIndicator(
+                                backgroundColor: Color.fromARGB(255, 3, 104, 7),
+                                strokeWidth: 2.0,
+                              ),
+                            ),
                           ),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +79,7 @@ class RoomListTile extends ConsumerWidget {
                               Text("『" "${chat.lastMessage.toString()}" "』",
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: Color.fromARGB(160, 30, 41, 236),
+                                    color: Color.fromARGB(231, 7, 15, 165),
                                   ),
                                   overflow: TextOverflow.ellipsis),
                           trailing: IconButton(
@@ -227,6 +235,14 @@ class RoomListTile extends ConsumerWidget {
                             foregroundImage: NetworkImage(data!.imageURL),
                             backgroundColor:
                                 const Color.fromARGB(123, 246, 233, 116),
+                            child: const SizedBox(
+                              width: 20.0,
+                              height: 20.0,
+                              child: CircularProgressIndicator(
+                                backgroundColor: Color.fromARGB(255, 3, 104, 7),
+                                strokeWidth: 2.0,
+                              ),
+                            ),
                           ),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -250,7 +266,7 @@ class RoomListTile extends ConsumerWidget {
                               Text("『" "${chat.lastMessage.toString()}" "』",
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: Color.fromARGB(160, 30, 41, 236),
+                                    color: Color.fromARGB(231, 7, 15, 165),
                                   ),
                                   overflow: TextOverflow.ellipsis),
                           trailing: IconButton(
@@ -339,8 +355,8 @@ class RoomListTile extends ConsumerWidget {
                                 builder: (childContext) {
                                   return AlertDialog(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
                                     title:
                                         Text("Delete Room\n『${data.userName}』"),
                                     content:
@@ -377,9 +393,10 @@ class RoomListTile extends ConsumerWidget {
                                 });
                           },
                           shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100)),
-                              side: BorderSide(color: Colors.lightGreen)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100)),
+                            side: BorderSide(color: Colors.lightGreen),
+                          ),
                         ),
                       ),
                     ]);
@@ -389,7 +406,9 @@ class RoomListTile extends ConsumerWidget {
                       child: Text("Error"),
                     );
                   }
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 })),
       ),
     );

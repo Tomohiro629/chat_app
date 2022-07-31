@@ -49,6 +49,9 @@ class RoomSelectPage extends ConsumerWidget {
                               backgroundColor: Colors.amber[100],
                               foregroundImage:
                                   NetworkImage(doc.get("imageURL")),
+                              child: const CircularProgressIndicator(
+                                backgroundColor: Color.fromARGB(255, 3, 104, 7),
+                              ),
                             ),
                           ],
                         ),

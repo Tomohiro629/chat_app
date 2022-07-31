@@ -135,33 +135,13 @@ class AddChatRoomPage extends ConsumerWidget {
                                       ],
                                     );
                                   });
-                            } else if (searchUserName != doc.get("userName")) {
-                              print("error");
-                              showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (childContext) {
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      title: const Text("Not Found"),
-                                      actions: <Widget>[
-                                        MaterialButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                          ),
-                                          color: const Color.fromARGB(
-                                              255, 137, 196, 244),
-                                          child: const Text("Back"),
-                                          onPressed: () async {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  });
+                            } else if (searchUserName.text != doc) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                    "Registration Error. Please Enter The Required Information"),
+                                backgroundColor: Colors.red,
+                              ));
                             }
                           });
                         });

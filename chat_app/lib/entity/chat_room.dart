@@ -48,6 +48,6 @@ class ChatRoom {
   final String roomId;
   final String? lastMessage;
   final String? sendTime;
-  final String userImageURL;
+  final String? userImageURL;
   final List<String> userIds;
 }

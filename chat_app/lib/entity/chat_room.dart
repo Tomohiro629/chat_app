@@ -6,7 +6,6 @@ class ChatRoom {
     required this.roomId,
     this.sendTime = "",
     this.lastMessage = "",
-    required this.userImageURL,
     required this.userIds,
   });
 
@@ -16,12 +15,10 @@ class ChatRoom {
     required String partnerUserId,
     required String lastMessage,
     required String sendTime,
-    required String userImageURL,
   }) {
     return ChatRoom(
         roomId: const Uuid().v4(),
         chatName: chatName,
-        userImageURL: userImageURL,
         userIds: [currentUserId, partnerUserId]);
   }
 
@@ -31,7 +28,6 @@ class ChatRoom {
         sendTime: map['sendTime'],
         roomId: map['roomId'],
         lastMessage: map['lastMessage'],
-        userImageURL: map['userImageURL'],
         userIds: (map['userIds'] as List<dynamic>).cast<String>());
   }
 
@@ -39,7 +35,6 @@ class ChatRoom {
     return {
       'chatRoomName': chatName,
       'roomId': roomId,
-      'userImageURL': userImageURL,
       'userIds': userIds,
     };
   }
@@ -48,6 +43,5 @@ class ChatRoom {
   final String roomId;
   final String? lastMessage;
   final String? sendTime;
-  final String? userImageURL;
   final List<String> userIds;
 }

@@ -14,10 +14,8 @@ class ChatPage extends ConsumerWidget {
   const ChatPage({
     Key? key,
     required this.chat,
-    required this.userImageURL,
   }) : super(key: key);
   final ChatRoom chat;
-  final String userImageURL;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +51,8 @@ class ChatPage extends ConsumerWidget {
                           message: message,
                         )
                       : PartnerMessageListTile(
-                          message: message, userImageURL: userImageURL);
+                          message: message,
+                        );
                 }),
           ),
           Align(

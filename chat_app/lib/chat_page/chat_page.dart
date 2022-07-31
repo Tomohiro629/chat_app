@@ -5,6 +5,8 @@ import 'package:chat_app/chat_page/partner_message_list_tile.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
 import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
+import 'package:chat_app/service/image_picker_service.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +24,8 @@ class ChatPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
+    final imagePickerService = ref.watch(imagePickerServiceProvider);
+    final storageService = ref.watch(storageServiceProvider);
     final textEdit = TextEditingController();
 
     return Scaffold(
@@ -68,20 +72,38 @@ class ChatPage extends ConsumerWidget {
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                 border: const OutlineInputBorder(),
-                labelText: "Text Form",
                 labelStyle: const TextStyle(fontSize: 20),
                 focusColor: Colors.green,
+                // prefixIcon: Row(children: [
+                //   IconButton(
+                //     onPressed: () {
+                //       imagePickerService.takeGallery();
+                //     },
+                //     icon: const Icon(Icons.photo),
+                //     color: const Color.fromARGB(255, 255, 176, 7),
+                //   ),
+                //   IconButton(
+                //     onPressed: () {
+                //       imagePickerService.takeCamera();
+                //     },
+                //     icon: const Icon(Icons.camera_alt),
+                //     color: const Color.fromARGB(255, 255, 176, 7),
+                //   ),
+                // ]),
                 suffixIcon: IconButton(
                   onPressed: () async {
                     try {
                       await controller.addMesseage(
                         messageText: textEdit.text,
                         chatId: chat.roomId,
+                        // imageURL: storageService.imageURL!,
                       );
                       await controller.addLastMessage(
                           chatId: chat.roomId,
                           lastMessage: textEdit.text,
                           sendTime: "");
+                      await storageService.uploadPostImageAndGetUrl(
+                          file: imagePickerService.imagePath!);
                       textEdit.clear();
                     } catch (e) {
                       const Dialog(

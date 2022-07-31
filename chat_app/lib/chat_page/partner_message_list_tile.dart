@@ -8,9 +8,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PartnerMessageListTile extends ConsumerWidget {
   final Message message;
+  final String userImageURL;
 
   const PartnerMessageListTile({
     super.key,
+    required this.userImageURL,
     required this.message,
   });
 
@@ -32,7 +34,7 @@ class PartnerMessageListTile extends ConsumerWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 25.0,
-                      foregroundImage: NetworkImage(""),
+                      foregroundImage: NetworkImage(userImageURL),
                       backgroundColor: Colors.amber[100],
                     ),
                     ChatBubble(

@@ -163,7 +163,7 @@ class RoomListTile extends ConsumerWidget {
                                         borderRadius:
                                             BorderRadius.circular(50)),
                                     title:
-                                        Text("Delete Room\n『${chat.chatName}』"),
+                                        Text("Delete Room\n『${data.userName}』"),
                                     content:
                                         const Text("Do you want to Delete it?"),
                                     actions: <Widget>[
@@ -342,7 +342,7 @@ class RoomListTile extends ConsumerWidget {
                                         borderRadius:
                                             BorderRadius.circular(50)),
                                     title:
-                                        Text("Delete Room\n『${chat.chatName}』"),
+                                        Text("Delete Room\n『${data.userName}』"),
                                     content:
                                         const Text("Do you want to Delete it?"),
                                     actions: <Widget>[

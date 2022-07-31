@@ -109,6 +109,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                               userImageURL: doc.get("imageURL"),
                                               sendTime: "",
                                             );
+
                                             Navigator.pushAndRemoveUntil(
                                                 context,
                                                 MaterialPageRoute(

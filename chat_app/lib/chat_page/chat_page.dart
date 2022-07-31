@@ -1,4 +1,3 @@
-import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/message_list_tile.dart';
@@ -43,7 +42,7 @@ class ChatPage extends ConsumerWidget {
         fit: StackFit.expand,
         children: [
           Container(
-            padding: const EdgeInsets.only(bottom: 50),
+            padding: const EdgeInsets.only(bottom: 50.0),
             child: FirestoreListView<Message>(
                 reverse: true,
                 query: controller.messageQuery(chatId: chat.roomId),

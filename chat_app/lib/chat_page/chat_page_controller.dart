@@ -34,6 +34,7 @@ class ChatController extends ChangeNotifier {
       chatId: chatId,
       messageText: messageText,
       userId: _reader(authServiceProvider).userId,
+      // imageURL: imageURL,
     );
     await _reader(messageRepositoryProvider).setMesseage(message: message);
 

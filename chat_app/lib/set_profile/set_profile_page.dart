@@ -28,10 +28,13 @@ class SetProfilePage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const CircleAvatar(
+            CircleAvatar(
               radius: 80,
-              backgroundColor: Color.fromARGB(255, 191, 244, 155),
-              child: Text("Add Photo"),
+              foregroundImage: imagePickerService.imagePath != null
+                  ? FileImage(imagePickerService.imagePath!)
+                  : null,
+              backgroundColor: const Color.fromARGB(255, 191, 244, 155),
+              child: const Text("Add Photo"),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +110,11 @@ class SetProfilePage extends ConsumerWidget {
                       imageURL: storageService.imageURL!,
                     );
                   } catch (e) {
-                    print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                          "Registration Error. Please Enter The Required Information"),
+                      backgroundColor: Colors.red,
+                    ));
                   }
                 },
               ),

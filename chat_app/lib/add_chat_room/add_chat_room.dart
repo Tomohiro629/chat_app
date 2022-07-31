@@ -104,7 +104,6 @@ class AddChatRoomPage extends ConsumerWidget {
                                           onPressed: () async {
                                             controller.setChatRoom(
                                               lastMessage: "",
-                                              chatName: searchUserName.text,
                                               userId: doc.get("userId"),
                                               sendTime: "",
                                             );

@@ -1,7 +1,6 @@
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 final chatRepositoryProvider = Provider(((ref) {
   return ChatRoomRepository();
@@ -16,8 +15,7 @@ class ChatRoomRepository {
   }) async {
     await _firestore.collection("chat_rooms").doc(chatId).update({
       "lastMessage": lastMessage,
-      "sendTime": DateFormat("HH:mm").format(DateTime.now()),
-      "timeStamp": DateFormat("MM月dd日 HH時mm分ss秒").format(DateTime.now()),
+      "timeStamp": DateTime.now(),
     });
   }
 
@@ -41,8 +39,8 @@ class ChatRoomRepository {
   ) {
     final query = _firestore
         .collection('chat_rooms')
-        .where('userIds', arrayContains: userId);
-    // .orderBy("timeStamp", descending: true);
+        .where('userIds', arrayContains: userId)
+        .orderBy("timeStamp", descending: true);
     return query.withConverter<ChatRoom>(
       fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),
       toFirestore: (chatRoom, _) => chatRoom.toJson(),

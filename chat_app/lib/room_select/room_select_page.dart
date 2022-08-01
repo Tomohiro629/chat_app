@@ -3,12 +3,11 @@ import 'package:chat_app/edit_profile/edit_profile_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
-import 'package:chat_app/room_select/partoner_list_tile.dart';
-import 'package:chat_app/room_select/current_list_tile.dart';
+import 'package:chat_app/room_select/chat_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/common_method.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -115,18 +114,11 @@ class RoomSelectPage extends ConsumerWidget {
                 child: Padding(
                     //cardの幅
                     padding: const EdgeInsets.all(5.0),
-                    child:
-                        chat.userIds[0] == ref.watch(authServiceProvider).userId
-                            ? CurrentListTile(
-                                chat: chat,
-                                userIds: const [],
-                                partnerUserId: "",
-                              )
-                            : PartonerListTile(
-                                chat: chat,
-                                userIds: const [],
-                                partnerUserId: "",
-                              )));
+                    child: ChatListTile(
+                      chat: chat,
+                      partnerUserId: getPartnerUserId(
+                          ref.watch(authServiceProvider).userId, chat.userIds),
+                    )));
           },
         ),
       ),

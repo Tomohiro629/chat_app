@@ -17,6 +17,7 @@ class ChatRoomRepository {
     await _firestore.collection("chat_rooms").doc(chatId).update({
       "lastMessage": lastMessage,
       "sendTime": DateFormat("HH:mm").format(DateTime.now()),
+      "timeStamp": DateFormat("MM月dd日 HH時mm分ss秒").format(DateTime.now()),
     });
   }
 
@@ -41,6 +42,7 @@ class ChatRoomRepository {
     final query = _firestore
         .collection('chat_rooms')
         .where('userIds', arrayContains: userId);
+    // .orderBy("timeStamp", descending: true);
     return query.withConverter<ChatRoom>(
       fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),
       toFirestore: (chatRoom, _) => chatRoom.toJson(),

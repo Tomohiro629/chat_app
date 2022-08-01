@@ -31,71 +31,67 @@ class RoomSelectPage extends ConsumerWidget {
         widgets: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () {
-              userController
-                  .getUserDate(userId: ref.watch(authServiceProvider).userId)
-                  .then((DocumentSnapshot doc) {
-                final data = doc.data() as Map<String, dynamic>;
-                showDialog(
-                    barrierDismissible: true,
-                    context: context,
-                    builder: (childContext) {
-                      return AlertDialog(
-                        backgroundColor: Colors.green[100],
-                        content: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: 75.0,
-                              backgroundColor: Colors.amber[100],
-                              foregroundImage:
-                                  NetworkImage(doc.get("imageURL")),
-                              child: const CircularProgressIndicator(
-                                backgroundColor: Color.fromARGB(255, 3, 104, 7),
-                              ),
+            onPressed: () async {
+              final user = await userController.getUserDate(
+                  userId: ref.watch(authServiceProvider).userId);
+              showDialog(
+                  barrierDismissible: true,
+                  context: context,
+                  builder: (childContext) {
+                    return AlertDialog(
+                      backgroundColor: Colors.green[100],
+                      content: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 75.0,
+                            backgroundColor: Colors.amber[100],
+                            foregroundImage: NetworkImage(user.imageURL),
+                            child: const CircularProgressIndicator(
+                              backgroundColor: Color.fromARGB(255, 3, 104, 7),
                             ),
-                          ],
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        title: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            doc.get('userName'),
-                          ),
-                        ),
-                        actions: <Widget>[
-                          MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            color: const Color.fromARGB(255, 240, 124, 116),
-                            child: const Text("Edit"),
-                            onPressed: () async {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfilePage(
-                                          imageURL: doc.get("imageURL"),
-                                          userName: doc.get("userName"),
-                                        )),
-                              );
-                            },
-                          ),
-                          MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            color: const Color.fromARGB(255, 137, 196, 244),
-                            child: const Text("Back"),
-                            onPressed: () async {
-                              Navigator.of(context).pop();
-                            },
                           ),
                         ],
-                      );
-                    });
-              });
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      title: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          user.userName,
+                        ),
+                      ),
+                      actions: <Widget>[
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          color: const Color.fromARGB(255, 240, 124, 116),
+                          child: const Text("Edit"),
+                          onPressed: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditProfilePage(
+                                        imageURL: user.imageURL,
+                                        userName: user.userName,
+                                      )),
+                            );
+                          },
+                        ),
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          color: const Color.fromARGB(255, 137, 196, 244),
+                          child: const Text("Back"),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  });
             },
           ),
           IconButton(

@@ -68,91 +68,85 @@ class AddChatRoomPage extends ConsumerWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       onPressed: () async {
-                        userController
-                            .searchUserData(searchUserName.text)
-                            .then((QuerySnapshot snapshot) {
-                          snapshot.docs.forEach((doc) {
-                            if (searchUserName.text == doc.get("userName")) {
-                              showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (childContext) {
-                                    return AlertDialog(
-                                      content: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 75.0,
-                                              backgroundColor:
-                                                  Colors.amber[100],
-                                              foregroundImage: NetworkImage(
-                                                  doc.get("imageURL")),
-                                              child:
-                                                  const CircularProgressIndicator(
-                                                backgroundColor: Color.fromARGB(
-                                                    255, 3, 104, 7),
-                                              ),
-                                            ),
-                                          ]),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      title: Text(
-                                          "${"User『" + doc.get("userName")}』 Found! \nChat Start?"),
-                                      actions: <Widget>[
-                                        MaterialButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                          ),
-                                          color: const Color.fromARGB(
-                                              255, 240, 124, 116),
-                                          child: const Text("Start"),
-                                          onPressed: () async {
-                                            controller.setChatRoom(
-                                              lastMessage: "",
-                                              userId: doc.get("userId"),
-                                              sendTime: "",
-                                              timeStamp: "",
-                                            );
+                        final user = await userController
+                            .searchUserData(searchUserName.text);
 
-                                            Navigator.pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        RoomSelectPage(
-                                                          chatName:
-                                                              searchUserName
-                                                                  .text,
-                                                        )),
-                                                (_) => false);
-                                          },
-                                        ),
-                                        MaterialButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
+                        if (user != null) {
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (childContext) {
+                                return AlertDialog(
+                                  content: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 75.0,
+                                          backgroundColor: Colors.amber[100],
+                                          foregroundImage:
+                                              NetworkImage(user.imageURL),
+                                          child:
+                                              const CircularProgressIndicator(
+                                            backgroundColor:
+                                                Color.fromARGB(255, 3, 104, 7),
                                           ),
-                                          color: const Color.fromARGB(
-                                              255, 137, 196, 244),
-                                          child: const Text("No"),
-                                          onPressed: () async {
-                                            Navigator.of(context).pop();
-                                          },
                                         ),
-                                      ],
-                                    );
-                                  });
-                            } else if (searchUserName.text != doc) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text(
-                                    "Registration Error. Please Enter The Required Information"),
-                                backgroundColor: Colors.red,
-                              ));
-                            }
-                          });
-                        });
+                                      ]),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  title: Text(
+                                      "User『 ${user.userName}』 Found! \nChat Start?"),
+                                  actions: <Widget>[
+                                    MaterialButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      color: const Color.fromARGB(
+                                          255, 240, 124, 116),
+                                      child: const Text("Start"),
+                                      onPressed: () async {
+                                        controller.setChatRoom(
+                                          lastMessage: "",
+                                          userId: user.userId,
+                                          sendTime: "",
+                                          timeStamp: "",
+                                        );
+
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RoomSelectPage(
+                                                      chatName:
+                                                          searchUserName.text,
+                                                    )),
+                                            (_) => false);
+                                      },
+                                    ),
+                                    MaterialButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      color: const Color.fromARGB(
+                                          255, 137, 196, 244),
+                                      child: const Text("No"),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text(
+                                "Registration Error. Please Enter The Required Information"),
+                            backgroundColor: Colors.red,
+                          ));
+                        }
                       })),
             ],
           ),

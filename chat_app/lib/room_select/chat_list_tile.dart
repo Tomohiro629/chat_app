@@ -3,18 +3,18 @@ import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/repository/chat_room_repository.dart';
 import 'package:chat_app/repository/user_repository.dart';
+import 'package:chat_app/service/common_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PartonerListTile extends ConsumerWidget {
+class ChatListTile extends ConsumerWidget {
   final ChatRoom chat;
   final String partnerUserId;
 
-  const PartonerListTile({
+  const ChatListTile({
     super.key,
     required this.chat,
     required this.partnerUserId,
-    required List<String> userIds,
   });
 
   @override
@@ -23,7 +23,7 @@ class PartonerListTile extends ConsumerWidget {
     final userController = ref.watch(userRepositoryProvider);
 
     return StreamBuilder<ChatUser?>(
-        stream: userController.getPartnerUserData(userId: chat.userIds[0]),
+        stream: userController.getPartnerUserData(userId: partnerUserId),
         builder: ((context, snapshot) {
           final data = snapshot.data;
           if (snapshot.hasData) {
@@ -55,8 +55,8 @@ class PartonerListTile extends ConsumerWidget {
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      chat.sendTime != null
-                          ? Text(chat.sendTime.toString(),
+                      chat.timeStamp != null
+                          ? Text(getDateString(chat.timeStamp!),
                               style: const TextStyle(
                                 fontSize: 15,
                               ),

@@ -43,9 +43,9 @@ class UserRepository {
         (qs) => qs.docs.map((doc) => ChatUser.fromJson(doc.data())).toList());
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserDate(
-      {required String userId}) {
-    return _firestore.collection("users").doc(userId).get();
+  Future<ChatUser> getUserDate({required String userId}) async {
+    final snapshot = await _firestore.collection("users").doc(userId).get();
+    return ChatUser.fromJson(snapshot.data()!);
   }
 
   Stream<ChatUser?> getPartnerUserData({required String userId}) {
@@ -54,13 +54,18 @@ class UserRepository {
         ((doc) => doc.data() == null ? null : ChatUser.fromJson(doc.data()!)));
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> searchUserData(
+  Future<ChatUser?> searchUserData(
     String inputUserName,
-  ) {
-    return _firestore
+  ) async {
+    final qs = await _firestore
         .collection('users')
         .where('userName', isEqualTo: inputUserName)
         .get();
+    if (qs.docs.isEmpty) {
+      return null;
+    } else {
+      return ChatUser.fromJson(qs.docs.first.data());
+    }
   }
 
   Future<void> updateUserName(

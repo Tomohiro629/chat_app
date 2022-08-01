@@ -3,12 +3,11 @@ import 'package:chat_app/edit_profile/edit_profile_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
-import 'package:chat_app/room_select/partoner_list_tile.dart';
-import 'package:chat_app/room_select/current_list_tile.dart';
+import 'package:chat_app/room_select/chat_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/common_method.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -31,71 +30,67 @@ class RoomSelectPage extends ConsumerWidget {
         widgets: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () {
-              userController
-                  .getUserDate(userId: ref.watch(authServiceProvider).userId)
-                  .then((DocumentSnapshot doc) {
-                final data = doc.data() as Map<String, dynamic>;
-                showDialog(
-                    barrierDismissible: true,
-                    context: context,
-                    builder: (childContext) {
-                      return AlertDialog(
-                        backgroundColor: Colors.green[100],
-                        content: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: 75.0,
-                              backgroundColor: Colors.amber[100],
-                              foregroundImage:
-                                  NetworkImage(doc.get("imageURL")),
-                              child: const CircularProgressIndicator(
-                                backgroundColor: Color.fromARGB(255, 3, 104, 7),
-                              ),
+            onPressed: () async {
+              final user = await userController.getUserDate(
+                  userId: ref.watch(authServiceProvider).userId);
+              showDialog(
+                  barrierDismissible: true,
+                  context: context,
+                  builder: (childContext) {
+                    return AlertDialog(
+                      backgroundColor: Colors.green[100],
+                      content: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 75.0,
+                            backgroundColor: Colors.amber[100],
+                            foregroundImage: NetworkImage(user.imageURL),
+                            child: const CircularProgressIndicator(
+                              backgroundColor: Color.fromARGB(255, 3, 104, 7),
                             ),
-                          ],
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        title: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            doc.get('userName'),
-                          ),
-                        ),
-                        actions: <Widget>[
-                          MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            color: const Color.fromARGB(255, 240, 124, 116),
-                            child: const Text("Edit"),
-                            onPressed: () async {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfilePage(
-                                          imageURL: doc.get("imageURL"),
-                                          userName: doc.get("userName"),
-                                        )),
-                              );
-                            },
-                          ),
-                          MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            color: const Color.fromARGB(255, 137, 196, 244),
-                            child: const Text("Back"),
-                            onPressed: () async {
-                              Navigator.of(context).pop();
-                            },
                           ),
                         ],
-                      );
-                    });
-              });
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      title: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          user.userName,
+                        ),
+                      ),
+                      actions: <Widget>[
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          color: const Color.fromARGB(255, 240, 124, 116),
+                          child: const Text("Edit"),
+                          onPressed: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditProfilePage(
+                                        imageURL: user.imageURL,
+                                        userName: user.userName,
+                                      )),
+                            );
+                          },
+                        ),
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          color: const Color.fromARGB(255, 137, 196, 244),
+                          child: const Text("Back"),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  });
             },
           ),
           IconButton(
@@ -119,18 +114,11 @@ class RoomSelectPage extends ConsumerWidget {
                 child: Padding(
                     //cardの幅
                     padding: const EdgeInsets.all(5.0),
-                    child:
-                        chat.userIds[0] == ref.watch(authServiceProvider).userId
-                            ? CurrentListTile(
-                                chat: chat,
-                                userIds: const [],
-                                partnerUserId: "",
-                              )
-                            : PartonerListTile(
-                                chat: chat,
-                                userIds: const [],
-                                partnerUserId: "",
-                              )));
+                    child: ChatListTile(
+                      chat: chat,
+                      partnerUserId: getPartnerUserId(
+                          ref.watch(authServiceProvider).userId, chat.userIds),
+                    )));
           },
         ),
       ),

@@ -1,20 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatRoom {
   ChatRoom({
     required this.roomId,
-    this.sendTime = "",
     this.lastMessage = "",
-    this.timeStamp = "",
+    this.timeStamp,
     required this.userIds,
   });
 
   factory ChatRoom.create({
     required String currentUserId,
     required String partnerUserId,
-    required String lastMessage,
-    required String timeStamp,
-    required String sendTime,
   }) {
     return ChatRoom(
         roomId: const Uuid().v4(), userIds: [currentUserId, partnerUserId]);
@@ -22,10 +19,11 @@ class ChatRoom {
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {
     return ChatRoom(
-        sendTime: map['sendTime'],
         roomId: map['roomId'],
         lastMessage: map['lastMessage'],
-        timeStamp: map['timeStamp'],
+        timeStamp: map['timeStamp'] != null
+            ? (map['timeStamp']! as Timestamp).toDate()
+            : null,
         userIds: (map['userIds'] as List<dynamic>).cast<String>());
   }
 
@@ -33,12 +31,13 @@ class ChatRoom {
     return {
       'roomId': roomId,
       'userIds': userIds,
+      'timeStamp': timeStamp,
+      'lastMessage': lastMessage,
     };
   }
 
   final String roomId;
   final String? lastMessage;
-  final String? sendTime;
-  final String? timeStamp;
+  final DateTime? timeStamp;
   final List<String> userIds;
 }

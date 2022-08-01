@@ -106,6 +106,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                               lastMessage: "",
                                               userId: doc.get("userId"),
                                               sendTime: "",
+                                              timeStamp: "",
                                             );
 
                                             Navigator.pushAndRemoveUntil(

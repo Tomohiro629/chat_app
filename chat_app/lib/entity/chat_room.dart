@@ -5,6 +5,7 @@ class ChatRoom {
     required this.roomId,
     this.sendTime = "",
     this.lastMessage = "",
+    this.timeStamp = "",
     required this.userIds,
   });
 
@@ -12,6 +13,7 @@ class ChatRoom {
     required String currentUserId,
     required String partnerUserId,
     required String lastMessage,
+    required String timeStamp,
     required String sendTime,
   }) {
     return ChatRoom(
@@ -23,6 +25,7 @@ class ChatRoom {
         sendTime: map['sendTime'],
         roomId: map['roomId'],
         lastMessage: map['lastMessage'],
+        timeStamp: map['timeStamp'],
         userIds: (map['userIds'] as List<dynamic>).cast<String>());
   }
 
@@ -36,5 +39,6 @@ class ChatRoom {
   final String roomId;
   final String? lastMessage;
   final String? sendTime;
+  final String? timeStamp;
   final List<String> userIds;
 }

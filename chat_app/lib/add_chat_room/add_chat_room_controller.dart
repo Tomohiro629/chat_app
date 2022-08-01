@@ -27,10 +27,4 @@ class AddChatRoomController extends ChangeNotifier {
     await _reader(chatRepositoryProvider).setChatRoom(chat: chat);
     notifyListeners();
   }
-
-  Future<void> updateChatRoom(
-      {required String editChatName, required String roomId}) async {
-    await _reader(chatRepositoryProvider)
-        .updateChatRoom(editChatName: editChatName, roomId: roomId);
-  }
 }

@@ -1,4 +1,3 @@
-import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:chat_app/chat_page/chat_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/chat_user.dart';
@@ -20,10 +19,8 @@ class CurrentListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final addChatRoomController = ref.watch(addChatRoomControllerProvider);
     final chatRoomController = ref.watch(chatRepositoryProvider);
     final userController = ref.watch(userRepositoryProvider);
-    final editChatRoomName = TextEditingController();
 
     return StreamBuilder<ChatUser?>(
         stream: userController.getPartnerUserData(userId: chat.userIds[1]),
@@ -75,67 +72,6 @@ class CurrentListTile extends ConsumerWidget {
                           ),
                           overflow: TextOverflow.ellipsis)
                       : const Text(""),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (childContext) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              title: const Text("Change ChatRoomName?"),
-                              content: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: 50,
-                                child: TextFormField(
-                                    maxLines: 1,
-                                    controller: editChatRoomName,
-                                    decoration: const InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 23.0, horizontal: 8.0),
-                                      border: OutlineInputBorder(),
-                                      labelText: "Text Form",
-                                      labelStyle: TextStyle(fontSize: 20),
-                                      focusColor: Colors.green,
-                                    )),
-                              ),
-                              actions: <Widget>[
-                                MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  color:
-                                      const Color.fromARGB(255, 240, 124, 116),
-                                  child: const Text("Yes"),
-                                  onPressed: () async {
-                                    try {
-                                      addChatRoomController.updateChatRoom(
-                                          editChatName: editChatRoomName.text,
-                                          roomId: chat.roomId);
-                                      Navigator.of(context).pop();
-                                    } catch (e) {
-                                      print(e);
-                                    }
-                                  },
-                                ),
-                                MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  color:
-                                      const Color.fromARGB(255, 137, 196, 244),
-                                  child: const Text("No"),
-                                  onPressed: () async {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                  ),
                   onTap: () {
                     Navigator.push(
                         context,

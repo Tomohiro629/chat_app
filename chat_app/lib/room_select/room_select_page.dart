@@ -145,7 +145,7 @@ class RoomSelectPage extends ConsumerWidget {
                         lastMessage: '',
                       )));
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.search),
       ),
     );
   }

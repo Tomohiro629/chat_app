@@ -1,5 +1,6 @@
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/service/common_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
@@ -26,7 +27,7 @@ class MessageListTile extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 35.0),
                     child: Text(
-                      message.sendTime,
+                      getDateString(message.timeStamp),
                       style: const TextStyle(fontSize: 10),
                     ),
                   ),

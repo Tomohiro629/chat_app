@@ -15,10 +15,10 @@ class ChatController extends ChangeNotifier {
   final Reader _reader;
   ChatController(this._reader);
 
-  addLastMessage(
-      {required String chatId,
-      required String lastMessage,
-      required String sendTime}) async {
+  addLastMessage({
+    required String chatId,
+    required String lastMessage,
+  }) async {
     _reader(chatRepositoryProvider).addLastMessage(
       chatId: chatId,
       lastMessage: lastMessage,

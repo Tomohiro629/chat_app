@@ -68,20 +68,23 @@ class RoomListTile extends ConsumerWidget {
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Text(chat.sendTime.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  overflow: TextOverflow.ellipsis),
+                              chat.sendTime != null
+                                  ? Text(chat.sendTime.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      overflow: TextOverflow.ellipsis)
+                                  : const Text(""),
                             ],
                           ),
-                          subtitle:
-                              Text("『" "${chat.lastMessage.toString()}" "』",
+                          subtitle: chat.lastMessage != null
+                              ? Text("『" "${chat.lastMessage}" "』",
                                   style: const TextStyle(
                                     fontSize: 15,
                                     color: Color.fromARGB(231, 7, 15, 165),
                                   ),
-                                  overflow: TextOverflow.ellipsis),
+                                  overflow: TextOverflow.ellipsis)
+                              : const Text(""),
                           trailing: IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () {
@@ -255,20 +258,23 @@ class RoomListTile extends ConsumerWidget {
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Text(chat.sendTime.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  overflow: TextOverflow.ellipsis),
+                              chat.sendTime != null
+                                  ? Text(chat.sendTime.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      overflow: TextOverflow.ellipsis)
+                                  : const Text(""),
                             ],
                           ),
-                          subtitle:
-                              Text("『" "${chat.lastMessage.toString()}" "』",
+                          subtitle: chat.lastMessage != null
+                              ? Text("『" "${chat.lastMessage}" "』",
                                   style: const TextStyle(
                                     fontSize: 15,
                                     color: Color.fromARGB(231, 7, 15, 165),
                                   ),
-                                  overflow: TextOverflow.ellipsis),
+                                  overflow: TextOverflow.ellipsis)
+                              : const Text(""),
                           trailing: IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () {

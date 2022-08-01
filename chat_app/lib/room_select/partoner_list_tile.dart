@@ -29,7 +29,7 @@ class PartonerListTile extends ConsumerWidget {
           if (snapshot.hasData) {
             return Column(children: [
               SizedBox(
-                width: 350.0,
+                width: 400.0,
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 25.0,

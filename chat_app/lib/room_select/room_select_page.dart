@@ -3,7 +3,8 @@ import 'package:chat_app/edit_profile/edit_profile_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
-import 'package:chat_app/room_select/room_list_tile.dart';
+import 'package:chat_app/room_select/partoner_list_tile.dart';
+import 'package:chat_app/room_select/current_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
@@ -112,11 +113,24 @@ class RoomSelectPage extends ConsumerWidget {
           query: roomSelectController.chatRoomQuery(),
           itemBuilder: (context, snapshot) {
             final chat = snapshot.data();
-            return RoomListTile(
-              chat: chat,
-              userIds: const [],
-              partnerUserId: "",
-            );
+            return Container(
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(40.0)),
+                child: Padding(
+                    //cardの幅
+                    padding: const EdgeInsets.all(5.0),
+                    child:
+                        chat.userIds[0] == ref.watch(authServiceProvider).userId
+                            ? CurrentListTile(
+                                chat: chat,
+                                userIds: const [],
+                                partnerUserId: "",
+                              )
+                            : PartonerListTile(
+                                chat: chat,
+                                userIds: const [],
+                                partnerUserId: "",
+                              )));
           },
         ),
       ),

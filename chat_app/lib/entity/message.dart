@@ -56,7 +56,7 @@ class Message {
   final String message;
   final String messageId;
   final String sendTime;
-  final String? timeStamp;
+  final String timeStamp;
   final String chatId;
   final String userId;
   // final String? imageURL;

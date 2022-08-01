@@ -21,10 +21,14 @@ class MessageListTile extends ConsumerWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Column(
+              Row(
                 children: <Widget>[
-                  const SizedBox(
-                    height: 5,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35.0),
+                    child: Text(
+                      message.sendTime,
+                      style: const TextStyle(fontSize: 10),
+                    ),
                   ),
                   ChatBubble(
                     clipper: ChatBubbleClipper4(type: BubbleType.sendBubble),
@@ -88,10 +92,6 @@ class MessageListTile extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    message.sendTime,
-                    style: const TextStyle(fontSize: 10),
-                  )
                 ],
               ),
             ],

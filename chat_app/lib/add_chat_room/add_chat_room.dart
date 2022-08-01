@@ -142,8 +142,7 @@ class AddChatRoomPage extends ConsumerWidget {
                         } else {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text(
-                                "Registration Error. Please Enter The Required Information"),
+                            content: Text("User Not Found"),
                             backgroundColor: Colors.red,
                           ));
                         }

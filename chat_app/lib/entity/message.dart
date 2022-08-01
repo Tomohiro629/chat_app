@@ -1,11 +1,10 @@
-import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class Message {
   Message({
     required this.message,
     required this.messageId,
-    required this.sendTime,
     required this.timeStamp,
     required this.chatId,
     required this.userId,
@@ -17,13 +16,11 @@ class Message {
     required String chatId,
     required String userId,
     required String messageText,
-    // required String? imageURL,
   }) {
     return Message(
       messageId: const Uuid().v4(),
       message: messageText,
-      sendTime: DateFormat("HH:mm").format(DateTime.now()),
-      timeStamp: DateFormat("MM月dd日 HH時mm分ss秒").format(DateTime.now()),
+      timeStamp: DateTime.now(),
       chatId: chatId,
       userId: userId,
       // imageURL: imageURL!,
@@ -34,8 +31,7 @@ class Message {
     return Message(
       message: map['message'],
       messageId: map['messageId'],
-      sendTime: map['sendTime'],
-      timeStamp: map['timeStamp'],
+      timeStamp: (map['timeStamp']! as Timestamp).toDate(),
       chatId: map['chatId'],
       userId: map['senderUserId'],
       // imageURL: map["imageURL"],
@@ -46,7 +42,6 @@ class Message {
     return {
       'message': message,
       'messageId': messageId,
-      'sendTime': sendTime,
       'timeStamp': timeStamp,
       'chatId': chatId,
       'senderUserId': userId,
@@ -55,8 +50,7 @@ class Message {
 
   final String message;
   final String messageId;
-  final String sendTime;
-  final String timeStamp;
+  final DateTime timeStamp;
   final String chatId;
   final String userId;
   // final String? imageURL;

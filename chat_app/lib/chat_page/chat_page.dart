@@ -99,9 +99,9 @@ class ChatPage extends ConsumerWidget {
                         // imageURL: storageService.imageURL!,
                       );
                       await controller.addLastMessage(
-                          chatId: chat.roomId,
-                          lastMessage: textEdit.text,
-                          sendTime: "");
+                        chatId: chat.roomId,
+                        lastMessage: textEdit.text,
+                      );
                       await storageService.uploadPostImageAndGetUrl(
                           file: imagePickerService.imagePath!);
                       textEdit.clear();

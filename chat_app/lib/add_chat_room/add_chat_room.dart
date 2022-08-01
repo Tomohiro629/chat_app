@@ -83,8 +83,15 @@ class AddChatRoomPage extends ConsumerWidget {
                                           children: [
                                             CircleAvatar(
                                               radius: 75.0,
+                                              backgroundColor:
+                                                  Colors.amber[100],
                                               foregroundImage: NetworkImage(
                                                   doc.get("imageURL")),
+                                              child:
+                                                  const CircularProgressIndicator(
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 3, 104, 7),
+                                              ),
                                             ),
                                           ]),
                                       shape: RoundedRectangleBorder(

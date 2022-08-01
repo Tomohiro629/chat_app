@@ -38,7 +38,7 @@ class MessageRepository {
         .collection('chat_rooms')
         .doc(chatId)
         .collection("messages")
-        .orderBy('sendTime', descending: true);
+        .orderBy('timeStamp', descending: true);
     return query.withConverter<Message>(
       fromFirestore: (snapshot, _) => Message.fromJson(snapshot.data()!),
       toFirestore: (message, _) => message.toJson(),

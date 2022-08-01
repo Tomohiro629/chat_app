@@ -6,8 +6,10 @@ class Message {
     required this.message,
     required this.messageId,
     required this.sendTime,
+    required this.timeStamp,
     required this.chatId,
     required this.userId,
+
     // this.imageURL = "",
   });
 
@@ -20,7 +22,8 @@ class Message {
     return Message(
       messageId: const Uuid().v4(),
       message: messageText,
-      sendTime: DateFormat("MM月dd日 HH時mm分ss秒").format(DateTime.now()),
+      sendTime: DateFormat("HH:mm").format(DateTime.now()),
+      timeStamp: DateFormat("MM月dd日 HH時mm分ss秒").format(DateTime.now()),
       chatId: chatId,
       userId: userId,
       // imageURL: imageURL!,
@@ -32,6 +35,7 @@ class Message {
       message: map['message'],
       messageId: map['messageId'],
       sendTime: map['sendTime'],
+      timeStamp: map['timeStamp'],
       chatId: map['chatId'],
       userId: map['senderUserId'],
       // imageURL: map["imageURL"],
@@ -43,6 +47,7 @@ class Message {
       'message': message,
       'messageId': messageId,
       'sendTime': sendTime,
+      'timeStamp': timeStamp,
       'chatId': chatId,
       'senderUserId': userId,
     };
@@ -51,6 +56,7 @@ class Message {
   final String message;
   final String messageId;
   final String sendTime;
+  final String timeStamp;
   final String chatId;
   final String userId;
   // final String? imageURL;

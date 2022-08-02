@@ -9,7 +9,7 @@ final messageRepositoryProvider = Provider(((ref) {
 class MessageRepository {
   final _firestore = FirebaseFirestore.instance;
 
-  Future<void> setMesseage({
+  Future<void> setMessage({
     required Message message,
   }) async {
     //firestoreにメッセージを追加
@@ -21,7 +21,7 @@ class MessageRepository {
         .set(message.toJson(), SetOptions(merge: true));
   }
 
-  Future<void> deleteMesseage({
+  Future<void> deleteMessage({
     required Message message,
   }) async {
     //firestoreのデータ削除

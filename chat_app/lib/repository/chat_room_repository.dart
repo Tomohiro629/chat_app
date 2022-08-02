@@ -46,12 +46,4 @@ class ChatRoomRepository {
       toFirestore: (chatRoom, _) => chatRoom.toJson(),
     );
   }
-
-  Future<void> updateChatRoom(
-      {required String editChatName, required String roomId}) async {
-    _firestore
-        .collection('chat_rooms')
-        .doc(roomId)
-        .update({"chatRoomName": editChatName});
-  }
 }

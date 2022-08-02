@@ -2,7 +2,6 @@ import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

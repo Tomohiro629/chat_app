@@ -1,6 +1,5 @@
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/service/auth_service.dart';
-import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
 import 'package:chat_app/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,6 @@ class EditProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userService = ref.watch(userServiceProvider);
-    final storageService = ref.watch(storageServiceProvider);
     final imagePickerService = ref.watch(imagePickerServiceProvider);
     final userId = ref.watch(authServiceProvider).userId;
     final editName = TextEditingController();

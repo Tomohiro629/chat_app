@@ -95,9 +95,19 @@ class LoginPage extends ConsumerWidget {
                           style: TextStyle(fontSize: 18),
                         ),
                         onPressed: () {
-                          controller.loginUser(
-                              email: loginMailAddress, password: loginPassword);
-                          Navigator.pop(context);
+                          if (loginMailAddress.isNotEmpty &&
+                              loginPassword.isNotEmpty) {
+                            controller.loginUser(
+                                email: loginMailAddress,
+                                password: loginPassword);
+                            Navigator.pop(context);
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Login error"),
+                              backgroundColor: Colors.red,
+                            ));
+                          }
                         })),
               ]),
         )));

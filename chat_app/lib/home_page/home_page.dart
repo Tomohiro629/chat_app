@@ -71,7 +71,7 @@ class _Buttons extends StatelessWidget {
                   builder: (context) => SignUpPage(),
                 ));
           },
-          child: const Text("Sign Up"),
+          child: const Text("Signup"),
         )
       ],
     );

@@ -5,15 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddChatRoomPage extends ConsumerWidget {
-  const AddChatRoomPage(
-      {Key? key,
-      required this.chatId,
-      required this.userName,
-      required this.lastMessage})
-      : super(key: key);
-  final String chatId;
-  final String userName;
-  final String lastMessage;
+  const AddChatRoomPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

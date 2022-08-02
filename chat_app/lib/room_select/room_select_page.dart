@@ -124,14 +124,8 @@ class RoomSelectPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const AddChatRoomPage(
-                        chatId: "",
-                        userName: "",
-                        lastMessage: '',
-                      )));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddChatRoomPage()));
         },
         child: const Icon(Icons.search),
       ),

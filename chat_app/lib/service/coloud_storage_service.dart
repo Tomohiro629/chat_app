@@ -27,7 +27,7 @@ class CloudStorageService extends ChangeNotifier {
     required File file,
   }) async {
     UploadTask uploadTask;
-    final id = Uuid().v4();
+    final id = const Uuid().v4();
 
     final path = id;
     //fileのダウンロード

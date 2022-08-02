@@ -3,7 +3,8 @@ import 'package:chat_app/edit_profile/edit_profile_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
-import 'package:chat_app/room_select/chat_list_tile.dart';
+import 'package:chat_app/room_select/components/chat_list_tile.dart';
+import 'package:chat_app/room_select/components/current_user_data_dialog.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/common_method.dart';
@@ -37,58 +38,8 @@ class RoomSelectPage extends ConsumerWidget {
                   barrierDismissible: true,
                   context: context,
                   builder: (childContext) {
-                    return AlertDialog(
-                      backgroundColor: Colors.green[100],
-                      content: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CircleAvatar(
-                            radius: 75.0,
-                            backgroundColor: Colors.amber[100],
-                            foregroundImage: NetworkImage(user.imageURL),
-                            child: const CircularProgressIndicator(
-                              backgroundColor: Color.fromARGB(255, 3, 104, 7),
-                            ),
-                          ),
-                        ],
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      title: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          user.userName,
-                        ),
-                      ),
-                      actions: <Widget>[
-                        MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          color: const Color.fromARGB(255, 240, 124, 116),
-                          child: const Text("Edit"),
-                          onPressed: () async {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EditProfilePage(
-                                        imageURL: user.imageURL,
-                                        userName: user.userName,
-                                      )),
-                            );
-                          },
-                        ),
-                        MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          color: const Color.fromARGB(255, 137, 196, 244),
-                          child: const Text("Back"),
-                          onPressed: () async {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
+                    return CurrentUserDateDialog(
+                      user: user,
                     );
                   });
             },

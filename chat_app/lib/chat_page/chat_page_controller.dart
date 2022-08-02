@@ -19,10 +19,12 @@ class ChatController extends ChangeNotifier {
     required String chatId,
     required String lastMessage,
   }) async {
-    _reader(chatRepositoryProvider).addLastMessage(
-      chatId: chatId,
-      lastMessage: lastMessage,
-    );
+    if (lastMessage.isNotEmpty) {
+      _reader(chatRepositoryProvider).addLastMessage(
+        chatId: chatId,
+        lastMessage: lastMessage,
+      );
+    }
   }
 
   Future<void> addMesseage({

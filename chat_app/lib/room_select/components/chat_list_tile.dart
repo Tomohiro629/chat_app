@@ -65,10 +65,10 @@ class ChatListTile extends ConsumerWidget {
                     ],
                   ),
                   subtitle: chat.lastMessage != null
-                      ? Text("『" "${chat.lastMessage}" "』",
+                      ? Text(chat.lastMessage.toString(),
                           style: const TextStyle(
                             fontSize: 15,
-                            color: Color.fromARGB(231, 7, 15, 165),
+                            color: Color.fromARGB(177, 7, 139, 165),
                           ),
                           overflow: TextOverflow.ellipsis)
                       : const Text(
@@ -81,6 +81,7 @@ class ChatListTile extends ConsumerWidget {
                             builder: (context) => ChatPage(
                                   chat: chat,
                                   userImageURL: user.imageURL,
+                                  roomName: user.userName,
                                 )));
                   },
                   onLongPress: () {

@@ -17,9 +17,11 @@ class ChatPage extends ConsumerWidget {
     Key? key,
     required this.chat,
     required this.userImageURL,
+    required this.roomName,
   }) : super(key: key);
   final ChatRoom chat;
   final String userImageURL;
+  final String roomName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +32,7 @@ class ChatPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: BaseAppBar(
-        title: const Text("Chat Room"),
+        title: Text(roomName),
         widgets: [
           IconButton(
             icon: const Icon(Icons.settings),

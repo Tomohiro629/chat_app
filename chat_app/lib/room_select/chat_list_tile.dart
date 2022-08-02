@@ -71,7 +71,9 @@ class ChatListTile extends ConsumerWidget {
                             color: Color.fromARGB(231, 7, 15, 165),
                           ),
                           overflow: TextOverflow.ellipsis)
-                      : const Text(""),
+                      : const Text(
+                          "",
+                        ),
                   onTap: () {
                     Navigator.push(
                         context,

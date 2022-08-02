@@ -58,7 +58,7 @@ class _Buttons extends StatelessWidget {
                   ));
             },
             child: const Text(
-              "Login",
+              "Log in",
               style: TextStyle(fontSize: 18.0),
             ),
           ),
@@ -71,7 +71,7 @@ class _Buttons extends StatelessWidget {
                   builder: (context) => SignUpPage(),
                 ));
           },
-          child: const Text("Signup"),
+          child: const Text("Sign up"),
         )
       ],
     );

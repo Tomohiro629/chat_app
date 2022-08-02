@@ -20,11 +20,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Chat App',
       theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const AuthGatePage(
-        userId: "",
-      ),
+          primarySwatch: Colors.green, fontFamily: 'M PLUS Rounded 1c'),
+      home: const AuthGatePage(),
     );
   }
 }

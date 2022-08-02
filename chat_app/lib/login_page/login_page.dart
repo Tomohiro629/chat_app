@@ -91,7 +91,7 @@ class LoginPage extends ConsumerWidget {
                           ),
                         ),
                         child: const Text(
-                          'Login',
+                          'Log in',
                           style: TextStyle(fontSize: 18),
                         ),
                         onPressed: () {

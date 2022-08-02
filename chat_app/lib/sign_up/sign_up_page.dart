@@ -113,7 +113,7 @@ class SignUpPage extends ConsumerWidget {
                     ),
                   ),
                   child: const Text(
-                    'Signup',
+                    'Sign up',
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {

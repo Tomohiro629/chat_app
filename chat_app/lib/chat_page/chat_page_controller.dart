@@ -1,6 +1,8 @@
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/entity/send_image.dart';
 import 'package:chat_app/repository/chat_room_repository.dart';
 import 'package:chat_app/repository/message_repository.dart';
+import 'package:chat_app/repository/send_image_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,21 @@ class ChatController extends ChangeNotifier {
   bool loading = false;
   final Reader _reader;
   ChatController(this._reader);
+
+  addSendImage({
+    required String imageURL,
+    required String chatId,
+  }) async {
+    changeLoadingStatus(true);
+    final sendImage = SendImage.create(
+        imageURL: imageURL,
+        chatId: chatId,
+        userId: _reader(authServiceProvider).userId);
+    await _reader(sendImageRepositoryProvider)
+        .setImageURL(sendImage: sendImage);
+
+    changeLoadingStatus(false);
+  }
 
   addLastMessage({
     required String chatId,

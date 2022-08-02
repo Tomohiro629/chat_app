@@ -36,7 +36,7 @@ class ChatController extends ChangeNotifier {
       userId: _reader(authServiceProvider).userId,
       // imageURL: imageURL,
     );
-    await _reader(messageRepositoryProvider).setMesseage(message: message);
+    await _reader(messageRepositoryProvider).setMessage(message: message);
 
     changeLoadingStatus(false);
   }
@@ -51,10 +51,10 @@ class ChatController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteMesseage({
+  Future<void> deleteMessage({
     required Message message,
   }) async {
     //firestoreのデータ削除
-    await _reader(messageRepositoryProvider).deleteMesseage(message: message);
+    await _reader(messageRepositoryProvider).deleteMessage(message: message);
   }
 }

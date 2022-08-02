@@ -77,7 +77,7 @@ class PartnerMessageListTile extends ConsumerWidget {
                                             255, 240, 124, 116),
                                         child: const Text("Yes"),
                                         onPressed: () async {
-                                          controller.deleteMesseage(
+                                          controller.deleteMessage(
                                               message: message);
                                           Navigator.of(context).pop();
                                         },

@@ -12,7 +12,6 @@ class SignUpPage extends ConsumerWidget {
   SignUpPage({Key? key}) : super(key: key);
 
   final authError = AuthenticationError();
-  final txetEdit = TextEditingController();
   UserCredential? result;
   User? user;
 
@@ -28,7 +27,7 @@ class SignUpPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: const BaseAppBar(
-        title: Text("Registertion Page"),
+        title: Text("Signup Page"),
         widgets: [],
       ),
       body: Center(
@@ -114,7 +113,7 @@ class SignUpPage extends ConsumerWidget {
                     ),
                   ),
                   child: const Text(
-                    'Sign Up',
+                    'Signup',
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {

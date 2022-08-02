@@ -25,7 +25,7 @@ class ChatListTile extends ConsumerWidget {
     return StreamBuilder<ChatUser?>(
         stream: userController.getPartnerUserData(userId: partnerUserId),
         builder: ((context, snapshot) {
-          final data = snapshot.data;
+          final user = snapshot.data;
           if (snapshot.hasData) {
             return Column(children: [
               SizedBox(
@@ -33,7 +33,7 @@ class ChatListTile extends ConsumerWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 25.0,
-                    foregroundImage: NetworkImage(data!.imageURL),
+                    foregroundImage: NetworkImage(user!.imageURL),
                     backgroundColor: const Color.fromARGB(123, 246, 233, 116),
                     child: const SizedBox(
                       width: 20.0,
@@ -48,7 +48,7 @@ class ChatListTile extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        data.userName,
+                        user.userName,
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(255, 7, 205, 30),
@@ -78,7 +78,7 @@ class ChatListTile extends ConsumerWidget {
                         MaterialPageRoute(
                             builder: (context) => ChatPage(
                                   chat: chat,
-                                  userImageURL: data.imageURL,
+                                  userImageURL: user.imageURL,
                                 )));
                   },
                   onLongPress: () {
@@ -90,7 +90,7 @@ class ChatListTile extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            title: Text("Delete Room\n『${data.userName}』"),
+                            title: Text("Delete Room\n『${user.userName}』"),
                             content: const Text("Do you want to Delete it?"),
                             actions: <Widget>[
                               MaterialButton(

@@ -8,8 +8,6 @@ class Message {
     required this.timeStamp,
     required this.chatId,
     required this.userId,
-
-    // this.imageURL = "",
   });
 
   factory Message.create({
@@ -23,7 +21,6 @@ class Message {
       timeStamp: DateTime.now(),
       chatId: chatId,
       userId: userId,
-      // imageURL: imageURL!,
     );
   }
 
@@ -34,7 +31,6 @@ class Message {
       timeStamp: (map['timeStamp']! as Timestamp).toDate(),
       chatId: map['chatId'],
       userId: map['senderUserId'],
-      // imageURL: map["imageURL"],
     );
   }
 
@@ -53,5 +49,4 @@ class Message {
   final DateTime timeStamp;
   final String chatId;
   final String userId;
-  // final String? imageURL;
 }

@@ -104,7 +104,6 @@ class ChatPage extends ConsumerWidget {
                                 ? await controller.addMesseage(
                                     messageText: textEdit.text,
                                     chatId: chat.roomId,
-                                    // imageURL: storageService.imageURL!,
                                   )
                                 : ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(

@@ -93,11 +93,18 @@ class ChatPage extends ConsumerWidget {
                 suffixIcon: IconButton(
                   onPressed: () async {
                     try {
-                      await controller.addMesseage(
-                        messageText: textEdit.text,
-                        chatId: chat.roomId,
-                        // imageURL: storageService.imageURL!,
-                      );
+                      textEdit.text.isNotEmpty
+                          ? await controller.addMesseage(
+                              messageText: textEdit.text,
+                              chatId: chat.roomId,
+                              // imageURL: storageService.imageURL!,
+                            )
+                          : ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                              content: Text("Please enter your message"),
+                              backgroundColor: Colors.red,
+                            ));
+
                       await controller.addLastMessage(
                         chatId: chat.roomId,
                         lastMessage: textEdit.text,
@@ -106,9 +113,7 @@ class ChatPage extends ConsumerWidget {
                           file: imagePickerService.imagePath!);
                       textEdit.clear();
                     } catch (e) {
-                      const Dialog(
-                        child: Text("Please enter a Message"),
-                      );
+                      print(e);
                     }
                   },
                   icon: const Icon(Icons.send),

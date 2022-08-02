@@ -12,12 +12,8 @@ class AuthService {
 
   Future<void> signUpUser(
       {required String newEmail, required String newPassword}) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: newEmail, password: newPassword);
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
+    await _auth.createUserWithEmailAndPassword(
+        email: newEmail, password: newPassword);
   }
 
   Future<void> loginUser(

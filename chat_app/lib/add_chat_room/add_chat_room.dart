@@ -16,7 +16,7 @@ class AddChatRoomPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: const BaseAppBar(
-        title: Text("Add Chat Room"),
+        title: Text("Add Chat"),
         widgets: [],
       ),
       body: Center(

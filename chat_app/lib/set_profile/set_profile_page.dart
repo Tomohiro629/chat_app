@@ -21,7 +21,7 @@ class SetProfilePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: const BaseAppBar(
-        title: Text("Set Profile Page"),
+        title: Text("Set Profile"),
         widgets: [],
       ),
       body: Center(

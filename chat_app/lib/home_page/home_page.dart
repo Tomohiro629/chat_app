@@ -13,7 +13,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const BaseAppBar(
-        title: Text("Home Page"),
+        title: Text("Home"),
         widgets: [],
       ),
       body: Center(

@@ -27,7 +27,7 @@ class RoomSelectPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: BaseAppBar(
-        title: const Text("Room Select Page"),
+        title: const Text("Room Select"),
         widgets: [
           IconButton(
             icon: const Icon(Icons.person),

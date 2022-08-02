@@ -24,7 +24,7 @@ class EditProfilePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: const BaseAppBar(
-        title: Text("Edit Profile Page"),
+        title: Text("Edit Profile"),
         widgets: [],
       ),
       body: Center(

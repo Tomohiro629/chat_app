@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthGatePage extends ConsumerWidget {
-  const AuthGatePage({Key? key, required this.userId}) : super(key: key);
-  final String userId;
+  const AuthGatePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

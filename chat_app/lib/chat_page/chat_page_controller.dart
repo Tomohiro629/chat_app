@@ -56,7 +56,6 @@ class ChatController extends ChangeNotifier {
   Future<void> deleteMessage({
     required Message message,
   }) async {
-    //firestoreのデータ削除
     await _reader(messageRepositoryProvider).deleteMessage(message: message);
   }
 }

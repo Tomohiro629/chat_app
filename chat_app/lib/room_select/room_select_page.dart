@@ -1,5 +1,4 @@
 import 'package:chat_app/base_app_bar.dart';
-import 'package:chat_app/edit_profile/edit_profile_page.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';

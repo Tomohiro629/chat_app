@@ -1,4 +1,4 @@
-import 'package:chat_app/add_chat_room/search_user_dialog.dart';
+import 'package:chat_app/add_chat_room/components/search_user_dialog.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:flutter/material.dart';

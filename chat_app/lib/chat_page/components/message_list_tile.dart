@@ -41,11 +41,32 @@ class MessageListTile extends ConsumerWidget {
                         maxWidth: MediaQuery.of(context).size.width * 0.5,
                       ),
                       child: TextButton(
-                        child: Text(
-                          message.message,
-                          style: const TextStyle(
-                              color: Colors.black, fontSize: 18),
-                        ),
+                        child: message.message == '写真を送信しました'
+                            ? Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Image(
+                                  image: NetworkImage(
+                                    message.imageURL!,
+                                  ),
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return const Center(
+                                      child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          backgroundColor:
+                                              Color.fromARGB(255, 3, 104, 7),
+                                          strokeWidth: 2.0),
+                                    );
+                                  },
+                                ),
+                              )
+                            : Text(
+                                message.message,
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
                         onLongPress: () {
                           showDialog(
                               barrierDismissible: false,
@@ -89,7 +110,39 @@ class MessageListTile extends ConsumerWidget {
                                 );
                               });
                         },
-                        onPressed: () {},
+                        onPressed: () {
+                          if (message.message == '写真を送信しました') {
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (childContext) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    title: Image(
+                                      image: NetworkImage(
+                                        message.imageURL!,
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      MaterialButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        color: const Color.fromARGB(
+                                            255, 137, 196, 244),
+                                        child: const Text("Back"),
+                                        onPressed: () async {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          }
+                        },
                       ),
                     ),
                   ),

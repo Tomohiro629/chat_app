@@ -41,7 +41,7 @@ class SendImageDailog extends ConsumerWidget {
               await storageService.uploadPostImageAndGetUrl(
                   file: imagePickerService.imagePath!);
               await controller.addMesseage(
-                  messageText: "",
+                  messageText: "写真を送信しました",
                   chatId: chat.roomId,
                   imageURL: storageService.imageURL!);
               print(storageService.imageURL);

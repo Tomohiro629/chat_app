@@ -14,12 +14,16 @@ class Message {
   factory Message.create({
     required String chatId,
     required String userId,
+    required String message,
+    required String imageURL,
   }) {
     return Message(
       messageId: const Uuid().v4(),
       timeStamp: DateTime.now(),
       chatId: chatId,
       userId: userId,
+      message: message,
+      imageURL: imageURL,
     );
   }
 
@@ -46,7 +50,7 @@ class Message {
   }
 
   final String message;
-  final String imageURL;
+  final String? imageURL;
   final String messageId;
   final DateTime timeStamp;
   final String chatId;

@@ -80,7 +80,7 @@ class ChatListTile extends ConsumerWidget {
                         MaterialPageRoute(
                             builder: (context) => ChatPage(
                                   chat: chat,
-                                  userImageURL: user.imageURL,
+                                  imageURL: user.imageURL,
                                   roomName: user.userName,
                                 )));
                   },

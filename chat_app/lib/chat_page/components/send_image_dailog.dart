@@ -1,7 +1,6 @@
+import 'package:chat_app/chat_page/chat_page.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/entity/chat_room.dart';
-import 'package:chat_app/repository/send_image_repository.dart';
-import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
 import 'package:flutter/material.dart';
@@ -41,9 +40,21 @@ class SendImageDailog extends ConsumerWidget {
             try {
               await storageService.uploadPostImageAndGetUrl(
                   file: imagePickerService.imagePath!);
-              await controller.addSendImage(
-                  chatId: chat.roomId, imageURL: storageService.imageURL!);
-              Navigator.pop(context);
+              await controller.addMesseage(
+                  messageText: "",
+                  chatId: chat.roomId,
+                  imageURL: storageService.imageURL!);
+              print(storageService.imageURL);
+              // ignore: use_build_context_synchronously
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatPage(
+                          roomName: "",
+                          imageURL: storageService.imageURL!,
+                          chat: chat,
+                        )),
+              );
             } catch (e) {
               print(e);
             }

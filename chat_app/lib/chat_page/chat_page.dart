@@ -5,8 +5,6 @@ import 'package:chat_app/chat_page/components/partner_message_list_tile.dart';
 import 'package:chat_app/chat_page/components/send_image_dailog.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
-import 'package:chat_app/entity/send_image.dart';
-import 'package:chat_app/repository/send_image_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
@@ -19,11 +17,11 @@ class ChatPage extends ConsumerWidget {
   const ChatPage({
     Key? key,
     required this.chat,
-    required this.userImageURL,
+    required this.imageURL,
     required this.roomName,
   }) : super(key: key);
   final ChatRoom chat;
-  final String userImageURL;
+  final String imageURL;
   final String roomName;
 
   @override
@@ -51,20 +49,6 @@ class ChatPage extends ConsumerWidget {
         children: [
           Container(
             padding: const EdgeInsets.only(bottom: 50.0),
-            child: FirestoreListView<SendImage>(
-                reverse: true,
-                query: controller.imageQuery(chatId: chat.roomId),
-                itemBuilder: (context, snapshot) {
-                  final image = snapshot.data();
-                  return Image(
-                    image: NetworkImage(image.imageURL!),
-                    width: 10.0,
-                    height: 200.0,
-                  );
-                }),
-          ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 50.0),
             child: FirestoreListView<Message>(
                 reverse: true,
                 query: controller.messageQuery(chatId: chat.roomId),
@@ -76,7 +60,7 @@ class ChatPage extends ConsumerWidget {
                         )
                       : PartnerMessageListTile(
                           message: message,
-                          userImageURL: userImageURL,
+                          userImageURL: imageURL,
                         );
                 }),
           ),
@@ -128,11 +112,11 @@ class ChatPage extends ConsumerWidget {
                       suffixIcon: IconButton(
                         onPressed: () async {
                           try {
-                            textEdit.text.isNotEmpty
+                            textEdit.text.isNotEmpty && imageURL.isNotEmpty
                                 ? await controller.addMesseage(
                                     messageText: textEdit.text,
                                     chatId: chat.roomId,
-                                  )
+                                    imageURL: imageURL)
                                 : ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
                                     content: Text("Please enter your message"),

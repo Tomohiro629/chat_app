@@ -54,7 +54,6 @@ class MessageListTile extends ConsumerWidget {
                                     if (loadingProgress == null) return child;
                                     return const Center(
                                       child: CircularProgressIndicator(
-                                          color: Colors.white,
                                           backgroundColor:
                                               Color.fromARGB(255, 3, 104, 7),
                                           strokeWidth: 2.0),

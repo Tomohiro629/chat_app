@@ -46,15 +46,7 @@ class SendImageDailog extends ConsumerWidget {
                   imageURL: storageService.imageURL!);
               print(storageService.imageURL);
               // ignore: use_build_context_synchronously
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatPage(
-                          roomName: "",
-                          imageURL: storageService.imageURL!,
-                          chat: chat,
-                        )),
-              );
+              Navigator.pop(context);
             } catch (e) {
               print(e);
             }

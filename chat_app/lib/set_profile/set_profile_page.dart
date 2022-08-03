@@ -31,7 +31,9 @@ class SetProfilePage extends ConsumerWidget {
             CircleAvatar(
               radius: 80,
               foregroundImage: imagePickerService.imagePath != null
-                  ? FileImage(imagePickerService.imagePath!)
+                  ? FileImage(
+                      imagePickerService.imagePath!,
+                    )
                   : null,
               backgroundColor: const Color.fromARGB(255, 191, 244, 155),
               child: const Text("Add Photo"),

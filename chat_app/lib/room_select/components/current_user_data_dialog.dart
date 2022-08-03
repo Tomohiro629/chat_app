@@ -9,7 +9,7 @@ class CurrentUserDateDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
-      backgroundColor: Colors.green[100],
+      backgroundColor: const Color.fromARGB(131, 76, 175, 79),
       content: Stack(
         alignment: Alignment.center,
         children: [
@@ -28,6 +28,7 @@ class CurrentUserDateDialog extends ConsumerWidget {
         alignment: Alignment.center,
         child: Text(
           user.userName,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       actions: <Widget>[

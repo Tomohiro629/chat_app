@@ -3,7 +3,8 @@ import 'package:uuid/uuid.dart';
 
 class Message {
   Message({
-    required this.message,
+    this.message = "",
+    this.imageURL = "",
     required this.messageId,
     required this.timeStamp,
     required this.chatId,
@@ -13,20 +14,23 @@ class Message {
   factory Message.create({
     required String chatId,
     required String userId,
-    required String messageText,
+    required String message,
+    required String imageURL,
   }) {
     return Message(
       messageId: const Uuid().v4(),
-      message: messageText,
       timeStamp: DateTime.now(),
       chatId: chatId,
       userId: userId,
+      message: message,
+      imageURL: imageURL,
     );
   }
 
   factory Message.fromJson(Map<String, dynamic> map) {
     return Message(
       message: map['message'],
+      imageURL: map['imageURL'],
       messageId: map['messageId'],
       timeStamp: (map['timeStamp']! as Timestamp).toDate(),
       chatId: map['chatId'],
@@ -37,6 +41,7 @@ class Message {
   Map<String, dynamic> toJson() {
     return {
       'message': message,
+      'imageURL': imageURL,
       'messageId': messageId,
       'timeStamp': timeStamp,
       'chatId': chatId,
@@ -45,6 +50,7 @@ class Message {
   }
 
   final String message;
+  final String? imageURL;
   final String messageId;
   final DateTime timeStamp;
   final String chatId;

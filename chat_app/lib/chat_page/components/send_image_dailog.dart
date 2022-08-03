@@ -1,4 +1,5 @@
-import 'package:chat_app/chat_page/chat_page.dart';
+import 'dart:io';
+
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
@@ -21,14 +22,23 @@ class SendImageDailog extends ConsumerWidget {
 
     return AlertDialog(
       content: Stack(
-          alignment: Alignment.center,
-          children: [Image(image: FileImage(imagePickerService.imagePath!))]),
+        alignment: Alignment.center,
+        children: [
+          ConstrainedBox(
+            constraints:
+                const BoxConstraints(maxHeight: 400.0, maxWidth: 200.0),
+            child: Image(
+              image: FileImage(imagePickerService.imagePath!),
+            ),
+          ),
+        ],
+      ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       title: const Text(
-        "Send This Image?",
+        "Send This Image",
         style: TextStyle(color: Colors.white),
       ),
-      backgroundColor: Colors.black38,
+      backgroundColor: const Color.fromARGB(53, 0, 0, 0),
       actions: <Widget>[
         MaterialButton(
           shape: RoundedRectangleBorder(
@@ -41,25 +51,13 @@ class SendImageDailog extends ConsumerWidget {
               await storageService.uploadPostImageAndGetUrl(
                   file: imagePickerService.imagePath!);
               await controller.addMesseage(
-                  messageText: "写真を送信しました",
+                  messageText: "Send a photo",
                   chatId: chat.roomId,
                   imageURL: storageService.imageURL!);
-              print(storageService.imageURL);
-              // ignore: use_build_context_synchronously
-              Navigator.pop(context);
+              imagePickerService.imagePath = null;
             } catch (e) {
               print(e);
             }
-          },
-        ),
-        MaterialButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
-          ),
-          color: const Color.fromARGB(255, 137, 196, 244),
-          child: const Text("No"),
-          onPressed: () async {
-            Navigator.pop(context);
           },
         ),
       ],

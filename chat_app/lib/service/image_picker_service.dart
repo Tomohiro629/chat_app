@@ -11,17 +11,17 @@ class ImagePickerService {
   final _picker = ImagePicker();
   File? imagePath;
 
-  void takeCamera() async {
+  Future<void> takeCamera() async {
     final picekdfile =
-        await _picker.pickImage(source: ImageSource.camera, imageQuality: 100);
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 80);
     if (picekdfile != null) {
       imagePath = File(picekdfile.path);
     }
   }
 
-  void takeGallery() async {
+  Future<void> takeGallery() async {
     final picekdfile =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (picekdfile != null) {
       imagePath = File(picekdfile.path);
     }

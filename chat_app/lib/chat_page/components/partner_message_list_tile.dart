@@ -50,7 +50,7 @@ class PartnerMessageListTile extends ConsumerWidget {
                           maxWidth: MediaQuery.of(context).size.width * 0.5,
                         ),
                         child: TextButton(
-                          child: message.message == '写真を送信しました'
+                          child: message.message == 'Send a photo'
                               ? Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50)),
@@ -123,7 +123,7 @@ class PartnerMessageListTile extends ConsumerWidget {
                             }
                           },
                           onPressed: () {
-                            if (message.message == '写真を送信しました') {
+                            if (message.message == 'Send a photo') {
                               showDialog(
                                   barrierDismissible: false,
                                   context: context,

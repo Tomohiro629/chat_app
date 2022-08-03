@@ -61,6 +61,7 @@ class ChatPage extends ConsumerWidget {
                       : PartnerMessageListTile(
                           message: message,
                           userImageURL: imageURL,
+                          roomName: roomName,
                         );
                 }),
           ),

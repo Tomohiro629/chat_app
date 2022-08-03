@@ -4,6 +4,7 @@ import 'package:chat_app/repository/chat_room_repository.dart';
 import 'package:chat_app/repository/message_repository.dart';
 import 'package:chat_app/repository/send_image_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
+import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,15 +18,17 @@ class ChatController extends ChangeNotifier {
   final Reader _reader;
   ChatController(this._reader);
 
-  addSendImage({
-    required String imageURL,
+  Future<void> addSendImage({
     required String chatId,
+    required String imageURL,
   }) async {
     changeLoadingStatus(true);
     final sendImage = SendImage.create(
-        imageURL: imageURL,
-        chatId: chatId,
-        userId: _reader(authServiceProvider).userId);
+      imageURL: imageURL,
+      chatId: chatId,
+      userId: _reader(authServiceProvider).userId,
+    );
+
     await _reader(sendImageRepositoryProvider)
         .setImageURL(sendImage: sendImage);
 
@@ -57,6 +60,11 @@ class ChatController extends ChangeNotifier {
     await _reader(messageRepositoryProvider).setMessage(message: message);
 
     changeLoadingStatus(false);
+  }
+
+  Query<SendImage> imageQuery({required String chatId}) {
+    return _reader(sendImageRepositoryProvider)
+        .sendImageQuery(_reader(authServiceProvider).userId, chatId: chatId);
   }
 
   Query<Message> messageQuery({required String chatId}) {

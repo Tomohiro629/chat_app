@@ -42,7 +42,7 @@ class SendImage {
     };
   }
 
-  final String imageURL;
+  final String? imageURL;
   final String messageId;
   final DateTime timeStamp;
   final String chatId;

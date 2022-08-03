@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
@@ -38,7 +36,7 @@ class SendImageDailog extends ConsumerWidget {
         "Send This Image",
         style: TextStyle(color: Colors.white),
       ),
-      backgroundColor: const Color.fromARGB(53, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(131, 76, 175, 79),
       actions: <Widget>[
         MaterialButton(
           shape: RoundedRectangleBorder(

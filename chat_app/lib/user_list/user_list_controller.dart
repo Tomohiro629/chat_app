@@ -11,10 +11,15 @@ final userListProvider = ChangeNotifierProvider<UserListController>((ref) {
 
 class UserListController extends ChangeNotifier {
   final Reader _reader;
+  bool checked = false;
   UserListController(this._reader);
 
   Query<ChatUser> userListQuery() {
     return _reader(userRepositoryProvider)
         .userListQuery(currentUserId: _reader(authServiceProvider).userId);
+  }
+
+  void selectCheckBox(value) {
+    checked = value;
   }
 }

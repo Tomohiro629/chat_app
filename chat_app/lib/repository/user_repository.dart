@@ -37,7 +37,8 @@ class UserRepository {
   }
 
   Stream<List<ChatUser>> fetchUsersStream() {
-    final snapshots = _firestore.collection('users').snapshots();
+    final snapshots =
+        _firestore.collection('users').where("userId").snapshots();
 
     return snapshots.map(
         (qs) => qs.docs.map((doc) => ChatUser.fromJson(doc.data())).toList());
@@ -76,8 +77,10 @@ class UserRepository {
         .update({"userName": editUserName});
   }
 
-  Query<ChatUser> userListQuery() {
-    final query = _firestore.collection('users');
+  Query<ChatUser> userListQuery({required String currentUserId}) {
+    final query = _firestore
+        .collection('users')
+        .where("userId", isNotEqualTo: currentUserId);
     return query.withConverter<ChatUser>(
       fromFirestore: (snapshot, _) => ChatUser.fromJson(snapshot.data()!),
       toFirestore: (chatUser, _) => chatUser.toJson(),

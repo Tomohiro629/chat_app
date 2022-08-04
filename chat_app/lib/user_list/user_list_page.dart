@@ -21,21 +21,53 @@ class UserListPage extends ConsumerWidget {
         widgets: [],
       ),
       body: Center(
-        child: FirestoreListView<ChatUser>(
-          query: userListController.userListQuery(),
-          itemBuilder: (context, snapshot) {
-            final user = snapshot.data();
-            return Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(40.0)),
-                child: Padding(
-                    //cardの幅
-                    padding: const EdgeInsets.all(5.0),
-                    child: UserListTile(
-                      user: user,
-                    )));
-          },
+        child: Stack(
+          children: [
+            // Column(
+            //   children: [
+            //     Align(
+            //       alignment: Alignment.bottomCenter,
+            //       child: SizedBox(
+            //         width: 300.0,
+            //         child: TextFormField(
+            //           keyboardType: TextInputType.multiline,
+            //           maxLines: null,
+            //           decoration: InputDecoration(
+            //             contentPadding: const EdgeInsets.symmetric(
+            //                 vertical: 5.0, horizontal: 10.0),
+            //             border: OutlineInputBorder(
+            //               borderRadius: BorderRadius.circular(100),
+            //             ),
+            //             labelStyle: const TextStyle(fontSize: 20),
+            //             focusColor: Colors.green,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+
+            //   ],
+            // ),
+            FirestoreListView<ChatUser>(
+              query: userListController.userListQuery(),
+              itemBuilder: (context, snapshot) {
+                final user = snapshot.data();
+                return Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40.0)),
+                    child: Padding(
+                        //cardの幅
+                        padding: const EdgeInsets.all(5.0),
+                        child: UserListTile(
+                          user: user,
+                        )));
+              },
+            ),
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }

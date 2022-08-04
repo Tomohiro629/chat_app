@@ -1,3 +1,4 @@
+import 'package:chat_app/add_group/add_group_page.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
@@ -35,7 +36,7 @@ class GroupSelectPage extends ConsumerWidget {
                   BoxDecoration(borderRadius: BorderRadius.circular(40.0)),
               child: const Padding(
                   //cardの幅
-                  padding: const EdgeInsets.all(5.0),
+                  padding: EdgeInsets.all(5.0),
                   child: Text("test")),
             );
           },
@@ -43,10 +44,8 @@ class GroupSelectPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const AddGroupRoomPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddGroupPage()));
         },
         child: const Icon(Icons.search),
       ),

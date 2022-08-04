@@ -75,4 +75,12 @@ class UserRepository {
         .doc(userId)
         .update({"userName": editUserName});
   }
+
+  Query<ChatUser> userListQuery() {
+    final query = _firestore.collection('users');
+    return query.withConverter<ChatUser>(
+      fromFirestore: (snapshot, _) => ChatUser.fromJson(snapshot.data()!),
+      toFirestore: (chatUser, _) => chatUser.toJson(),
+    );
+  }
 }

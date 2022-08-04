@@ -26,22 +26,7 @@ class GroupSelectPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Center(
-        child: FirestoreListView<ChatRoom>(
-          query: groupSelectController.chatRoomQuery(),
-          itemBuilder: (context, snapshot) {
-            final chat = snapshot.data();
-            return Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(40.0)),
-              child: const Padding(
-                  //cardの幅
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("test")),
-            );
-          },
-        ),
-      ),
+      body: Center(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,

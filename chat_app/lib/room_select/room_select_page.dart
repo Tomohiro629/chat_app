@@ -5,6 +5,7 @@ import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/components/chat_list_tile.dart';
 import 'package:chat_app/room_select/components/current_user_data_dialog.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
+import 'package:chat_app/select_group/group_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/common_method.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
@@ -28,6 +29,14 @@ class RoomSelectPage extends ConsumerWidget {
       appBar: BaseAppBar(
         title: const Text("Room Select"),
         widgets: [
+          IconButton(
+            icon: const Icon(Icons.group),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const GroupSelectPage();
+              }));
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () async {

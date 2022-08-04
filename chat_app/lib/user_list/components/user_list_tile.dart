@@ -10,7 +10,7 @@ class UserListTile extends ConsumerWidget {
     return Column(
       children: [
         SizedBox(
-          width: 400.0,
+          width: 350.0,
           child: ListTile(
             title: Text(user.userName),
             leading: CircleAvatar(
@@ -25,6 +25,10 @@ class UserListTile extends ConsumerWidget {
                   strokeWidth: 2.0,
                 ),
               ),
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+              side: BorderSide(color: Colors.lightGreen),
             ),
           ),
         )

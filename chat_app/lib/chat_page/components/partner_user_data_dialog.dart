@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PartnerUserDateDialog extends ConsumerWidget {
   const PartnerUserDateDialog({
     Key? key,
-    required this.partonerUserName,
+    required this.partnerUserName,
     required this.imageURL,
   }) : super(key: key);
-  final String partonerUserName;
+  final String partnerUserName;
   final String imageURL;
 
   @override
@@ -31,7 +31,7 @@ class PartnerUserDateDialog extends ConsumerWidget {
       title: Align(
         alignment: Alignment.center,
         child: Text(
-          partonerUserName,
+          partnerUserName,
           style: const TextStyle(color: Colors.white),
         ),
       ),

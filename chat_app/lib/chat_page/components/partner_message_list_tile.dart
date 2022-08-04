@@ -3,6 +3,7 @@ import 'package:chat_app/chat_page/components/partner_user_data_dialog.dart';
 import 'package:chat_app/entity/message.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/common_method.dart';
+import 'package:chat_app/service/image_gallery_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
@@ -24,6 +25,7 @@ class PartnerMessageListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
+    final imageSaverController = ref.watch(imageSaverServiceProvider);
     return Stack(
       alignment: Alignment.bottomLeft,
       children: [
@@ -34,7 +36,7 @@ class PartnerMessageListTile extends ConsumerWidget {
                 context: context,
                 builder: (childContext) {
                   return PartnerUserDateDialog(
-                    partonerUserName: roomName,
+                    partnerUserName: roomName,
                     imageURL: userImageURL,
                   );
                 });
@@ -150,6 +152,38 @@ class PartnerMessageListTile extends ConsumerWidget {
                                     ),
                                   ),
                                   actions: <Widget>[
+                                    MaterialButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      color: const Color.fromARGB(
+                                          255, 240, 124, 116),
+                                      child: const Text("Saver"),
+                                      onPressed: () async {
+                                        try {
+                                          imageSaverController.imageSaver(
+                                              saverImageURL: message.imageURL!);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text("Image Saved"),
+                                              backgroundColor: Colors.blue,
+                                            ),
+                                          );
+                                          Navigator.of(context).pop();
+                                        } catch (e) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text("Served Error"),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                          Navigator.of(context).pop();
+                                        }
+                                      },
+                                    ),
                                     MaterialButton(
                                       shape: RoundedRectangleBorder(
                                         borderRadius:

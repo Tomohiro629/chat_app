@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.2.1
   cupertino_icons: ^1.0.2
   cloud_firestore: ^3.1.17
+  dio: ^4.0.6
   flutter_cache_manager: ^3.3.0
   flutter_chat_bubble: ^2.0.0
   flutter_riverpod: ^1.0.4
@@ -45,6 +46,7 @@ dependencies:
   flutterfire_ui: ^0.4.2+3
   firestore_ui: ^1.23.0
   intl: ^0.17.0
+  image_gallery_saver: ^1.7.1
   image_picker: ^0.8.5+3
   riverpod: ^1.0.3
   settings_ui: ^1.0.0

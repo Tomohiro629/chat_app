@@ -5,8 +5,8 @@ import 'package:chat_app/service/image_picker_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SendImageDailog extends ConsumerWidget {
-  const SendImageDailog({
+class SendImageDialog extends ConsumerWidget {
+  const SendImageDialog({
     super.key,
     required this.chat,
   });

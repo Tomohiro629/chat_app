@@ -2,7 +2,7 @@ import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/components/message_list_tile.dart';
 import 'package:chat_app/chat_page/components/partner_message_list_tile.dart';
-import 'package:chat_app/chat_page/components/send_image_dailog.dart';
+import 'package:chat_app/chat_page/components/send_image_dialog.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
 import 'package:chat_app/service/auth_service.dart';
@@ -69,7 +69,7 @@ class ChatPage extends ConsumerWidget {
             children: [
               Center(
                 child: imagePickerService.imagePath != null
-                    ? SendImageDailog(
+                    ? SendImageDialog(
                         chat: chat,
                       )
                     : const Text(""),

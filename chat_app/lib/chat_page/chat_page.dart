@@ -77,6 +77,7 @@ class ChatPage extends ConsumerWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
                   icon: const Icon(

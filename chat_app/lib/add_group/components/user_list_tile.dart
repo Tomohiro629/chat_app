@@ -26,6 +26,10 @@ class UserListTile extends ConsumerWidget {
                 ),
               ),
             ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+              side: BorderSide(color: Colors.lightGreen),
+            ),
           ),
         )
       ],

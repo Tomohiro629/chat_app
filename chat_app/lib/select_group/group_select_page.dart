@@ -47,7 +47,7 @@ class GroupSelectPage extends ConsumerWidget {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const AddGroupPage()));
         },
-        child: const Icon(Icons.search),
+        child: const Icon(Icons.add),
       ),
     );
   }

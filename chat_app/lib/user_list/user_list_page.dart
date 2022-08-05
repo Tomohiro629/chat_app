@@ -1,7 +1,7 @@
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_user.dart';
-import 'package:chat_app/user_list/components/add_group_dialog.dart';
 import 'package:chat_app/user_list/components/user_list_tile.dart';
+
 import 'package:chat_app/user_list/user_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,11 +38,10 @@ class UserListPage extends ConsumerWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40.0)),
                         child: Padding(
-                            //cardの幅
-                            padding: const EdgeInsets.all(5.0),
-                            child: UserListTile(
-                              user: user,
-                            ))),
+                          //cardの幅
+                          padding: const EdgeInsets.all(5.0),
+                          child: UserListTile(user: user),
+                        )),
                   ],
                 );
               },

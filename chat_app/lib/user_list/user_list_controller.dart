@@ -18,4 +18,9 @@ class UserListController extends ChangeNotifier {
     return _reader(userRepositoryProvider)
         .userListQuery(currentUserId: _reader(authServiceProvider).userId);
   }
+
+  changed() {
+    checked = true;
+    notifyListeners();
+  }
 }

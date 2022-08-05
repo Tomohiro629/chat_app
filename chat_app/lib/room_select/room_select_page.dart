@@ -31,14 +31,6 @@ class RoomSelectPage extends ConsumerWidget {
         title: const Text("Room Select"),
         widgets: [
           IconButton(
-            icon: const Icon(Icons.group),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const GroupSelectPage();
-              }));
-            },
-          ),
-          IconButton(
             icon: const Icon(Icons.person),
             onPressed: () async {
               final user = await userController.getUserDate(

@@ -11,11 +11,23 @@ final userListProvider = ChangeNotifierProvider<UserListController>((ref) {
 
 class UserListController extends ChangeNotifier {
   final Reader _reader;
-  bool checked = false;
+  bool selected = true;
+  bool clicked = true;
+
   UserListController(this._reader);
 
   Query<ChatUser> userListQuery() {
     return _reader(userRepositoryProvider)
         .userListQuery(currentUserId: _reader(authServiceProvider).userId);
+  }
+
+  selectedList() {
+    selected = false;
+    notifyListeners();
+  }
+
+  clickButton() {
+    clicked = false;
+    notifyListeners();
   }
 }

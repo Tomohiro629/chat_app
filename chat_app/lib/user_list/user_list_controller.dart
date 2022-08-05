@@ -18,8 +18,4 @@ class UserListController extends ChangeNotifier {
     return _reader(userRepositoryProvider)
         .userListQuery(currentUserId: _reader(authServiceProvider).userId);
   }
-
-  void selectCheckBox(value) {
-    checked = value;
-  }
 }

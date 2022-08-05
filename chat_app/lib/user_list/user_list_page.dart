@@ -49,7 +49,10 @@ class UserListPage extends ConsumerWidget {
             // ),
             FirestoreListView<ChatUser>(
               query: userListController.userListQuery(),
-              itemBuilder: (context, snapshot) {
+              itemBuilder: (
+                context,
+                snapshot,
+              ) {
                 final user = snapshot.data();
                 return Container(
                     decoration: BoxDecoration(
@@ -66,7 +69,9 @@ class UserListPage extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          // showDialog(context: context, builder: builder)
+        },
         child: const Icon(Icons.add),
       ),
     );

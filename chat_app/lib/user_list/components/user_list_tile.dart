@@ -1,5 +1,4 @@
 import 'package:chat_app/entity/chat_user.dart';
-import 'package:chat_app/user_list/user_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,8 +8,7 @@ class UserListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userListController = ref.watch(userListProvider);
-    final users = [user];
+    bool isChecked = false;
     return Column(children: [
       Row(
         children: [
@@ -18,10 +16,9 @@ class UserListTile extends ConsumerWidget {
             width: 300.0,
             child: Consumer(
               builder: (context, ref, _) {
-                final userListController = ref.watch(userListProvider);
-                return ListTile(
+                return CheckboxListTile(
                   title: Text(user.userName),
-                  leading: CircleAvatar(
+                  secondary: CircleAvatar(
                     radius: 25.0,
                     foregroundImage: NetworkImage(user.imageURL),
                     backgroundColor: const Color.fromARGB(123, 246, 233, 116),
@@ -34,13 +31,17 @@ class UserListTile extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  controlAffinity: ListTileControlAffinity.trailing,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(100)),
                     side: BorderSide(color: Colors.lightGreen),
                   ),
-                  onLongPress: () {
-                    userListController.selectedList();
+                  activeColor: Colors.green,
+                  checkColor: Colors.white,
+                  onChanged: (value) {
+                    isChecked = value!;
                   },
+                  value: isChecked,
                 );
               },
             ),

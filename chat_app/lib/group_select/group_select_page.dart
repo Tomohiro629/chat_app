@@ -1,4 +1,3 @@
-import 'package:chat_app/add_group/add_group_page.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
@@ -66,7 +65,7 @@ class GroupSelectPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddGroupPage()));
+              MaterialPageRoute(builder: (context) => const UserListPage()));
         },
         child: const Icon(Icons.add),
       ),

@@ -12,9 +12,11 @@ class ChatRoom {
   factory ChatRoom.create({
     required String currentUserId,
     required String partnerUserId,
+    required String groupUserId,
   }) {
     return ChatRoom(
-        roomId: const Uuid().v4(), userIds: [currentUserId, partnerUserId]);
+        roomId: const Uuid().v4(),
+        userIds: [currentUserId, partnerUserId, groupUserId]);
   }
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {

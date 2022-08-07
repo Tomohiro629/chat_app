@@ -36,9 +36,7 @@ class SearchUserDialog extends ConsumerWidget {
           color: const Color.fromARGB(255, 240, 124, 116),
           child: const Text("Start"),
           onPressed: () async {
-            controller.setChatRoom(
-              userId: user.userId,
-            );
+            controller.setChatRoom(partnerId: user.userId, groupUserId: "");
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(

@@ -32,6 +32,19 @@ class ChatRoomRepository {
     );
   }
 
+  Query<ChatRoom> groupQuery(
+    String userId,
+  ) {
+    final query = _firestore
+        .collection('chat_rooms')
+        .where('userIds', arrayContains: userId)
+        .orderBy("timeStamp", descending: true);
+    return query.withConverter<ChatRoom>(
+      fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),
+      toFirestore: (chatRoom, _) => chatRoom.toJson(),
+    );
+  }
+
   Future<void> deleteChatRoom({
     required ChatRoom chat,
   }) async {

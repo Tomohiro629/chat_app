@@ -19,21 +19,6 @@ class ChatRoomRepository {
     });
   }
 
-  Future<void> setChatRoom({
-    required ChatRoom chat,
-  }) async {
-    await _firestore
-        .collection("chat_rooms")
-        .doc(chat.roomId)
-        .set(chat.toJson(), SetOptions(merge: true));
-  }
-
-  Future<void> deleteChatRoom({
-    required ChatRoom chat,
-  }) async {
-    await _firestore.collection("chat_rooms").doc(chat.roomId).delete();
-  }
-
   Query<ChatRoom> chatRoomQuery(
     String userId,
   ) {
@@ -45,5 +30,33 @@ class ChatRoomRepository {
       fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),
       toFirestore: (chatRoom, _) => chatRoom.toJson(),
     );
+  }
+
+  Query<ChatRoom> groupQuery(
+    String userId,
+  ) {
+    final query = _firestore
+        .collection('chat_rooms')
+        .where('userIds', arrayContains: userId)
+        .orderBy("timeStamp", descending: true);
+    return query.withConverter<ChatRoom>(
+      fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),
+      toFirestore: (chatRoom, _) => chatRoom.toJson(),
+    );
+  }
+
+  Future<void> deleteChatRoom({
+    required ChatRoom chat,
+  }) async {
+    await _firestore.collection("chat_rooms").doc(chat.roomId).delete();
+  }
+
+  Future<void> setChatRoom({
+    required ChatRoom chat,
+  }) async {
+    await _firestore
+        .collection("chat_rooms")
+        .doc(chat.roomId)
+        .set(chat.toJson(), SetOptions(merge: true));
   }
 }

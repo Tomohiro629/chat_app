@@ -1,8 +1,8 @@
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
+import 'package:chat_app/group_select/group_select_controller.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/components/current_user_data_dialog.dart';
-import 'package:chat_app/room_select/room_select_controller.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:chat_app/user_list/user_list_page.dart';
@@ -14,7 +14,7 @@ class GroupSelectPage extends ConsumerWidget {
   const GroupSelectPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final groupSelectController = ref.watch(roomSelectControllerProvider);
+    final groupSelectController = ref.watch(groupSelectControllerProvider);
     final userController = ref.watch(userRepositoryProvider);
 
     return Scaffold(
@@ -48,7 +48,7 @@ class GroupSelectPage extends ConsumerWidget {
       ),
       body: Center(
         child: FirestoreListView<ChatRoom>(
-          query: groupSelectController.chatRoomQuery(),
+          query: groupSelectController.groupQuery(),
           itemBuilder: (context, snapshot) {
             final chat = snapshot.data();
             return Container(

@@ -5,12 +5,14 @@ import 'package:chat_app/group_select/group_select_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchUsersDialog extends ConsumerWidget {
-  const SearchUsersDialog({
+class AddUserDialog extends ConsumerWidget {
+  const AddUserDialog({
     Key? key,
     required this.user,
+    required this.addUserName,
   }) : super(key: key);
   final ChatUser user;
+  final String addUserName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

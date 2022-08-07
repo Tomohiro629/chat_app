@@ -1,3 +1,4 @@
+import 'package:chat_app/add_group/add_group_page.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/components/message_from_file.dart';
@@ -33,6 +34,14 @@ class ChatPage extends ConsumerWidget {
       appBar: BaseAppBar(
         title: Text(roomName),
         widgets: [
+          IconButton(
+            icon: const Icon(Icons.person_add),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const AddGroupPage();
+              }));
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {

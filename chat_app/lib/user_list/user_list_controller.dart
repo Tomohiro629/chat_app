@@ -22,12 +22,7 @@ class UserListController extends ChangeNotifier {
   }
 
   selectedList() {
-    selected = false;
-    notifyListeners();
-  }
-
-  clickButton() {
-    clicked = false;
+    selected;
     notifyListeners();
   }
 }

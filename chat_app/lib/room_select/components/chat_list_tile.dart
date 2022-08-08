@@ -64,7 +64,9 @@ class ChatListTile extends ConsumerWidget {
                               overflow: TextOverflow.ellipsis,
                             )
                           : Text(
-                              '${chat.userNames[1]}/' '${chat.userNames[2]}',
+                              '${chat.userNames[0]}/'
+                              '${chat.userNames[1]}/'
+                              '${chat.userNames[2]}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Color.fromARGB(255, 7, 205, 30),

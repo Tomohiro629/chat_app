@@ -44,8 +44,8 @@ class PartnerMessageListTile extends ConsumerWidget {
                           imageURL: chat.userImages[1],
                         )
                       : PartnerUserDateDialog(
-                          partnerUserName: chat.userNames[2],
-                          imageURL: chat.userImages[2]);
+                          partnerUserName: chat.userNames[0],
+                          imageURL: chat.userImages[0]);
                 });
           },
           child: chat.userIds[1] == message.userId
@@ -56,7 +56,7 @@ class PartnerMessageListTile extends ConsumerWidget {
                 )
               : CircleAvatar(
                   radius: 25.0,
-                  foregroundImage: NetworkImage(chat.userImages[2]),
+                  foregroundImage: NetworkImage(chat.userImages[0]),
                   backgroundColor: Colors.amber[100],
                 ),
         ),

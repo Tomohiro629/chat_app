@@ -40,18 +40,21 @@ class ChatPage extends ConsumerWidget {
                 '${chat.userNames[1]}/' '${chat.userNames[2]}',
               ),
         widgets: [
-          IconButton(
-            icon: const Icon(Icons.person_add),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return AddGroupPage(
-                  chat: chat,
-                  addGroupUserName: roomName,
-                  partnerUserImage: imageURL,
-                );
-              }));
-            },
-          ),
+          chat.userIds[2].isEmpty
+              ? IconButton(
+                  icon: const Icon(Icons.person_add),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return AddGroupPage(
+                        chat: chat,
+                        addGroupUserName: roomName,
+                        partnerUserImage: imageURL,
+                      );
+                    }));
+                  },
+                )
+              : const Text(""),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {

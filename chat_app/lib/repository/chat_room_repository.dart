@@ -37,7 +37,7 @@ class ChatRoomRepository {
   ) {
     final query = _firestore
         .collection('chat_rooms')
-        .where('userIds', arrayContains: userId)
+        .where('roomName', isNull: false)
         .orderBy("timeStamp", descending: true);
     return query.withConverter<ChatRoom>(
       fromFirestore: (snapshot, _) => ChatRoom.fromJson(snapshot.data()!),

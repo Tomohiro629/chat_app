@@ -15,18 +15,20 @@ class ChatRoom {
     required String groupUserId,
   }) {
     return ChatRoom(
-        roomId: const Uuid().v4(),
-        userIds: [currentUserId, partnerUserId, groupUserId]);
+      roomId: const Uuid().v4(),
+      userIds: [currentUserId, partnerUserId, groupUserId],
+    );
   }
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {
     return ChatRoom(
-        roomId: map['roomId'],
-        lastMessage: map['lastMessage'],
-        timeStamp: map['timeStamp'] != null
-            ? (map['timeStamp']! as Timestamp).toDate()
-            : null,
-        userIds: (map['userIds'] as List<dynamic>).cast<String>());
+      roomId: map['roomId'],
+      lastMessage: map['lastMessage'],
+      timeStamp: map['timeStamp'] != null
+          ? (map['timeStamp']! as Timestamp).toDate()
+          : null,
+      userIds: (map['userIds'] as List<dynamic>).cast<String>(),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +42,7 @@ class ChatRoom {
 
   final String roomId;
   final String? lastMessage;
+
   final DateTime? timeStamp;
   final List<String> userIds;
 }

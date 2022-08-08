@@ -74,7 +74,7 @@ class AddGroupPage extends ConsumerWidget {
                         } else {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text("User Not Found"),
+                            content: Text("There are some missing items"),
                             backgroundColor: Colors.red,
                           ));
                         }

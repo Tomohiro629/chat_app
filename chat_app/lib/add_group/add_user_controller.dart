@@ -18,6 +18,9 @@ class AddGroupController extends ChangeNotifier {
     required String currentUserName,
     required String partnerUserName,
     required String groupName,
+    required String currentUserImage,
+    required String partnerUserImage,
+    required String groupImage,
   }) async {
     final chat = ChatRoom.create(
       currentUserId: _reader(authServiceProvider).userId,
@@ -26,6 +29,9 @@ class AddGroupController extends ChangeNotifier {
       currentUserName: currentUserName,
       partnerUserName: partnerUserName,
       groupUserName: groupName,
+      currentUserImage: currentUserImage,
+      partnerUserImage: partnerUserImage,
+      groupUserImage: groupImage,
     );
 
     await _reader(chatRepositoryProvider).setChatRoom(chat: chat);

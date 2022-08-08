@@ -1,11 +1,10 @@
-import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/components/delete_check_dialog.dart';
 import 'package:chat_app/chat_page/components/partner_user_data_dialog.dart';
 import 'package:chat_app/chat_page/components/saved_image_dialog.dart';
+import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/common_method.dart';
-import 'package:chat_app/service/image_gallery_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
@@ -14,14 +13,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PartnerMessageListTile extends ConsumerWidget {
   final Message message;
+  final ChatRoom chat;
   final String userImageURL;
   final String roomName;
+  final String partnerUserId;
 
   const PartnerMessageListTile({
     super.key,
     required this.userImageURL,
     required this.message,
+    required this.chat,
     required this.roomName,
+    required this.partnerUserId,
   });
 
   @override
@@ -37,15 +40,21 @@ class PartnerMessageListTile extends ConsumerWidget {
                 builder: (childContext) {
                   return PartnerUserDateDialog(
                     partnerUserName: roomName,
-                    imageURL: userImageURL,
+                    imageURL: chat.userImages[1],
                   );
                 });
           },
-          child: CircleAvatar(
-            radius: 25.0,
-            foregroundImage: NetworkImage(userImageURL),
-            backgroundColor: Colors.amber[100],
-          ),
+          child: chat.userIds[1] == partnerUserId
+              ? CircleAvatar(
+                  radius: 25.0,
+                  foregroundImage: NetworkImage(chat.userImages[1]),
+                  backgroundColor: Colors.amber[100],
+                )
+              : CircleAvatar(
+                  radius: 25.0,
+                  foregroundImage: NetworkImage(chat.userImages[2]),
+                  backgroundColor: Colors.amber[100],
+                ),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,

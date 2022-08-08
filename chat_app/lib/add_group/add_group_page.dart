@@ -8,10 +8,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddGroupPage extends ConsumerWidget {
   const AddGroupPage(
-      {Key? key, required this.chat, required this.addGroupUserName})
+      {Key? key,
+      required this.chat,
+      required this.addGroupUserName,
+      required this.partnerUserImage})
       : super(key: key);
   final ChatRoom chat;
   final String addGroupUserName;
+  final String partnerUserImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -76,6 +80,8 @@ class AddGroupPage extends ConsumerWidget {
                                   user: user,
                                   currentUserName: currentUser.userName,
                                   addUserName: addGroupUserName,
+                                  currentUserImage: currentUser.imageURL,
+                                  partnerUserImage: partnerUserImage,
                                 );
                               });
                         } else {

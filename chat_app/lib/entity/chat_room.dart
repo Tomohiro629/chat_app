@@ -8,6 +8,7 @@ class ChatRoom {
     this.timeStamp,
     required this.userIds,
     required this.userNames,
+    required this.userImages,
   });
 
   factory ChatRoom.create({
@@ -17,11 +18,15 @@ class ChatRoom {
     required String currentUserName,
     required String partnerUserName,
     required String groupUserName,
+    required String currentUserImage,
+    required String partnerUserImage,
+    required String groupUserImage,
   }) {
     return ChatRoom(
         roomId: const Uuid().v4(),
         userIds: [currentUserId, partnerUserId, groupUserId],
-        userNames: [currentUserName, partnerUserName, groupUserName]);
+        userNames: [currentUserName, partnerUserName, groupUserName],
+        userImages: [currentUserImage, partnerUserImage, groupUserImage]);
   }
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {
@@ -33,16 +38,18 @@ class ChatRoom {
           : null,
       userIds: (map['userIds'] as List<dynamic>).cast<String>(),
       userNames: (map['userNames'] as List<dynamic>).cast<String>(),
+      userImages: (map['userImages'] as List<dynamic>).cast<String>(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'roomId': roomId,
+      'lastMessage': lastMessage,
+      'timeStamp': timeStamp,
       'userIds': userIds,
       'userNames': userNames,
-      'timeStamp': timeStamp,
-      'lastMessage': lastMessage,
+      'userImages': userImages,
     };
   }
 
@@ -51,4 +58,5 @@ class ChatRoom {
   final DateTime? timeStamp;
   final List<String> userIds;
   final List<String> userNames;
+  final List<String> userImages;
 }

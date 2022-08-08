@@ -1,7 +1,6 @@
 import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
 import 'package:chat_app/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:chat_app/entity/chat_user.dart';
-import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,11 +9,13 @@ class SearchUserDialog extends ConsumerWidget {
       {Key? key,
       required this.user,
       required this.searchUserName,
-      required this.currentUserName})
+      required this.currentUserName,
+      required this.currentUserImage})
       : super(key: key);
   final ChatUser user;
   final String searchUserName;
   final String currentUserName;
+  final String currentUserImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,6 +47,8 @@ class SearchUserDialog extends ConsumerWidget {
               groupUserId: "",
               currentUserName: currentUserName, //ログインユーザ名
               partnerUserName: user.userName,
+              currentUserImage: currentUserImage,
+              partnerUserImage: user.imageURL,
             );
             Navigator.pushAndRemoveUntil(
                 context,

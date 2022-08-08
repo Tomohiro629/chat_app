@@ -47,6 +47,7 @@ class ChatPage extends ConsumerWidget {
                 return AddGroupPage(
                   chat: chat,
                   addGroupUserName: roomName,
+                  partnerUserImage: imageURL,
                 );
               }));
             },
@@ -76,8 +77,10 @@ class ChatPage extends ConsumerWidget {
                         )
                       : PartnerMessageListTile(
                           message: message,
+                          chat: chat,
                           userImageURL: imageURL,
                           roomName: roomName,
+                          partnerUserId: chat.userIds[1],
                         );
                 }),
           ),

@@ -12,11 +12,15 @@ class AddUserDialog extends ConsumerWidget {
     required this.chat,
     required this.addUserName,
     required this.currentUserName,
+    required this.currentUserImage,
+    required this.partnerUserImage,
   }) : super(key: key);
   final ChatUser user;
   final ChatRoom chat;
   final String addUserName;
   final String currentUserName;
+  final String currentUserImage;
+  final String partnerUserImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -49,6 +53,9 @@ class AddUserDialog extends ConsumerWidget {
               currentUserName: currentUserName,
               partnerUserName: addUserName,
               groupName: user.userName,
+              currentUserImage: currentUserImage,
+              partnerUserImage: partnerUserImage,
+              groupImage: user.imageURL,
             );
             Navigator.pushAndRemoveUntil(
                 context,

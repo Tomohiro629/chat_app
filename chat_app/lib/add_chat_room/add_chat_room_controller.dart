@@ -13,11 +13,14 @@ class AddChatRoomController extends ChangeNotifier {
   final Reader _reader;
   AddChatRoomController(this._reader);
 
-  Future<void> setChatRoom(
-      {required String partnerId,
-      required String groupUserId,
-      required String currentUserName,
-      required String partnerUserName}) async {
+  Future<void> setChatRoom({
+    required String partnerId,
+    required String groupUserId,
+    required String currentUserName,
+    required String partnerUserName,
+    required String currentUserImage,
+    required String partnerUserImage,
+  }) async {
     final chat = ChatRoom.create(
       currentUserId: _reader(authServiceProvider).userId,
       partnerUserId: partnerId,
@@ -25,6 +28,9 @@ class AddChatRoomController extends ChangeNotifier {
       currentUserName: currentUserName,
       partnerUserName: partnerUserName,
       groupUserName: "",
+      currentUserImage: currentUserImage,
+      partnerUserImage: partnerUserImage,
+      groupUserImage: "",
     );
 
     await _reader(chatRepositoryProvider).setChatRoom(chat: chat);

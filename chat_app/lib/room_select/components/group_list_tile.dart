@@ -7,13 +7,13 @@ import 'package:chat_app/service/common_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChatListTile extends ConsumerWidget {
+class GroupListTile extends ConsumerWidget {
   final ChatRoom chat;
   final String partnerUserId;
   final String partnerUserName;
   final String partnerUserImage;
 
-  const ChatListTile({
+  const GroupListTile({
     super.key,
     required this.chat,
     required this.partnerUserId,
@@ -37,7 +37,10 @@ class ChatListTile extends ConsumerWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 25.0,
-                    foregroundImage: NetworkImage(user!.imageURL),
+                    foregroundImage: chat.userNames[2].isEmpty
+                        ? NetworkImage(user!.imageURL)
+                        : const NetworkImage(
+                            "https://th.bing.com/th/id/OIP.3dYlegQ0F8Kx8suoY52NNAHaLH?w=125&h=187&c=7&r=0&o=5&dpr=1.5&pid=1.7"),
                     backgroundColor: const Color.fromARGB(123, 246, 233, 116),
                     child: const SizedBox(
                       width: 20.0,
@@ -51,14 +54,25 @@ class ChatListTile extends ConsumerWidget {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        user.userName,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 7, 205, 30),
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      chat.userNames[2].isEmpty
+                          ? Text(
+                              user!.userName,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 7, 205, 30),
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          : Text(
+                              '${chat.userNames[0]}/'
+                              '${chat.userNames[1]}/'
+                              '${chat.userNames[2]}',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 7, 205, 30),
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                       chat.timeStamp != null
                           ? Text(getDateString(chat.timeStamp!),
                               style: const TextStyle(
@@ -84,7 +98,7 @@ class ChatListTile extends ConsumerWidget {
                         MaterialPageRoute(
                             builder: (context) => ChatPage(
                                   chat: chat,
-                                  imageURL: user.imageURL,
+                                  imageURL: user!.imageURL,
                                   roomName: user.userName,
                                 )));
                   },
@@ -97,7 +111,7 @@ class ChatListTile extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            title: Text("Delete Room\n『${user.userName}』"),
+                            title: Text("Delete Room\n『${user!.userName}』"),
                             content: const Text("Do you want to Delete it?"),
                             actions: <Widget>[
                               MaterialButton(

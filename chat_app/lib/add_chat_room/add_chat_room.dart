@@ -1,6 +1,7 @@
 import 'package:chat_app/add_chat_room/components/search_user_dialog.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/repository/user_repository.dart';
+import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -59,6 +60,9 @@ class AddChatRoomPage extends ConsumerWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       onPressed: () async {
+                        final currentUser = await userController.getUserDate(
+                            userId: ref.watch(authServiceProvider).userId);
+
                         final user = await userController
                             .searchUserData(searchUserName.text);
 
@@ -69,7 +73,9 @@ class AddChatRoomPage extends ConsumerWidget {
                               builder: (childContext) {
                                 return SearchUserDialog(
                                   user: user,
+                                  currentUserName: currentUser.userName,
                                   searchUserName: searchUserName.text,
+                                  currentUserImage: currentUser.imageURL,
                                 );
                               });
                         } else {

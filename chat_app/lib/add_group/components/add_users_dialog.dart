@@ -1,8 +1,7 @@
-import 'package:chat_app/add_group/components/add_user_controller.dart';
+import 'package:chat_app/add_group/add_user_controller.dart';
 import 'package:chat_app/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/chat_user.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,12 +9,18 @@ class AddUserDialog extends ConsumerWidget {
   const AddUserDialog({
     Key? key,
     required this.user,
-    required this.addUserName,
     required this.chat,
+    required this.addUserName,
+    required this.currentUserName,
+    required this.currentUserImage,
+    required this.partnerUserImage,
   }) : super(key: key);
   final ChatUser user;
   final ChatRoom chat;
   final String addUserName;
+  final String currentUserName;
+  final String currentUserImage;
+  final String partnerUserImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,11 +50,19 @@ class AddUserDialog extends ConsumerWidget {
             controller.setGroup(
               chatRoom: chat,
               groupUserId: user.userId,
+              currentUserName: currentUserName,
+              partnerUserName: addUserName,
+              groupName: user.userName,
+              currentUserImage: currentUserImage,
+              partnerUserImage: partnerUserImage,
+              groupImage: user.imageURL,
             );
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => BottomNavigationBarPage()),
+                    builder: (context) => BottomNavigationBarPage(
+                          chatName: '',
+                        )),
                 (_) => false);
           },
         ),

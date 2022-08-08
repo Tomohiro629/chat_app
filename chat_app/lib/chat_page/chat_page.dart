@@ -32,16 +32,29 @@ class ChatPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: BaseAppBar(
-        title: Text(roomName),
+        title: chat.userNames[2].isEmpty
+            ? Text(
+                chat.userNames[1],
+              )
+            : Text(
+                '${chat.userNames[1]}/' '${chat.userNames[2]}',
+              ),
         widgets: [
-          IconButton(
-            icon: const Icon(Icons.person_add),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return AddGroupPage(chat: chat);
-              }));
-            },
-          ),
+          chat.userIds[2].isEmpty
+              ? IconButton(
+                  icon: const Icon(Icons.person_add),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return AddGroupPage(
+                        chat: chat,
+                        addGroupUserName: roomName,
+                        partnerUserImage: imageURL,
+                      );
+                    }));
+                  },
+                )
+              : const Text(""),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
@@ -67,8 +80,10 @@ class ChatPage extends ConsumerWidget {
                         )
                       : PartnerMessageListTile(
                           message: message,
+                          chat: chat,
                           userImageURL: imageURL,
                           roomName: roomName,
+                          partnerUserId: chat.userIds[1],
                         );
                 }),
           ),

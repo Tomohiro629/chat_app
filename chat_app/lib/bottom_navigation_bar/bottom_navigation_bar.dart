@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BottomNavigationBarPage extends ConsumerWidget {
-  BottomNavigationBarPage({
-    Key? key,
-  }) : super(key: key);
+  BottomNavigationBarPage({Key? key, required this.chatName}) : super(key: key);
+  final String chatName;
 
   final pages = [
     const UserListPage(),

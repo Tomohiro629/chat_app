@@ -5,18 +5,20 @@ class ChatRoom {
   ChatRoom({
     required this.roomId,
     this.lastMessage = "",
+    this.roomName = "",
     this.timeStamp,
     required this.userIds,
   });
 
-  factory ChatRoom.create({
-    required String currentUserId,
-    required String partnerUserId,
-    required String groupUserId,
-  }) {
+  factory ChatRoom.create(
+      {required String currentUserId,
+      required String partnerUserId,
+      required String groupUserId,
+      required String? roomName}) {
     return ChatRoom(
         roomId: const Uuid().v4(),
-        userIds: [currentUserId, partnerUserId, groupUserId]);
+        userIds: [currentUserId, partnerUserId, groupUserId],
+        roomName: roomName);
   }
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {
@@ -26,7 +28,8 @@ class ChatRoom {
         timeStamp: map['timeStamp'] != null
             ? (map['timeStamp']! as Timestamp).toDate()
             : null,
-        userIds: (map['userIds'] as List<dynamic>).cast<String>());
+        userIds: (map['userIds'] as List<dynamic>).cast<String>(),
+        roomName: map['roomName']);
   }
 
   Map<String, dynamic> toJson() {
@@ -35,11 +38,13 @@ class ChatRoom {
       'userIds': userIds,
       'timeStamp': timeStamp,
       'lastMessage': lastMessage,
+      'roomName': roomName
     };
   }
 
   final String roomId;
   final String? lastMessage;
+  final String? roomName;
   final DateTime? timeStamp;
   final List<String> userIds;
 }

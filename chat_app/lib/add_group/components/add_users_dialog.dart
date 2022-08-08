@@ -42,7 +42,11 @@ class AddUserDialog extends ConsumerWidget {
           color: const Color.fromARGB(255, 240, 124, 116),
           child: const Text("Start"),
           onPressed: () async {
-            controller.setGroup(chatRoom: chat, groupUserId: user.userId);
+            controller.setGroup(
+              chatRoom: chat,
+              groupUserId: user.userId,
+              roomName: chat.userIds[0],
+            );
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(

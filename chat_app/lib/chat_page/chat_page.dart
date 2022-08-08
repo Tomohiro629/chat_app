@@ -32,7 +32,13 @@ class ChatPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: BaseAppBar(
-        title: Text(roomName),
+        title: chat.userNames[2].isEmpty
+            ? Text(
+                chat.userNames[1],
+              )
+            : Text(
+                '${chat.userNames[1]}/' '${chat.userNames[2]}',
+              ),
         widgets: [
           IconButton(
             icon: const Icon(Icons.person_add),

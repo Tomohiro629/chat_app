@@ -28,6 +28,7 @@ class AddChatRoomController extends ChangeNotifier {
       currentUserName: currentUserName,
       partnerUserName: partnerUserName,
       groupUserName: "",
+      currentUserImage: currentUserImage,
       partnerUserImage: partnerUserImage,
       groupUserImage: "",
     );

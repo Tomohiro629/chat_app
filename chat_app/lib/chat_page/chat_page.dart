@@ -38,7 +38,10 @@ class ChatPage extends ConsumerWidget {
             icon: const Icon(Icons.person_add),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return AddGroupPage(chat: chat);
+                return AddGroupPage(
+                  chat: chat,
+                  addGroupUserName: roomName,
+                );
               }));
             },
           ),

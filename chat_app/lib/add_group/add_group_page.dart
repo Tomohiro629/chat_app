@@ -2,12 +2,16 @@ import 'package:chat_app/add_group/components/add_users_dialog.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
+import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddGroupPage extends ConsumerWidget {
-  const AddGroupPage({Key? key, required this.chat}) : super(key: key);
+  const AddGroupPage(
+      {Key? key, required this.chat, required this.addGroupUserName})
+      : super(key: key);
   final ChatRoom chat;
+  final String addGroupUserName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -58,6 +62,8 @@ class AddGroupPage extends ConsumerWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       onPressed: () async {
+                        final currentUser = await userController.getUserDate(
+                            userId: ref.watch(authServiceProvider).userId);
                         final user = await userController
                             .searchUserData(addUserName.text);
                         if (user != null) {
@@ -68,7 +74,8 @@ class AddGroupPage extends ConsumerWidget {
                                 return AddUserDialog(
                                   chat: chat,
                                   user: user,
-                                  addUserName: addUserName.text,
+                                  currentUserName: currentUser.userName,
+                                  addUserName: addGroupUserName,
                                 );
                               });
                         } else {

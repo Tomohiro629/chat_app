@@ -1,6 +1,6 @@
 import 'package:chat_app/add_chat_room/add_chat_room_controller.dart';
-import 'package:chat_app/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:chat_app/entity/chat_user.dart';
+import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -53,8 +53,9 @@ class SearchUserDialog extends ConsumerWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => BottomNavigationBarPage(
-                          chatName: searchUserName,
+                    builder: (context) => RoomSelectPage(
+                          partnerUserName: user.userName,
+                          partnerUserImage: user.imageURL,
                         )),
                 (_) => false);
           },

@@ -1,4 +1,3 @@
-import 'package:chat_app/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:chat_app/entity/chat_user.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
 import 'package:chat_app/service/auth_service.dart';
@@ -21,8 +20,9 @@ class UserGatePage extends ConsumerWidget {
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;
         return isExist
-            ? BottomNavigationBarPage(
-                chatName: "",
+            ? const RoomSelectPage(
+                partnerUserName: "",
+                partnerUserImage: "",
               ) //ユーザーがいたら
             : const SetProfilePage(); //失敗
         //

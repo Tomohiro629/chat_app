@@ -16,9 +16,11 @@ import 'package:flutterfire_ui/firestore.dart';
 class RoomSelectPage extends ConsumerWidget {
   const RoomSelectPage({
     Key? key,
-    required this.chatName,
+    required this.partnerUserName,
+    required this.partnerUserImage,
   }) : super(key: key);
-  final String chatName;
+  final String partnerUserName;
+  final String partnerUserImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,6 +71,8 @@ class RoomSelectPage extends ConsumerWidget {
                       chat: chat,
                       partnerUserId: getPartnerUserId(
                           ref.watch(authServiceProvider).userId, chat.userIds),
+                      partnerUserName: partnerUserName,
+                      partnerUserImage: partnerUserImage,
                     )));
           },
         ),

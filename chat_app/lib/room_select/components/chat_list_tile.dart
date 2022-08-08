@@ -10,11 +10,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ChatListTile extends ConsumerWidget {
   final ChatRoom chat;
   final String partnerUserId;
+  final String partnerUserName;
+  final String partnerUserImage;
 
   const ChatListTile({
     super.key,
     required this.chat,
     required this.partnerUserId,
+    required this.partnerUserName,
+    required this.partnerUserImage,
   });
 
   @override
@@ -34,7 +38,7 @@ class ChatListTile extends ConsumerWidget {
                   leading: CircleAvatar(
                     radius: 25.0,
                     foregroundImage: chat.userNames[2].isEmpty
-                        ? NetworkImage(chat.userImages[1])
+                        ? NetworkImage(user!.imageURL)
                         : const NetworkImage(
                             "https://th.bing.com/th/id/OIP.3dYlegQ0F8Kx8suoY52NNAHaLH?w=125&h=187&c=7&r=0&o=5&dpr=1.5&pid=1.7"),
                     backgroundColor: const Color.fromARGB(123, 246, 233, 116),
@@ -52,7 +56,7 @@ class ChatListTile extends ConsumerWidget {
                     children: [
                       chat.userNames[2].isEmpty
                           ? Text(
-                              chat.userNames[1],
+                              user!.userName,
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Color.fromARGB(255, 7, 205, 30),
@@ -60,7 +64,9 @@ class ChatListTile extends ConsumerWidget {
                               overflow: TextOverflow.ellipsis,
                             )
                           : Text(
-                              '${chat.userNames[1]}/' '${chat.userNames[2]}',
+                              '${chat.userNames[0]}/'
+                              '${chat.userNames[1]}/'
+                              '${chat.userNames[2]}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Color.fromARGB(255, 7, 205, 30),

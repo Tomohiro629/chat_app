@@ -1,12 +1,11 @@
-import 'package:chat_app/add_group/add_group_page.dart';
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/chat_page/components/message_from_file.dart';
 import 'package:chat_app/chat_page/components/message_list_tile.dart';
-import 'package:chat_app/chat_page/components/partner_message_list_tile.dart';
 import 'package:chat_app/chat_page/components/send_image_dialog.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';
+import 'package:chat_app/gourp_page/components/group_message_list_tile.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
 import 'package:chat_app/setting_page/setting_page.dart';
@@ -14,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
-class ChatPage extends ConsumerWidget {
-  const ChatPage({
+class GroupPage extends ConsumerWidget {
+  const GroupPage({
     Key? key,
     required this.chat,
     required this.imageURL,
@@ -33,21 +32,11 @@ class ChatPage extends ConsumerWidget {
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(
-          roomName,
+          '${chat.userNames[0]}/'
+          '${chat.userNames[1]}/'
+          '${chat.userNames[2]}',
         ),
         widgets: [
-          IconButton(
-            icon: const Icon(Icons.person_add),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return AddGroupPage(
-                  chat: chat,
-                  addGroupUserName: roomName,
-                  partnerUserImage: imageURL,
-                );
-              }));
-            },
-          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
@@ -71,7 +60,7 @@ class ChatPage extends ConsumerWidget {
                       ? MessageListTile(
                           message: message,
                         )
-                      : PartnerMessageListTile(
+                      : GroupMessageListTile(
                           message: message,
                           chat: chat,
                           userImageURL: imageURL,

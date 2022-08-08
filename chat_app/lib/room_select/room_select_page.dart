@@ -4,6 +4,7 @@ import 'package:chat_app/add_chat_room/add_chat_room.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/components/chat_list_tile.dart';
 import 'package:chat_app/room_select/components/current_user_data_dialog.dart';
+import 'package:chat_app/room_select/components/group_list_tile.dart';
 import 'package:chat_app/room_select/room_select_controller.dart';
 
 import 'package:chat_app/service/auth_service.dart';
@@ -67,13 +68,22 @@ class RoomSelectPage extends ConsumerWidget {
                 child: Padding(
                     //cardの幅
                     padding: const EdgeInsets.all(5.0),
-                    child: ChatListTile(
-                      chat: chat,
-                      partnerUserId: getPartnerUserId(
-                          ref.watch(authServiceProvider).userId, chat.userIds),
-                      partnerUserName: partnerUserName,
-                      partnerUserImage: partnerUserImage,
-                    )));
+                    child: chat.userIds[2].isEmpty
+                        ? ChatListTile(
+                            chat: chat,
+                            partnerUserId: getPartnerUserId(
+                                ref.watch(authServiceProvider).userId,
+                                chat.userIds),
+                            partnerUserName: partnerUserName,
+                            partnerUserImage: partnerUserImage,
+                          )
+                        : GroupListTile(
+                            chat: chat,
+                            partnerUserId: getPartnerUserId(
+                                ref.watch(authServiceProvider).userId,
+                                chat.userIds),
+                            partnerUserName: partnerUserName,
+                            partnerUserImage: partnerUserImage)));
           },
         ),
       ),

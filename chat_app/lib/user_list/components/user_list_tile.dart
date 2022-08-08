@@ -15,12 +15,12 @@ class UserListTile extends ConsumerWidget {
       Row(
         children: [
           SizedBox(
-            width: 300.0,
+            width: 350.0,
             child: Consumer(
               builder: (context, ref, _) {
-                return CheckboxListTile(
+                return ListTile(
                   title: Text(user.userName),
-                  secondary: CircleAvatar(
+                  leading: CircleAvatar(
                     radius: 25.0,
                     foregroundImage: NetworkImage(user.imageURL),
                     backgroundColor: const Color.fromARGB(123, 246, 233, 116),
@@ -33,18 +33,10 @@ class UserListTile extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  controlAffinity: ListTileControlAffinity.trailing,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(100)),
                     side: BorderSide(color: Colors.lightGreen),
                   ),
-                  activeColor: Colors.green,
-                  checkColor: Colors.white,
-                  onChanged: (value) {
-                    userListController.selectedList();
-                    userListController.selected = value!;
-                  },
-                  value: userListController.selected,
                 );
               },
             ),

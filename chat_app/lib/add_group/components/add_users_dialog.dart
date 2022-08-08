@@ -53,7 +53,6 @@ class AddUserDialog extends ConsumerWidget {
               currentUserName: currentUserName,
               partnerUserName: addUserName,
               groupName: user.userName,
-              currentUserImage: currentUserImage,
               partnerUserImage: partnerUserImage,
               groupImage: user.imageURL,
             );

@@ -1,7 +1,6 @@
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/add_chat_room/add_chat_room.dart';
-import 'package:chat_app/group_select/group_select_page.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/components/chat_list_tile.dart';
 import 'package:chat_app/room_select/components/current_user_data_dialog.dart';

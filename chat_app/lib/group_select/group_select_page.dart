@@ -1,5 +1,6 @@
 import 'package:chat_app/base_app_bar.dart';
 import 'package:chat_app/entity/chat_room.dart';
+import 'package:chat_app/group_select/components/group_list_tile.dart';
 import 'package:chat_app/group_select/group_select_controller.dart';
 import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/room_select/components/current_user_data_dialog.dart';
@@ -54,10 +55,12 @@ class GroupSelectPage extends ConsumerWidget {
             return Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(40.0)),
-              child: const Padding(
-                  //cardの幅
-                  padding: EdgeInsets.all(5.0),
-                  child: Text("test")),
+              child: Padding(
+                //cardの幅
+                padding: const EdgeInsets.all(5.0),
+                child:
+                    GroupListTile(chat: chat, partnerUserId: chat.userIds[1]),
+              ),
             );
           },
         ),

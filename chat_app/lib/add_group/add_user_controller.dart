@@ -22,7 +22,7 @@ class AddGroupController extends ChangeNotifier {
     required String groupImage,
   }) async {
     final chat = ChatRoom.create(
-      currentUserId: _reader(authServiceProvider).userId,
+      currentUserId: chatRoom.userIds[0],
       partnerUserId: chatRoom.userIds[1],
       groupUserId: groupUserId,
       currentUserName: currentUserName,

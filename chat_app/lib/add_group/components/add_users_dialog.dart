@@ -45,6 +45,9 @@ class AddUserDialog extends ConsumerWidget {
             controller.setGroup(
               chatRoom: chat,
               groupUserId: user.userId,
+              currentUserName: "",
+              partnerUserName: user.userName,
+              groupName: addUserName,
             );
             Navigator.pushAndRemoveUntil(
                 context,

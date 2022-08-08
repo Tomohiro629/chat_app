@@ -6,10 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchUserDialog extends ConsumerWidget {
   const SearchUserDialog(
-      {Key? key, required this.user, required this.searchUserName})
+      {Key? key,
+      required this.user,
+      required this.searchUserName,
+      required this.currentUserName})
       : super(key: key);
   final ChatUser user;
   final String searchUserName;
+  final String currentUserName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,6 +43,8 @@ class SearchUserDialog extends ConsumerWidget {
             controller.setChatRoom(
               partnerId: user.userId,
               groupUserId: "",
+              currentUserName: currentUserName, //ログインユーザ名
+              partnerUserName: user.userName,
             );
             Navigator.pushAndRemoveUntil(
                 context,

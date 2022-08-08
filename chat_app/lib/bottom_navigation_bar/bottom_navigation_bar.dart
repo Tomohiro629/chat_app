@@ -1,7 +1,6 @@
 import 'package:chat_app/bottom_navigation_bar/bottom_navigation_bar_controller.dart';
-import 'package:chat_app/group_select/group_select_page.dart';
 import 'package:chat_app/room_select/room_select_page.dart';
-import 'package:chat_app/user_list/user_list_page.dart';
+import 'package:chat_app/setting_page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,8 +9,8 @@ class BottomNavigationBarPage extends ConsumerWidget {
   final String chatName;
 
   final pages = [
-    const UserListPage(),
     const RoomSelectPage(chatName: ""),
+    const SettingPage(),
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {

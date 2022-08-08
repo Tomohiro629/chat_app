@@ -20,8 +20,9 @@ class BottomNavigationBarPage extends ConsumerWidget {
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'User'),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Chat'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
         ],
         currentIndex: currentIndex,
         onTap: (int i) {

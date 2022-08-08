@@ -48,7 +48,7 @@ class GroupListTile extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        chat.roomName.toString(),
+                        chat.timeStamp.toString(),
                         style: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(255, 7, 205, 30),

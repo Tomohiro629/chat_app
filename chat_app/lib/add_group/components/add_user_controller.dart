@@ -15,13 +15,12 @@ class AddGroupController extends ChangeNotifier {
   Future<void> setGroup({
     required ChatRoom chatRoom,
     required String groupUserId,
-    required String roomName,
   }) async {
     final chat = ChatRoom.create(
-        currentUserId: _reader(authServiceProvider).userId,
-        partnerUserId: chatRoom.userIds[1],
-        groupUserId: groupUserId,
-        roomName: roomName);
+      currentUserId: _reader(authServiceProvider).userId,
+      partnerUserId: chatRoom.userIds[1],
+      groupUserId: groupUserId,
+    );
 
     await _reader(chatRepositoryProvider).setChatRoom(chat: chat);
     notifyListeners();

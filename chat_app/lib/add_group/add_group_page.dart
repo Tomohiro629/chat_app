@@ -13,7 +13,6 @@ class AddGroupPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userController = ref.watch(userRepositoryProvider);
     final addUserName = TextEditingController();
-    final roomName = TextEditingController();
 
     return Scaffold(
       appBar: const BaseAppBar(
@@ -26,25 +25,6 @@ class AddGroupPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                width: 300,
-                child: TextFormField(
-                  controller: roomName,
-                  style: const TextStyle(fontSize: 20),
-                  decoration: InputDecoration(
-                      labelText: 'Group Name',
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 15,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      )),
-                ),
-              ),
-              const SizedBox(
-                height: 25.0,
-              ),
               SizedBox(
                 width: 300,
                 child: TextFormField(
@@ -80,16 +60,16 @@ class AddGroupPage extends ConsumerWidget {
                       onPressed: () async {
                         final user = await userController
                             .searchUserData(addUserName.text);
-                        if (user != null && roomName.text.isNotEmpty) {
+                        if (user != null) {
                           showDialog(
                               barrierDismissible: false,
                               context: context,
                               builder: (childContext) {
                                 return AddUserDialog(
-                                    chat: chat,
-                                    user: user,
-                                    addUserName: addUserName.text,
-                                    chatName: roomName.text);
+                                  chat: chat,
+                                  user: user,
+                                  addUserName: addUserName.text,
+                                );
                               });
                         } else {
                           ScaffoldMessenger.of(context)

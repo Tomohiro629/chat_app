@@ -12,12 +12,10 @@ class AddUserDialog extends ConsumerWidget {
     required this.user,
     required this.addUserName,
     required this.chat,
-    required this.chatName,
   }) : super(key: key);
   final ChatUser user;
   final ChatRoom chat;
   final String addUserName;
-  final String chatName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,7 +45,6 @@ class AddUserDialog extends ConsumerWidget {
             controller.setGroup(
               chatRoom: chat,
               groupUserId: user.userId,
-              roomName: chatName,
             );
             Navigator.pushAndRemoveUntil(
                 context,

@@ -34,7 +34,7 @@ class ChatListTile extends ConsumerWidget {
                   leading: CircleAvatar(
                     radius: 25.0,
                     foregroundImage: chat.userNames[2].isEmpty
-                        ? NetworkImage(user!.imageURL)
+                        ? NetworkImage(chat.userImages[1])
                         : const NetworkImage(
                             "https://th.bing.com/th/id/OIP.3dYlegQ0F8Kx8suoY52NNAHaLH?w=125&h=187&c=7&r=0&o=5&dpr=1.5&pid=1.7"),
                     backgroundColor: const Color.fromARGB(123, 246, 233, 116),

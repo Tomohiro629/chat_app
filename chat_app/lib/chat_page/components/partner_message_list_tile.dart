@@ -38,13 +38,17 @@ class PartnerMessageListTile extends ConsumerWidget {
                 barrierDismissible: true,
                 context: context,
                 builder: (childContext) {
-                  return PartnerUserDateDialog(
-                    partnerUserName: roomName,
-                    imageURL: chat.userImages[1],
-                  );
+                  return chat.userIds[1] == message.userId
+                      ? PartnerUserDateDialog(
+                          partnerUserName: chat.userNames[1],
+                          imageURL: chat.userImages[1],
+                        )
+                      : PartnerUserDateDialog(
+                          partnerUserName: chat.userNames[2],
+                          imageURL: chat.userImages[2]);
                 });
           },
-          child: chat.userIds[1] == partnerUserId
+          child: chat.userIds[1] == message.userId
               ? CircleAvatar(
                   radius: 25.0,
                   foregroundImage: NetworkImage(chat.userImages[1]),

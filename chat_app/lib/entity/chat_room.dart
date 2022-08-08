@@ -18,6 +18,7 @@ class ChatRoom {
     required String currentUserName,
     required String partnerUserName,
     required String groupUserName,
+    required String currentUserImage,
     required String partnerUserImage,
     required String groupUserImage,
   }) {
@@ -25,7 +26,7 @@ class ChatRoom {
         roomId: const Uuid().v4(),
         userIds: [currentUserId, partnerUserId, groupUserId],
         userNames: [currentUserName, partnerUserName, groupUserName],
-        userImages: [partnerUserImage, groupUserImage]);
+        userImages: [currentUserImage, partnerUserImage, groupUserImage]);
   }
 
   factory ChatRoom.fromJson(Map<String, dynamic> map) {

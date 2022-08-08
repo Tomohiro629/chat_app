@@ -21,7 +21,9 @@ class UserGatePage extends ConsumerWidget {
       builder: ((context, snapshot) {
         final isExist = snapshot.data != null;
         return isExist
-            ? BottomNavigationBarPage() //ユーザーがいたら
+            ? BottomNavigationBarPage(
+                chatName: "",
+              ) //ユーザーがいたら
             : const SetProfilePage(); //失敗
         //
       }),

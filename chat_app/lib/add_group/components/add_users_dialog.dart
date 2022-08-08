@@ -52,7 +52,9 @@ class AddUserDialog extends ConsumerWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => BottomNavigationBarPage()),
+                    builder: (context) => BottomNavigationBarPage(
+                          chatName: '',
+                        )),
                 (_) => false);
           },
         ),

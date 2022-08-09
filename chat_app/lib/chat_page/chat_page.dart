@@ -20,10 +20,12 @@ class ChatPage extends ConsumerWidget {
     required this.chat,
     required this.imageURL,
     required this.roomName,
+    required this.currentUserImage,
   }) : super(key: key);
   final ChatRoom chat;
   final String imageURL;
   final String roomName;
+  final String currentUserImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -117,9 +119,9 @@ class ChatPage extends ConsumerWidget {
                 SizedBox(
                   width: 300.0,
                   child: MessageFromFile(
-                    chat: chat,
-                    imageURL: imageURL,
-                  ),
+                      chat: chat,
+                      imageURL: imageURL,
+                      currentUserImage: currentUserImage),
                 ),
               ],
             ),

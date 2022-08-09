@@ -75,7 +75,6 @@ class AddChatRoomPage extends ConsumerWidget {
                                   user: user,
                                   currentUserName: currentUser.userName,
                                   searchUserName: searchUserName.text,
-                                  currentUserImage: currentUser.imageURL,
                                 );
                               });
                         } else {

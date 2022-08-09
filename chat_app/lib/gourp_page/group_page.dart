@@ -108,6 +108,7 @@ class GroupPage extends ConsumerWidget {
                   child: MessageFromFile(
                     chat: chat,
                     imageURL: imageURL,
+                    currentUserImage: "",
                   ),
                 ),
               ],

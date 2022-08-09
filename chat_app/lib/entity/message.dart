@@ -3,12 +3,13 @@ import 'package:uuid/uuid.dart';
 
 class Message {
   Message({
-    this.message = "",
-    this.imageURL = "",
-    required this.messageId,
-    required this.timeStamp,
     required this.chatId,
     required this.userId,
+    this.message = "",
+    this.imageURL = "",
+    this.currentUserImage = "",
+    required this.messageId,
+    required this.timeStamp,
   });
 
   factory Message.create({
@@ -16,6 +17,7 @@ class Message {
     required String userId,
     required String message,
     required String imageURL,
+    required String currentUserImage,
   }) {
     return Message(
       messageId: const Uuid().v4(),
@@ -24,35 +26,39 @@ class Message {
       userId: userId,
       message: message,
       imageURL: imageURL,
+      currentUserImage: currentUserImage,
     );
   }
 
   factory Message.fromJson(Map<String, dynamic> map) {
     return Message(
-      message: map['message'],
-      imageURL: map['imageURL'],
       messageId: map['messageId'],
       timeStamp: (map['timeStamp']! as Timestamp).toDate(),
       chatId: map['chatId'],
       userId: map['senderUserId'],
+      message: map['message'],
+      imageURL: map['imageURL'],
+      currentUserImage: map['currentUserImage'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'message': message,
-      'imageURL': imageURL,
       'messageId': messageId,
       'timeStamp': timeStamp,
       'chatId': chatId,
       'senderUserId': userId,
+      'message': message,
+      'imageURL': imageURL,
+      'currentUserImage': currentUserImage,
     };
   }
 
-  final String message;
-  final String? imageURL;
   final String messageId;
   final DateTime timeStamp;
   final String chatId;
   final String userId;
+  final String message;
+  final String? imageURL;
+  final String? currentUserImage;
 }

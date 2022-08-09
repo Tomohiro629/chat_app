@@ -51,7 +51,8 @@ class SendImageDialog extends ConsumerWidget {
               await controller.addMesseage(
                   messageText: "Send a photo",
                   chatId: chat.roomId,
-                  imageURL: storageService.imageURL!);
+                  imageURL: storageService.imageURL!,
+                  currentUserImage: "");
               await controller.addLastMessage(
                   chatId: chat.roomId, lastMessage: "Send a photo");
               imagePickerService.imagePath = null;

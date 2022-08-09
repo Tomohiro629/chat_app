@@ -31,34 +31,10 @@ class GroupMessageListTile extends ConsumerWidget {
     return Stack(
       alignment: Alignment.bottomLeft,
       children: [
-        InkWell(
-          onTap: () {
-            showDialog(
-                barrierDismissible: true,
-                context: context,
-                builder: (childContext) {
-                  return getPartnerUserId(chat.userIds[0], chat.userIds) !=
-                          message.userId
-                      ? PartnerUserDateDialog(
-                          partnerUserName: chat.userNames.last,
-                          imageURL: chat.userImages.toString(),
-                        )
-                      : PartnerUserDateDialog(
-                          partnerUserName: chat.userNames.last,
-                          imageURL: chat.userImages[2]);
-                });
-          },
-          child: chat.userIds[0] != message.userId
-              ? CircleAvatar(
-                  radius: 25.0,
-                  foregroundImage: NetworkImage(chat.userImages[1]),
-                  backgroundColor: Colors.amber[100],
-                )
-              : CircleAvatar(
-                  radius: 25.0,
-                  foregroundImage: NetworkImage(chat.userImages[2]),
-                  backgroundColor: Colors.amber[100],
-                ),
+        CircleAvatar(
+          radius: 25.0,
+          foregroundImage: NetworkImage(message.currentUserImage.toString()),
+          backgroundColor: Colors.amber[100],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,

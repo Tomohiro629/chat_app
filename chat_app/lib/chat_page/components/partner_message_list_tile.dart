@@ -33,33 +33,27 @@ class PartnerMessageListTile extends ConsumerWidget {
       alignment: Alignment.bottomLeft,
       children: [
         InkWell(
-          onTap: () {
-            showDialog(
-                barrierDismissible: true,
-                context: context,
-                builder: (childContext) {
-                  return chat.userIds[1] == message.userId
-                      ? PartnerUserDateDialog(
-                          partnerUserName: chat.userNames[1],
-                          imageURL: chat.userImages[1],
-                        )
-                      : PartnerUserDateDialog(
-                          partnerUserName: chat.userNames[0],
-                          imageURL: chat.userImages[0]);
-                });
-          },
-          child: chat.userIds[1] == message.userId
-              ? CircleAvatar(
-                  radius: 25.0,
-                  foregroundImage: NetworkImage(chat.userImages[1]),
-                  backgroundColor: Colors.amber[100],
-                )
-              : CircleAvatar(
-                  radius: 25.0,
-                  foregroundImage: NetworkImage(chat.userImages[0]),
-                  backgroundColor: Colors.amber[100],
-                ),
-        ),
+            onTap: () {
+              showDialog(
+                  barrierDismissible: true,
+                  context: context,
+                  builder: (childContext) {
+                    return chat.userIds[1] == message.userId
+                        ? PartnerUserDateDialog(
+                            partnerUserName: chat.userNames[1],
+                            imageURL: chat.userImages[1],
+                          )
+                        : PartnerUserDateDialog(
+                            partnerUserName: chat.userNames[0],
+                            imageURL: chat.userImages[0]);
+                  });
+            },
+            child: CircleAvatar(
+              radius: 25.0,
+              foregroundImage:
+                  NetworkImage(message.currentUserImage.toString()),
+              backgroundColor: Colors.amber[100],
+            )),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[

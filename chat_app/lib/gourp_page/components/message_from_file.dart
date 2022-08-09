@@ -1,5 +1,7 @@
 import 'package:chat_app/chat_page/chat_page_controller.dart';
 import 'package:chat_app/entity/chat_room.dart';
+import 'package:chat_app/repository/user_repository.dart';
+import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ class MessageFromFile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
+    final userController = ref.watch(userRepositoryProvider);
     final imagePickerService = ref.watch(imagePickerServiceProvider);
 
     final storageService = ref.watch(storageServiceProvider);
@@ -36,12 +39,15 @@ class MessageFromFile extends ConsumerWidget {
         focusColor: Colors.green,
         suffixIcon: IconButton(
           onPressed: () async {
+            final currentUser = await userController.getUserDate(
+                userId: ref.watch(authServiceProvider).userId);
             try {
               textEdit.text.isNotEmpty && imageURL.isNotEmpty
                   ? await controller.addMesseage(
                       messageText: textEdit.text,
                       chatId: chat.roomId,
-                      imageURL: imageURL)
+                      imageURL: imageURL,
+                      currentUserImage: currentUser.imageURL)
                   : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Please enter your message"),
                       backgroundColor: Colors.red,

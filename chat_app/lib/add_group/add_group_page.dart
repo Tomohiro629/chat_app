@@ -80,7 +80,6 @@ class AddGroupPage extends ConsumerWidget {
                                   user: user,
                                   currentUserName: currentUser.userName,
                                   addUserName: addGroupUserName,
-                                  currentUserImage: currentUser.imageURL,
                                   partnerUserImage: partnerUserImage,
                                 );
                               });

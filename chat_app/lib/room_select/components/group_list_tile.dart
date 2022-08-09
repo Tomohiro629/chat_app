@@ -91,6 +91,7 @@ class GroupListTile extends ConsumerWidget {
                                     chat: chat,
                                     imageURL: user!.imageURL,
                                     roomName: user.userName,
+                                    currentUserImage: "",
                                   )
                                 : GroupPage(
                                     chat: chat,

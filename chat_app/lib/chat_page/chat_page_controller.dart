@@ -31,14 +31,15 @@ class ChatController extends ChangeNotifier {
     required String messageText,
     required String chatId,
     required String imageURL,
+    required String currentUserImage,
   }) async {
     changeLoadingStatus(true);
     final message = Message.create(
-      chatId: chatId,
-      userId: _reader(authServiceProvider).userId,
-      message: messageText,
-      imageURL: imageURL,
-    );
+        chatId: chatId,
+        userId: _reader(authServiceProvider).userId,
+        message: messageText,
+        imageURL: imageURL,
+        currentUserImage: currentUserImage);
     await _reader(messageRepositoryProvider).setMessage(message: message);
 
     changeLoadingStatus(false);

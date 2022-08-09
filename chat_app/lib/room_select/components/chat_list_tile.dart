@@ -86,6 +86,7 @@ class ChatListTile extends ConsumerWidget {
                                   chat: chat,
                                   imageURL: user.imageURL,
                                   roomName: user.userName,
+                                  currentUserImage: "",
                                 )));
                   },
                   onLongPress: () {

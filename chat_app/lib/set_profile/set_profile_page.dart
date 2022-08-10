@@ -1,4 +1,5 @@
 import 'package:chat_app/base_app_bar.dart';
+import 'package:chat_app/repository/user_repository.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/service/coloud_storage_service.dart';
 import 'package:chat_app/service/image_picker_service.dart';
@@ -14,6 +15,7 @@ class SetProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userService = ref.watch(userServiceProvider);
+    final userRepository = ref.watch(userRepositoryProvider);
     final storageService = ref.watch(storageServiceProvider);
     final imagePickerService = ref.watch(imagePickerServiceProvider);
     final nameEdit = TextEditingController();
@@ -103,15 +105,25 @@ class SetProfilePage extends ConsumerWidget {
                 ),
                 onPressed: () async {
                   try {
+                    final user =
+                        await userRepository.checkUserName(nameEdit.text);
                     storageService.uploadPostImageAndGetUrl(
                         file: imagePickerService.imagePath!);
 
-                    userService.addUser(
-                      userNameText: nameEdit.text,
-                      userId: newUserId,
-                      imageURL: storageService.imageURL!,
-                    );
+                    if (user?.userName != nameEdit.text) {
+                      userService.addUser(
+                        userNameText: nameEdit.text,
+                        userId: newUserId,
+                        imageURL: storageService.imageURL!,
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Name already registered"),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
                   } catch (e) {
+                    print(e);
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                           "Registration Error. Please Enter The Required Information"),

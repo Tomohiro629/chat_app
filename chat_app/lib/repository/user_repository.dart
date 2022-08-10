@@ -25,6 +25,18 @@ class UserRepository {
     }
   }
 
+  Future<ChatUser?> checkUserName(String userName) async {
+    final qs = await _firestore
+        .collection("users")
+        .where("userName", isEqualTo: userName)
+        .get();
+    if (qs.docs.isEmpty) {
+      return null;
+    } else {
+      return ChatUser.fromJson(qs.docs.first.data());
+    }
+  }
+
   Future<void> deleteUser(String userId) async {
     await _firestore.collection("users").doc(userId).delete();
   }

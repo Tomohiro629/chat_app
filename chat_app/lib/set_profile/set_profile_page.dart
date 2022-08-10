@@ -109,8 +109,7 @@ class SetProfilePage extends ConsumerWidget {
                         await userRepository.checkUserName(nameEdit.text);
                     storageService.uploadPostImageAndGetUrl(
                         file: imagePickerService.imagePath!);
-
-                    if (user?.userName != nameEdit.text) {
+                    if (user == null) {
                       userService.addUser(
                         userNameText: nameEdit.text,
                         userId: newUserId,

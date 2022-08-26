@@ -3,15 +3,12 @@ import 'package:chat_app/sign_up/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isObscureProvider = StateProvider<bool>((ref) => true);
-
 class SignUpPage extends ConsumerWidget {
   SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(signUpControllerProvider);
-    final isObscure = ref.watch(isObscureProvider);
 
     String newEmailAddress = "";
     String newPassword = "";
@@ -60,19 +57,11 @@ class SignUpPage extends ConsumerWidget {
                       horizontal: 10,
                       vertical: 15,
                     ),
-                    suffixIcon: IconButton(
-                      icon: Icon(isObscure
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined),
-                      onPressed: () {
-                        ref.read(isObscureProvider.state).state = !isObscure;
-                      },
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  obscureText: isObscure,
+                  obscureText: true,
                   maxLength: 20,
                   onChanged: (String value) {
                     newPassword = value;

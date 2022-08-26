@@ -3,8 +3,6 @@ import 'package:chat_app/login_page/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isObscureProvider = StateProvider<bool>((ref) => true);
-
 class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);
 
@@ -13,7 +11,6 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(loginControllerProvider);
-    final isObscure = ref.watch(isObscureProvider);
 
     String loginMailAddress = "";
     String loginPassword = "";
@@ -62,20 +59,12 @@ class LoginPage extends ConsumerWidget {
                       horizontal: 10,
                       vertical: 15,
                     ),
-                    suffixIcon: IconButton(
-                      icon: Icon(isObscure
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined),
-                      onPressed: () {
-                        ref.read(isObscureProvider.state).state = !isObscure;
-                      },
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  obscureText: isObscure,
                   maxLength: 20,
+                  obscureText: true,
                   onChanged: (String value) {
                     loginPassword = value;
                   },

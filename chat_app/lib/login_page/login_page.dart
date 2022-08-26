@@ -54,7 +54,7 @@ class LoginPage extends ConsumerWidget {
                   keyboardType: TextInputType.visiblePassword,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
-                    labelText: ' Password(8~20)',
+                    labelText: ' Password(6~20)',
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 15,

@@ -52,7 +52,7 @@ class SignUpPage extends ConsumerWidget {
                   keyboardType: TextInputType.visiblePassword,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
-                    labelText: ' Password(8~20)',
+                    labelText: ' Password(6~20)',
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 15,
@@ -64,7 +64,9 @@ class SignUpPage extends ConsumerWidget {
                   obscureText: true,
                   maxLength: 20,
                   onChanged: (String value) {
-                    newPassword = value;
+                    if (value.length < 6) {
+                      newPassword = value;
+                    }
                   },
                 ),
               ),
@@ -82,13 +84,30 @@ class SignUpPage extends ConsumerWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {
-                    if (newEmailAddress.isNotEmpty && newPassword.isNotEmpty) {
-                      await controller.signUpUser(
-                        newEmail: newEmailAddress,
-                        newPassword: newPassword,
-                      );
-                      Navigator.pop(context);
-                    } else {
+                    try {
+                      if (newEmailAddress.isNotEmpty &&
+                          newPassword.isNotEmpty) {
+                        await controller.signUpUser(
+                          newEmail: newEmailAddress,
+                          newPassword: newPassword,
+                        );
+                        // ignore: use_build_context_synchronously
+                        Navigator.pop(context);
+                      }
+                    } catch (e) {
+                      // if (newPassword.length < 6) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     const SnackBar(
+                      //       content: Text(
+                      //         "Password must be at least 8 characters",
+                      //         style: TextStyle(color: Colors.white),
+                      //         textAlign: TextAlign.center,
+                      //       ),
+                      //       backgroundColor: Colors.red,
+                      //       duration: Duration(seconds: 1),
+                      //     ),
+                      //   );
+                      // }
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Sign up error"),
                         backgroundColor: Colors.red,

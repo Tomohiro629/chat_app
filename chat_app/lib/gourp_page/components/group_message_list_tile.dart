@@ -1,5 +1,4 @@
 import 'package:chat_app/chat_page/components/delete_check_dialog.dart';
-import 'package:chat_app/chat_page/components/partner_user_data_dialog.dart';
 import 'package:chat_app/chat_page/components/saved_image_dialog.dart';
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/entity/message.dart';

@@ -61,7 +61,7 @@ class GroupListTile extends ConsumerWidget {
                           fontSize: 20,
                           color: Color.fromARGB(255, 7, 205, 30),
                         ),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.clip,
                       ),
                       chat.timeStamp != null
                           ? Text(getDateString(chat.timeStamp!),

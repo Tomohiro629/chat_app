@@ -31,6 +31,8 @@ class MessageFromFile extends ConsumerWidget {
       maxLines: null,
       controller: textEdit,
       decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         border: OutlineInputBorder(

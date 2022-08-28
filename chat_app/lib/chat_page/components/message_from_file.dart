@@ -31,6 +31,8 @@ class MessageFromFile extends ConsumerWidget {
       maxLines: null,
       controller: textEdit,
       decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         border: OutlineInputBorder(
@@ -49,9 +51,11 @@ class MessageFromFile extends ConsumerWidget {
                       chatId: chat.roomId,
                       imageURL: imageURL,
                       currentUserImage: currentUser.imageURL)
+                  // ignore: use_build_context_synchronously
                   : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Please enter your message"),
                       backgroundColor: Colors.red,
+                      duration: Duration(seconds: 1),
                     ));
 
               await controller.addLastMessage(
@@ -62,7 +66,12 @@ class MessageFromFile extends ConsumerWidget {
                   file: imagePickerService.imagePath!);
               textEdit.clear();
             } catch (e) {
-              print(e);
+              // ignore: use_build_context_synchronously
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(e.toString()),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 1),
+              ));
             }
           },
           icon: const Icon(Icons.send),

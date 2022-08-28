@@ -10,6 +10,12 @@ final signUpControllerProvider =
 class SignUpController extends ChangeNotifier {
   final Reader _reader;
   SignUpController(this._reader);
+  String errorMessage = '';
+
+  void setErrorMessage(String errorText) {
+    errorMessage = errorText;
+    notifyListeners();
+  }
 
   Future<void> signUpUser({
     required String newEmail,

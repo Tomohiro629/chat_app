@@ -80,38 +80,40 @@ class GroupPage extends ConsumerWidget {
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.camera_alt,
-                    color: Color.fromARGB(255, 255, 168, 7),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.camera_alt,
+                      color: Color.fromARGB(255, 255, 168, 7),
+                    ),
+                    onPressed: () {
+                      imagePickerService.takeCamera();
+                    },
                   ),
-                  onPressed: () {
-                    imagePickerService.takeCamera();
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.photo,
-                    color: Color.fromARGB(255, 255, 168, 7),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.photo,
+                      color: Color.fromARGB(255, 255, 168, 7),
+                    ),
+                    onPressed: () {
+                      imagePickerService.takeGallery();
+                    },
                   ),
-                  onPressed: () {
-                    imagePickerService.takeGallery();
-                  },
-                ),
-                SizedBox(
-                  width: 300.0,
-                  child: MessageFromFile(
-                    chat: chat,
-                    imageURL: imageURL,
-                    currentUserImage: "",
+                  SizedBox(
+                    width: 300.0,
+                    child: MessageFromFile(
+                      chat: chat,
+                      imageURL: imageURL,
+                      currentUserImage: "",
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

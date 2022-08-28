@@ -50,26 +50,28 @@ class GroupListTile extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  title: Stack(
                     children: [
                       Text(
                         '${chat.userNames[0]}/'
-                        '${chat.userNames[1]}/'
+                        '${chat.userNames[1]}/\n'
                         '${chat.userNames[2]}',
                         style: const TextStyle(
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Color.fromARGB(255, 7, 205, 30),
                         ),
                         overflow: TextOverflow.clip,
                       ),
-                      chat.timeStamp != null
-                          ? Text(getDateString(chat.timeStamp!),
-                              style: const TextStyle(
-                                fontSize: 15,
-                              ),
-                              overflow: TextOverflow.ellipsis)
-                          : const Text(""),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: chat.timeStamp != null
+                            ? Text(getDateString(chat.timeStamp!),
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                overflow: TextOverflow.ellipsis)
+                            : const Text(""),
+                      ),
                     ],
                   ),
                   subtitle: chat.lastMessage != null
@@ -108,7 +110,7 @@ class GroupListTile extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            title: Text("Delete Room\n『${user!.userName}』"),
+                            title: const Text("Delete Group Room』"),
                             content: const Text("Do you want to Delete it?"),
                             actions: <Widget>[
                               MaterialButton(

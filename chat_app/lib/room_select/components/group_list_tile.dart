@@ -60,7 +60,7 @@ class GroupListTile extends ConsumerWidget {
                           fontSize: 15,
                           color: Color.fromARGB(255, 7, 205, 30),
                         ),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.clip,
                       ),
                       Align(
                         alignment: Alignment.topRight,

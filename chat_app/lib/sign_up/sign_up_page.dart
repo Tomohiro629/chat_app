@@ -93,17 +93,35 @@ class SignUpPage extends ConsumerWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                   onPressed: () async {
-                    if (newEmailAddress.isNotEmpty && newPassword.isNotEmpty) {
+                    try {
                       await controller.signUpUser(
                         newEmail: newEmailAddress,
                         newPassword: newPassword,
                       );
+                      // ignore: use_build_context_synchronously
                       Navigator.pop(context);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Sign up error"),
+                    } catch (e) {
+                      if (e.toString() ==
+                          "[firebase_auth/unknown] Given String is empty or null") {
+                        controller.setErrorMessage(
+                            "Email address or password is missing");
+                      } else if (newPassword.length < 8) {
+                        controller.setErrorMessage(
+                            "Password must be at least 8 characters long");
+                        // ignore: unrelated_type_equality_checks
+                      } else if (e.toString() ==
+                          "[firebase_auth/email-already-in-use] The email address is already in use by another account.") {
+                        controller.setErrorMessage(
+                            "The email address is already in use by another account.");
+                      } else {
+                        controller.setErrorMessage("Sign up error");
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(controller.errorMessage),
                         backgroundColor: Colors.red,
+                        duration: const Duration(seconds: 1),
                       ));
+                      print(e.toString());
                     }
                   },
                 ),

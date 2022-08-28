@@ -30,6 +30,7 @@ class SignUpPage extends ConsumerWidget {
               SizedBox(
                 width: 300,
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                     labelText: ' Mail',
@@ -121,7 +122,6 @@ class SignUpPage extends ConsumerWidget {
                         backgroundColor: Colors.red,
                         duration: const Duration(seconds: 1),
                       ));
-                      print(e.toString());
                     }
                   },
                 ),

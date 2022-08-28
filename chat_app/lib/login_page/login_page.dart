@@ -32,6 +32,7 @@ class LoginPage extends ConsumerWidget {
               SizedBox(
                 width: 300,
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                     labelText: ' Mail',
@@ -94,19 +95,29 @@ class LoginPage extends ConsumerWidget {
                     'Log in',
                     style: TextStyle(fontSize: 18),
                   ),
-                  onPressed: () {
-                    if (loginMailAddress.isNotEmpty &&
-                        loginPassword.isNotEmpty) {
-                      controller.loginUser(
+                  onPressed: () async {
+                    try {
+                      await controller.loginUser(
                           email: loginMailAddress, password: loginPassword);
+                      // ignore: use_build_context_synchronously
                       Navigator.pop(context);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Log in error"),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
+                    } catch (e) {
+                      if (e.toString() ==
+                          "[firebase_auth/unknown] Given String is empty or null") {
+                        controller.setErrorMessage(
+                            "Email address or password is missing");
+                      } else if (e.toString() ==
+                          "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
+                        controller.setErrorMessage(
+                            "There is no user record corresponding to this identifier.\n The user may have been deleted.");
+                      } else {
+                        controller.setErrorMessage("Login error");
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(controller.errorMessage),
+                        backgroundColor: Colors.red,
+                        duration: const Duration(seconds: 1),
+                      ));
                     }
                   },
                 ),

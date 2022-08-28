@@ -9,6 +9,12 @@ final loginControllerProvider = ChangeNotifierProvider<LoginController>((ref) {
 class LoginController extends ChangeNotifier {
   final Reader _reader;
   LoginController(this._reader);
+  String errorMessage = '';
+
+  void setErrorMessage(String errorText) {
+    errorMessage = errorText;
+    notifyListeners();
+  }
 
   Future<void> loginUser({
     required String email,

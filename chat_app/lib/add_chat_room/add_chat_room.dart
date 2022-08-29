@@ -78,6 +78,7 @@ class AddChatRoomPage extends ConsumerWidget {
                                 );
                               });
                         } else {
+                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text("User Not Found"),

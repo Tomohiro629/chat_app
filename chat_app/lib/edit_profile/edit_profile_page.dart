@@ -110,7 +110,11 @@ class EditProfilePage extends ConsumerWidget {
                     );
                     Navigator.pop(context);
                   } catch (e) {
-                    print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Edit error"),
+                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 1),
+                    ));
                   }
                 },
               ),

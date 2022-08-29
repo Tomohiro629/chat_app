@@ -27,6 +27,7 @@ class AuthService {
   Future<void> logOut() async {
     await _auth.signOut();
     if (_auth.currentUser == null) {
+      // ignore: avoid_print
       print('ログアウト成功');
     }
   }

@@ -31,7 +31,6 @@ class ChatPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(chatControllerProvider);
     final imagePickerService = ref.watch(imagePickerServiceProvider);
-    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: BaseAppBar(

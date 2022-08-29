@@ -1,6 +1,5 @@
 import 'package:chat_app/entity/chat_room.dart';
 import 'package:chat_app/repository/chat_room_repository.dart';
-import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

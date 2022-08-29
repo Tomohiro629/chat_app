@@ -23,6 +23,7 @@ class UserService extends ChangeNotifier {
         user: user,
       );
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

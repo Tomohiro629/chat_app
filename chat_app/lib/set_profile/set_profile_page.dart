@@ -116,13 +116,13 @@ class SetProfilePage extends ConsumerWidget {
                         imageURL: storageService.imageURL!,
                       );
                     } else {
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Name already registered"),
                         backgroundColor: Colors.red,
                       ));
                     }
                   } catch (e) {
-                    print(e);
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                           "Registration Error. Please Enter The Required Information"),

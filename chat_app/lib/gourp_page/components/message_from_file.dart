@@ -48,6 +48,7 @@ class MessageFromFile extends ConsumerWidget {
                       chatId: chat.roomId,
                       imageURL: imageURL,
                       currentUserImage: currentUser.imageURL)
+                  // ignore: use_build_context_synchronously
                   : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Please enter your message"),
                       backgroundColor: Colors.red,
@@ -61,7 +62,12 @@ class MessageFromFile extends ConsumerWidget {
                   file: imagePickerService.imagePath!);
               textEdit.clear();
             } catch (e) {
-              print(e);
+              // ignore: use_build_context_synchronously
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Send message error"),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 1),
+              ));
             }
           },
           icon: const Icon(Icons.send),

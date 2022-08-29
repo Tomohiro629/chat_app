@@ -54,7 +54,7 @@ class _Buttons extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginPage(),
+                    builder: (context) => const LoginPage(),
                   ));
             },
             child: const Text(
@@ -68,7 +68,7 @@ class _Buttons extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SignUpPage(),
+                  builder: (context) => const SignUpPage(),
                 ));
           },
           child: const Text("Sign up"),

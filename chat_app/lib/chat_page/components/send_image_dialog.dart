@@ -57,7 +57,11 @@ class SendImageDialog extends ConsumerWidget {
                   chatId: chat.roomId, lastMessage: "Send a photo");
               imagePickerService.imagePath = null;
             } catch (e) {
-              print(e);
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Send error"),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 1),
+              ));
             }
           },
         ),
